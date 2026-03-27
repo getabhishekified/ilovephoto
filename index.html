@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I ❤️ Photo — Government Form Photo Converter India</title>
+<meta name="description" content="Free photo converter for Indian government forms. Convert your photo to PAN, Passport, Voter ID specs instantly. 100% private — processed in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #FF2D5B;
+    --rose-light: #FF6080;
+    --rose-glow: rgba(255,45,91,0.13);
+    --rose-deep: #C4003B;
+    --ink: #0D0A14;
+    --ink-mid: #160F22;
+    --ink-card: #1C1328;
+    --ink-border: rgba(255,255,255,0.07);
+    --white: #FFFFFF;
+    --muted: rgba(255,255,255,0.42);
+    --success: #00C97A;
+    --violet: #7B4FFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); color: var(--white); min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 15% -10%, rgba(255,45,91,0.13) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 45% at 85% 105%, rgba(123,79,255,0.12) 0%, transparent 65%);
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* HEADER */
+  header { padding: 16px 0; border-bottom: 1px solid var(--ink-border); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+  .logo-mark {
+    width: 46px; height: 46px;
+    background: linear-gradient(140deg, var(--rose), var(--rose-deep));
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; box-shadow: 0 4px 24px rgba(255,45,91,0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .logo-text { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; letter-spacing: -0.5px; line-height: 1.05; }
+  .logo-text .h { color: var(--rose); display: inline-block; animation: hb 2.4s ease-in-out infinite; }
+  @keyframes hb { 0%,100%{transform:scale(1)} 15%{transform:scale(1.25)} 30%{transform:scale(1)} 45%{transform:scale(1.15)} 60%{transform:scale(1)} }
+  .logo-domain { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.64rem; color: var(--muted); font-weight: 500; letter-spacing: 0.4px; }
+  .nav-pill {
+    padding: 6px 14px; background: rgba(255,45,91,0.09); border: 1px solid rgba(255,45,91,0.25);
+    border-radius: 20px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.8px;
+    color: var(--rose-light); text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero { padding: 60px 0 44px; text-align: center; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,45,91,0.08); border: 1px solid rgba(255,45,91,0.2);
+    border-radius: 30px; padding: 7px 18px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.4px;
+    color: var(--rose-light); margin-bottom: 26px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.08; letter-spacing: -1.5px; margin-bottom: 18px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(120deg, var(--rose) 0%, var(--violet) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub { max-width: 545px; margin: 0 auto 30px; font-size: 1.02rem; line-height: 1.75; color: var(--muted); font-weight: 300; }
+  .hero-pills { display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; }
+  .pill { display: flex; align-items: center; gap: 6px; background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 20px; padding: 6px 13px; font-size: 0.79rem; color: rgba(255,255,255,0.58); font-weight: 500; }
+  .pill .d { color: var(--rose); font-size: 0.68rem; }
+
+  /* STEPS */
+  .steps { display: flex; align-items: center; justify-content: center; margin: 38px 0 34px; }
+  .step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; max-width: 130px; }
+  .step-n {
+    width: 38px; height: 38px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;
+    color: var(--muted); transition: all 0.3s; background: var(--ink-mid);
+  }
+  .step.done .step-n { background: rgba(0,201,122,.15); border-color: var(--success); color: var(--success); }
+  .step.active .step-n { background: rgba(255,45,91,.15); border-color: var(--rose); color: var(--rose); box-shadow: 0 0 0 4px rgba(255,45,91,.1); }
+  .step-l { font-size: 0.67rem; color: var(--muted); font-weight: 600; text-align: center; }
+  .step.active .step-l { color: var(--rose); }
+  .step.done .step-l { color: var(--success); }
+  .sc { flex: 1; height: 2px; background: rgba(255,255,255,.07); margin-bottom: 22px; max-width: 55px; transition: background 0.4s; }
+  .sc.done { background: var(--success); }
+
+  /* GRID */
+  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 64px; }
+  @media (max-width: 720px) { .app-grid { grid-template-columns: 1fr; } }
+
+  /* CARDS */
+  .card { background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 20px; overflow: hidden; }
+  .card + .card { margin-top: 18px; }
+  .ch { padding: 18px 22px 14px; border-bottom: 1px solid var(--ink-border); display: flex; align-items: center; gap: 10px; }
+  .ci { width: 30px; height: 30px; background: var(--rose-glow); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .ch h2 { font-weight: 700; font-size: 0.92rem; flex: 1; }
+  .ch small { color: var(--muted); font-size: 0.7rem; }
+
+  /* DROP ZONE */
+  .dz {
+    margin: 18px 22px; border: 2px dashed rgba(255,45,91,.22); border-radius: 16px; padding: 44px 20px;
+    text-align: center; cursor: pointer; transition: all .22s; position: relative; background: rgba(255,45,91,.02);
+  }
+  .dz:hover, .dz.over { border-color: var(--rose); background: var(--rose-glow); transform: scale(1.01); }
+  .dz input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .dz-ico { font-size: 2.8rem; margin-bottom: 10px; display: block; }
+  .dz h3 { font-weight: 700; font-size: 0.96rem; margin-bottom: 5px; }
+  .dz p { color: var(--muted); font-size: 0.78rem; margin-bottom: 14px; }
+  .fmts { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
+  .fm { background: rgba(255,255,255,.05); border: 1px solid var(--ink-border); border-radius: 5px; padding: 2px 8px; font-size: 0.67rem; font-weight: 700; letter-spacing: .5px; color: var(--muted); }
+
+  /* SRC PREVIEW */
+  .sp { margin: 0 22px 16px; display: none; }
+  .sp.show { display: block; }
+  .sp img { width: 100%; max-height: 250px; object-fit: contain; border-radius: 12px; background: #120e1a; display: block; }
+  .sm { margin-top: 9px; display: flex; gap: 7px; flex-wrap: wrap; }
+  .mt { background: rgba(255,255,255,.05); border: 1px solid var(--ink-border); border-radius: 7px; padding: 3px 9px; font-size: 0.69rem; color: var(--muted); }
+  .mt b { color: var(--white); }
+
+  /* ADJUSTMENTS */
+  .at { padding: 0 22px 18px; display: none; }
+  .at.show { display: block; }
+  .at-lbl { font-size: 0.75rem; color: var(--muted); font-weight: 600; margin-bottom: 9px; }
+  .at-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .sl { display: flex; align-items: center; gap: 7px; }
+  .sl label { font-size: 0.73rem; color: var(--muted); white-space: nowrap; }
+  .sl input[type=range] { -webkit-appearance: none; width: 110px; height: 3px; background: rgba(255,255,255,.1); border-radius: 3px; outline: none; }
+  .sl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--rose); cursor: pointer; }
+  .sv { font-size: 0.71rem; color: var(--rose); font-weight: 700; min-width: 32px; }
+
+  /* BG PICKER */
+  .bgp { padding: 0 22px 18px; }
+  .bgp-lbl { font-size: 0.75rem; color: var(--muted); font-weight: 600; margin-bottom: 9px; }
+  .swatches { display: flex; gap: 7px; flex-wrap: wrap; }
+  .sw { width: 30px; height: 30px; border-radius: 7px; cursor: pointer; border: 2px solid transparent; transition: all .14s; position: relative; }
+  .sw:hover { transform: scale(1.18); }
+  .sw.on { border-color: var(--rose); box-shadow: 0 0 0 2px rgba(255,45,91,.3); }
+  .sw-c { background: conic-gradient(red,yellow,lime,cyan,blue,magenta,red); display: flex; align-items: center; justify-content: center; font-size: 13px; overflow: hidden; }
+  .sw-c input[type=color] { opacity: 0; position: absolute; inset: 0; cursor: pointer; }
+
+  /* PRESETS — SEARCHABLE DROPDOWN */
+  .pd-wrap { padding: 18px 22px 20px; }
+
+  /* Trigger button */
+  .pd-trigger {
+    width: 100%; display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; border-radius: 12px; cursor: pointer;
+    border: 1px solid var(--ink-border); background: rgba(255,255,255,.04);
+    transition: all .18s; user-select: none;
+  }
+  .pd-trigger:hover { border-color: rgba(255,45,91,.35); background: rgba(255,45,91,.05); }
+  .pd-trigger.open { border-color: var(--rose); background: rgba(255,45,91,.08); box-shadow: 0 0 0 3px rgba(255,45,91,.12); border-radius: 12px 12px 0 0; }
+  .pd-trigger-icon { font-size: 1.5rem; min-width: 30px; text-align: center; }
+  .pd-trigger-text { flex: 1; text-align: left; }
+  .pd-trigger-label { font-weight: 700; font-size: 0.88rem; }
+  .pd-trigger-sub { font-size: 0.69rem; color: var(--muted); margin-top: 1px; }
+  .pd-chevron {
+    font-size: 0.7rem; color: var(--muted); transition: transform .22s ease;
+    display: flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px;
+  }
+  .pd-trigger.open .pd-chevron { transform: rotate(180deg); }
+
+  /* Dropdown panel */
+  .pd-panel {
+    display: none; flex-direction: column;
+    border: 1px solid var(--rose); border-top: none;
+    border-radius: 0 0 12px 12px;
+    background: var(--ink-mid);
+    box-shadow: 0 12px 40px rgba(0,0,0,.55);
+    overflow: hidden;
+    position: relative; z-index: 100;
+  }
+  .pd-panel.open { display: flex; animation: ddOpen .18s ease; }
+  @keyframes ddOpen { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+
+  /* Search input */
+  .pd-search-wrap {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--ink-border);
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.03);
+  }
+  .pd-search-wrap .pd-search-ico { font-size: 0.85rem; opacity: .5; flex-shrink: 0; }
+  .pd-search {
+    flex: 1; background: none; border: none; outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.83rem;
+    color: var(--white); caret-color: var(--rose);
+  }
+  .pd-search::placeholder { color: var(--muted); }
+  .pd-clear {
+    font-size: 0.7rem; color: var(--muted); cursor: pointer; padding: 2px 5px;
+    border-radius: 4px; display: none; background: rgba(255,255,255,.06);
+    border: none; transition: all .14s;
+  }
+  .pd-clear:hover { color: var(--white); background: rgba(255,255,255,.12); }
+  .pd-clear.show { display: inline-block; }
+
+  /* Results list */
+  .pd-list { max-height: 260px; overflow-y: auto; }
+  .pd-list::-webkit-scrollbar { width: 4px; }
+  .pd-list::-webkit-scrollbar-track { background: transparent; }
+  .pd-list::-webkit-scrollbar-thumb { background: rgba(255,45,91,.3); border-radius: 4px; }
+
+  .pd-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; cursor: pointer; transition: background .14s;
+    border-bottom: 1px solid rgba(255,255,255,.035);
+  }
+  .pd-item:last-child { border-bottom: none; }
+  .pd-item:hover, .pd-item.kbd { background: rgba(255,45,91,.07); }
+  .pd-item.selected { background: rgba(255,45,91,.12); }
+  .pd-item-icon { font-size: 1.4rem; min-width: 30px; text-align: center; }
+  .pd-item-info { flex: 1; }
+  .pd-item-name { font-weight: 600; font-size: 0.84rem; margin-bottom: 2px; }
+  .pd-item-name mark { background: none; color: var(--rose); font-weight: 800; }
+  .pd-item-specs { font-size: 0.67rem; color: var(--muted); display: flex; gap: 7px; flex-wrap: wrap; }
+  .pd-item-tick { font-size: 0.7rem; color: var(--rose); opacity: 0; transition: opacity .14s; }
+  .pd-item.selected .pd-item-tick { opacity: 1; }
+
+  /* No results */
+  .pd-empty { padding: 22px; text-align: center; color: var(--muted); font-size: 0.8rem; display: none; }
+  .pd-empty.show { display: block; }
+
+  /* Selected spec summary */
+  .pd-spec-card {
+    margin-top: 14px;
+    border: 1px solid rgba(255,45,91,.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: rgba(255,45,91,.06);
+    display: none;
+  }
+  .pd-spec-card.show { display: block; animation: up .2s ease both; }
+  .pd-spec-title { font-weight: 700; font-size: 0.84rem; margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .pd-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .pd-spec-row { display: flex; flex-direction: column; gap: 1px; }
+  .pd-spec-key { font-size: 0.63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
+  .pd-spec-val { font-size: 0.8rem; font-weight: 600; color: var(--white); }
+
+  /* CUSTOM PRESET — dropdown footer */
+  .pd-footer { border-top: 1px solid var(--ink-border); padding: 9px 10px; background: rgba(255,255,255,.015); }
+  .pd-footer-btn {
+    width: 100%; padding: 9px 12px; border-radius: 9px; cursor: pointer;
+    border: 1px dashed rgba(255,45,91,.3); background: rgba(255,45,91,.04);
+    color: var(--rose-light); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.8rem; font-weight: 600; transition: all .15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .pd-footer-btn:hover { border-color: var(--rose); background: rgba(255,45,91,.11); }
+
+  /* Custom badge & delete */
+  .pd-item-badge {
+    font-size: 0.56rem; font-weight: 700; letter-spacing: .4px; padding: 2px 5px;
+    border-radius: 4px; text-transform: uppercase;
+    background: rgba(123,79,255,.18); color: var(--violet); border: 1px solid rgba(123,79,255,.28);
+  }
+  .pd-item-del {
+    font-size: 0.72rem; color: rgba(255,255,255,.22); cursor: pointer; padding: 5px 7px;
+    border-radius: 6px; border: none; background: none; transition: all .14s; line-height: 1; flex-shrink: 0;
+  }
+  .pd-item-del:hover { color: #ff5555; background: rgba(255,59,59,.13); }
+
+  /* MODAL overlay */
+  .cp-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.72); z-index: 600;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .cp-overlay.show { display: flex; animation: up .22s ease both; }
+  .cp-modal {
+    background: var(--ink-card); border: 1px solid rgba(255,45,91,.28);
+    border-radius: 20px; padding: 26px 28px; width: 100%; max-width: 430px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.72);
+  }
+  .cp-modal-head { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.08rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .cp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 11px; }
+  .cp-row.full { grid-template-columns: 1fr; }
+  .cp-field { display: flex; flex-direction: column; gap: 5px; }
+  .cp-field label { font-size: 0.68rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .cp-field input, .cp-field select {
+    background: rgba(255,255,255,.05); border: 1px solid var(--ink-border);
+    border-radius: 9px; padding: 9px 11px; color: var(--white); outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.84rem; transition: border-color .15s; width: 100%;
+  }
+  .cp-field input:focus, .cp-field select:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(255,45,91,.1); }
+  .cp-field select option { background: #1C1328; }
+  .cp-field input[type=color] { height: 39px; padding: 4px 8px; cursor: pointer; }
+  .cp-actions { display: flex; gap: 10px; margin-top: 20px; }
+  .cp-actions .btn { flex: 1; }
+
+  /* OUTPUT */
+  .ob { padding: 0 22px 20px; }
+  .cw {
+    background: repeating-conic-gradient(rgba(255,255,255,.038) 0% 25%, transparent 0% 50%) 0 0 / 18px 18px;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    min-height: 190px; margin-bottom: 13px; overflow: hidden;
+  }
+  .cw canvas { max-width: 100%; max-height: 270px; border-radius: 7px; display: block; }
+  .oph { text-align: center; padding: 38px 16px; }
+  .oph .oi { font-size: 2.2rem; opacity: 0.25; margin-bottom: 7px; }
+  .oph p { color: var(--muted); font-size: 0.78rem; line-height: 1.6; }
+  .os { display: none; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 13px; }
+  .ostat { background: rgba(255,255,255,.04); border: 1px solid var(--ink-border); border-radius: 10px; padding: 9px 10px; text-align: center; }
+  .osv { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.92rem; color: var(--rose); }
+  .osl { font-size: 0.61rem; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+  .sw-warn { display: none; padding: 8px 11px; background: rgba(255,59,59,.09); border: 1px solid rgba(255,59,59,.28); border-radius: 8px; font-size: 0.75rem; color: #ff8484; margin-bottom: 11px; gap: 5px; align-items: flex-start; }
+  .sw-warn.show { display: flex; }
+  .pw { height: 3px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; margin-bottom: 13px; display: none; }
+  .pw.show { display: block; }
+  .pb2 { height: 100%; background: linear-gradient(90deg, var(--rose), var(--violet)); width: 0%; transition: width .3s; border-radius: 3px; }
+
+  /* BUTTONS */
+  .br { padding: 0 22px 22px; display: flex; flex-direction: column; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border: none; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: all .2s; width: 100%; }
+  .bp { background: linear-gradient(135deg, var(--rose), var(--rose-deep)); color: #fff; box-shadow: 0 4px 22px rgba(255,45,91,.35); }
+  .bp:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,45,91,.52); }
+  .bp:disabled { opacity: .38; cursor: not-allowed; }
+  .bd { background: rgba(255,255,255,.06); border: 1px solid var(--ink-border); color: var(--white); }
+  .bd:hover:not(:disabled) { background: rgba(255,255,255,.1); }
+  .bd:disabled { opacity: .3; cursor: not-allowed; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 22px; right: 22px; background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 13px; padding: 13px 18px; font-size: 0.82rem; box-shadow: 0 8px 36px rgba(0,0,0,.6); transform: translateY(90px); opacity: 0; transition: all .32s cubic-bezier(.34,1.56,.64,1); z-index: 999; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.ok { border-color: rgba(0,201,122,.38); }
+  .toast.err { border-color: rgba(255,59,59,.38); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--ink-border); padding: 28px 0; text-align: center; }
+  .fb { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 900; margin-bottom: 5px; }
+  .fb .h { color: var(--rose); }
+  footer p { font-size: 0.75rem; color: var(--muted); }
+  footer a { color: var(--rose); text-decoration: none; }
+  .disc { background: rgba(255,255,255,.02); border: 1px solid var(--ink-border); border-radius: 10px; padding: 11px 16px; margin: 14px 0 0; font-size: 0.72rem; color: rgba(255,255,255,.3); line-height: 1.65; }
+
+  /* ANIMS */
+  @keyframes up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  .hero { animation: up .5s ease both; }
+  .steps { animation: up .5s .1s ease both; }
+  .app-grid { animation: up .5s .2s ease both; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; display: inline-block; }
+
+  /* Decorative big heart */
+  .bg-heart { position: fixed; top: -90px; right: -70px; font-size: 320px; opacity: .018; pointer-events: none; line-height: 1; z-index: 0; user-select: none; }
+</style>
+</head>
+<body>
+
+<div class="bg-heart">❤️</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">
+      <div class="logo-mark">❤️</div>
+      <div>
+        <div class="logo-text">I <span class="h">❤</span> Photo</div>
+        <div class="logo-domain">ilovephoto.in</div>
+      </div>
+    </a>
+    <div class="nav-pill">🇮🇳 Free · Private</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="hero-tag">🇮🇳 Made for Indian Government Forms</div>
+      <h1>Your Photo,<br><em>Perfectly Formatted</em></h1>
+      <p class="hero-sub">Convert your portrait to the exact size, DPI and format required for PAN, Passport, Voter ID &amp; more — instantly in your browser.</p>
+      <div class="hero-pills">
+        <div class="pill"><span class="d">●</span> No Server Upload</div>
+        <div class="pill"><span class="d">●</span> 100% Browser-based</div>
+        <div class="pill"><span class="d">●</span> Instant Download</div>
+        <div class="pill"><span class="d">●</span> Always Free</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step active" id="s1"><div class="step-n">1</div><div class="step-l">Upload</div></div>
+      <div class="sc" id="c1"></div>
+      <div class="step" id="s2"><div class="step-n">2</div><div class="step-l">Pick Form</div></div>
+      <div class="sc" id="c2"></div>
+      <div class="step" id="s3"><div class="step-n">3</div><div class="step-l">Preview</div></div>
+      <div class="sc" id="c3"></div>
+      <div class="step" id="s4"><div class="step-n">4</div><div class="step-l">Download</div></div>
+    </div>
+
+    <div class="app-grid">
+
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="card">
+          <div class="ch">
+            <div class="ci">📤</div>
+            <h2>Upload Your Photo</h2>
+            <small>Max 10 MB</small>
+          </div>
+          <div class="dz" id="dz">
+            <input type="file" id="fi" accept=".jpg,.jpeg,.png,.bmp,.gif,.tiff,.tif,.heic,.heif">
+            <span class="dz-ico">🖼️</span>
+            <h3>Drag &amp; drop your photo here</h3>
+            <p>or click to browse</p>
+            <div class="fmts">
+              <span class="fm">JPG</span><span class="fm">PNG</span><span class="fm">BMP</span><span class="fm">GIF</span><span class="fm">TIFF</span><span class="fm">HEIC</span>
+            </div>
+          </div>
+          <div class="sp" id="sp">
+            <img id="si" alt="">
+            <div class="sm" id="sm"></div>
+          </div>
+          <div class="at" id="at">
+            <div class="at-lbl">🔧 Adjustments</div>
+            <div class="at-row">
+              <div class="sl"><label>Zoom</label><input type="range" id="zr" min="50" max="200" value="100"><span class="sv" id="zn">100%</span></div>
+              <div class="sl"><label>Rotate</label><input type="range" id="rr" min="-180" max="180" value="0"><span class="sv" id="rn">0°</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="bgCard" style="display:none">
+          <div class="ch"><div class="ci">🎨</div><h2>Background Color</h2></div>
+          <div class="bgp">
+            <div class="bgp-lbl">Fill background with:</div>
+            <div class="swatches" id="swr">
+              <div class="sw on" style="background:#ffffff" data-c="#ffffff"></div>
+              <div class="sw" style="background:#f5f5f0" data-c="#f5f5f0"></div>
+              <div class="sw" style="background:#e0e0e0" data-c="#e0e0e0"></div>
+              <div class="sw" style="background:#87CEEB" data-c="#87CEEB"></div>
+              <div class="sw" style="background:#ffe4c8" data-c="#ffe4c8"></div>
+              <div class="sw" style="background:#000;border:1px solid #333" data-c="#000000"></div>
+              <div class="sw sw-c">🎨<input type="color" id="cc" value="#ffffff"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="card">
+          <div class="ch"><div class="ci">📋</div><h2>Conversion Presets</h2></div>
+          <div class="pd-wrap">
+
+            <!-- Trigger -->
+            <div class="pd-trigger" id="pdTrigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+              <div class="pd-trigger-icon" id="pdTriggerIcon">📋</div>
+              <div class="pd-trigger-text">
+                <div class="pd-trigger-label" id="pdTriggerLabel">Select a preset…</div>
+                <div class="pd-trigger-sub" id="pdTriggerSub">8 presets — updated Mar 2026 specs</div>
+              </div>
+              <div class="pd-chevron">▼</div>
+            </div>
+
+            <!-- Panel -->
+            <div class="pd-panel" id="pdPanel" role="listbox">
+              <div class="pd-search-wrap">
+                <span class="pd-search-ico">🔍</span>
+                <input class="pd-search" id="pdSearch" type="text" placeholder="Search presets — PAN, Passport, LinkedIn…" autocomplete="off" spellcheck="false">
+                <button class="pd-clear" id="pdClear" type="button" aria-label="Clear search">✕</button>
+              </div>
+              <div class="pd-list" id="pdList"></div>
+              <div class="pd-empty" id="pdEmpty">No presets match "<span id="pdEmptyQ"></span>"</div>
+              <div class="pd-footer">
+                <button class="pd-footer-btn" id="pdCustomBtn" type="button">＋ Create custom preset</button>
+              </div>
+            </div>
+
+            <!-- Spec card shown after selection -->
+            <div class="pd-spec-card" id="pdSpecCard">
+              <div class="pd-spec-title"><span id="pdSpecIcon"></span><span id="pdSpecName"></span></div>
+              <div class="pd-spec-grid">
+                <div class="pd-spec-row"><div class="pd-spec-key">Dimensions</div><div class="pd-spec-val" id="pdSpecDim">—</div></div>
+                <div class="pd-spec-row"><div class="pd-spec-key">Format</div><div class="pd-spec-val" id="pdSpecFmt">—</div></div>
+                <div class="pd-spec-row"><div class="pd-spec-key">DPI</div><div class="pd-spec-val" id="pdSpecDpi">—</div></div>
+                <div class="pd-spec-row"><div class="pd-spec-key">Max Size</div><div class="pd-spec-val" id="pdSpecSz">—</div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><div class="ci">✨</div><h2>Converted Output</h2></div>
+          <div class="ob">
+            <div class="cw">
+              <div class="oph" id="oph"><div class="oi">🖼️</div><p>Upload a photo &amp; select a preset<br>to see the preview here</p></div>
+              <canvas id="cv" style="display:none"></canvas>
+            </div>
+            <div class="sw-warn" id="sw2">⚠️ <span id="swt"></span></div>
+            <div class="os" id="os">
+              <div class="ostat"><div class="osv" id="od">—</div><div class="osl">Dimensions</div></div>
+              <div class="ostat"><div class="osv" id="odpi">—</div><div class="osl">DPI</div></div>
+              <div class="ostat"><div class="osv" id="osz">—</div><div class="osl">File Size</div></div>
+            </div>
+            <div class="pw" id="pw"><div class="pb2" id="pb2"></div></div>
+          </div>
+          <div class="br">
+            <button class="btn bp" id="dlBtn" disabled>⬇️ Download File</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="disc">
+      ⚠️ <strong>Disclaimer:</strong> All image processing happens entirely in your browser — no photo is ever sent to any server. Preset specifications are based on commonly published guidelines; always verify the latest requirements from official government portals before submission. ilovephoto.in makes no warranty of compliance with any specific government system.
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fb">I <span class="h">❤</span> Photo</div>
+    <p>Free government photo converter for Indian citizens · <a href="https://ilovephoto.in">ilovephoto.in</a></p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- Custom Preset Modal -->
+<div class="cp-overlay" id="cpOverlay">
+  <div class="cp-modal">
+    <div class="cp-modal-head">✏️ Custom Preset</div>
+    <div class="cp-row full">
+      <div class="cp-field">
+        <label>Preset Name</label>
+        <input type="text" id="cpName" placeholder="e.g. LinkedIn Profile Photo" maxlength="40">
+      </div>
+    </div>
+    <div class="cp-row">
+      <div class="cp-field">
+        <label>Width (px)</label>
+        <input type="number" id="cpW" placeholder="600" min="10" max="5000">
+      </div>
+      <div class="cp-field">
+        <label>Height (px)</label>
+        <input type="number" id="cpH" placeholder="600" min="10" max="5000">
+      </div>
+    </div>
+    <div class="cp-row">
+      <div class="cp-field">
+        <label>DPI</label>
+        <input type="number" id="cpDpi" placeholder="300" min="72" max="1200" value="300">
+      </div>
+      <div class="cp-field">
+        <label>Max Size (KB)</label>
+        <input type="number" id="cpMaxKB" placeholder="200" min="1" max="102400" value="200">
+      </div>
+    </div>
+    <div class="cp-row">
+      <div class="cp-field">
+        <label>Format</label>
+        <select id="cpFmt">
+          <option value="JPEG">JPEG</option>
+          <option value="PNG">PNG</option>
+        </select>
+      </div>
+      <div class="cp-field">
+        <label>Background</label>
+        <input type="color" id="cpBg" value="#ffffff">
+      </div>
+    </div>
+    <div class="cp-actions">
+      <button class="btn bd" id="cpCancel" type="button">Cancel</button>
+      <button class="btn bp" id="cpSave" type="button">💾 Save Preset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PRESETS = [
+
+  // ── HIGH VOLUME — INDIA ──────────────────────────────────────────────────────
+  // PAN Card: most-applied Indian ID doc online; 2.5×3.5 cm, JPEG, max 50 KB — NSDL/UTIITSL
+  { id:'pan',         name:'PAN Card',                  icon:'💳', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:200,  h:276,  dpi:200, bg:'#ffffff', maxKB:50,   q:0.92 },
+  // Passport India: 630×810 px, JPEG, max 100 KB — MEA / ICAO 2025
+  { id:'passport',    name:'Passport (India)',           icon:'📗', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:630,  h:810,  dpi:300, bg:'#ffffff', maxKB:100,  q:0.92 },
+
+  // ── EXAMS — INDIA ────────────────────────────────────────────────────────────
+  // NTA (NEET/JEE/GATE): 3.5×4.5 cm passport photo, JPEG, max 200 KB — NTA 2025
+  { id:'nta',         name:'NTA Exams (NEET/JEE/GATE)', icon:'🎓', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:413,  h:531,  dpi:300, bg:'#ffffff', maxKB:200,  q:0.85 },
+  // NEET Postcard Photo: 4"×6" (1200×1800 px @ 300 DPI), JPEG, max 200 KB — NTA 2025
+  { id:'neet_pc',     name:'NEET Postcard Photo',        icon:'📸', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:1200, h:1800, dpi:300, bg:'#ffffff', maxKB:200,  q:0.88 },
+  // UPSC Civil Services: 550–1000 px square, JPEG, max 300 KB — UPSC 2025
+  { id:'upsc',        name:'UPSC Civil Services',        icon:'⚖️', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:800,  h:800,  dpi:200, bg:'#ffffff', maxKB:300,  q:0.88 },
+  // CAT Exam (IIM): 1200×1200 px, JPEG, max 1 MB — IIM CAT 2025
+  { id:'cat',         name:'CAT Exam (IIM)',              icon:'📚', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:1200, h:1200, dpi:300, bg:'#ffffff', maxKB:1024, q:0.88 },
+
+  // ── IDENTITY — INDIA ─────────────────────────────────────────────────────────
+  // Voter ID (EPIC): 3.5×4.5 cm, JPEG, max 2 MB — Election Commission of India
+  { id:'voter',       name:'Voter ID (EPIC)',            icon:'🗳️', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:413,  h:531,  dpi:300, bg:'#ffffff', maxKB:2048, q:0.85 },
+  // Driving Licence: 420×525 px (35×45 mm), white bg, max 50 KB — Sarathi/Parivahan
+  { id:'driving',     name:"Driver's Licence",           icon:'🚗', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:420,  h:525,  dpi:300, bg:'#ffffff', maxKB:50,   q:0.88 },
+  // OCI Card: square 200–900 px, JPEG, max 200 KB — Ministry of External Affairs
+  { id:'oci',         name:'OCI Card',                  icon:'🌏', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:600,  h:600,  dpi:200, bg:'#ffffff', maxKB:200,  q:0.88 },
+
+  // ── VISAS ────────────────────────────────────────────────────────────────────
+  // US Passport / Visa: 600×600 px square, JPEG, max 240 KB — US State Dept
+  { id:'us_passport', name:'US Passport / Visa',         icon:'🦅', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:600,  h:600,  dpi:300, bg:'#ffffff', maxKB:240,  q:0.92 },
+  // Schengen Visa: 35×45 mm @ 600 DPI = 827×1063 px, JPEG, max 500 KB — VFS/ICAO
+  { id:'schengen',    name:'Schengen Visa',              icon:'🇪🇺', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:827,  h:1063, dpi:600, bg:'#ffffff', maxKB:500,  q:0.90 },
+  // India e-Visa: 400×400 px square, JPEG, max 300 KB — indianvisaonline.gov.in
+  { id:'evisa_in',    name:'India e-Visa',               icon:'✈️', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:400,  h:400,  dpi:200, bg:'#ffffff', maxKB:300,  q:0.88 },
+  // UK Passport: 600×750 px (35×45 mm), cream/light-grey bg, JPEG, max 10 MB — HMPO
+  { id:'uk_passport', name:'UK Passport',                icon:'🇬🇧', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:600,  h:750,  dpi:300, bg:'#f0efec', maxKB:5000, q:0.92 },
+
+  // ── PROFESSIONAL & WELFARE ───────────────────────────────────────────────────
+  // LinkedIn: 800×800 px (400 min), JPEG, max 8 MB — LinkedIn Help 2025
+  { id:'linkedin',    name:'LinkedIn Profile',           icon:'💼', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:800,  h:800,  dpi:300, bg:'#ffffff', maxKB:3072, q:0.92 },
+  // NREGA / Job Card: passport-size, no precise digital spec — general portal standard
+  { id:'nrega',       name:'NREGA / Job Card',           icon:'📄', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:300,  h:300,  dpi:200, bg:'#ffffff', maxKB:80,   q:0.82 },
+  // Ration Card: state portals vary; conservative standard
+  { id:'ration',      name:'Ration Card',                icon:'🏠', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:400,  h:400,  dpi:200, bg:'#ffffff', maxKB:100,  q:0.85 },
+];
+
+let S = { img:null, preset:null, bg:'#ffffff', zoom:100, rot:0, dataURL:null };
+const $=id=>document.getElementById(id);
+
+// ── CUSTOM PRESETS (localStorage) ─────────────────────────────────────────────
+const CUSTOM_KEY = 'ilovephoto_custom_presets';
+function loadCustom() { try { return JSON.parse(localStorage.getItem(CUSTOM_KEY)||'[]'); } catch { return []; } }
+function saveCustom(arr) { localStorage.setItem(CUSTOM_KEY, JSON.stringify(arr)); }
+function allPresets() { return [...PRESETS, ...loadCustom()]; }
+
+function updateSubtitle() {
+  if (!S.preset) $('pdTriggerSub').textContent = `${allPresets().length} presets — updated Mar 2026 specs`;
+}
+
+function deleteCustomPreset(id) {
+  const updated = loadCustom().filter(p => p.id !== id);
+  saveCustom(updated);
+  if (S.preset?.id === id) {
+    S.preset = null;
+    $('pdTriggerIcon').textContent = '📋';
+    $('pdTriggerLabel').textContent = 'Select a preset…';
+    pdSpecCard.classList.remove('show');
+    updateBtn();
+  }
+  updateSubtitle();
+  buildList($('pdSearch').value);
+  toast('🗑️ Preset deleted.', 'ok');
+}
+
+// ── CUSTOM PRESET MODAL ────────────────────────────────────────────────────────
+function openCpModal() {
+  closeDD();
+  $('cpName').value = ''; $('cpW').value = ''; $('cpH').value = '';
+  $('cpDpi').value = '300'; $('cpMaxKB').value = '200';
+  $('cpFmt').value = 'JPEG'; $('cpBg').value = '#ffffff';
+  $('cpOverlay').classList.add('show');
+  setTimeout(() => $('cpName').focus(), 80);
+}
+function closeCpModal() { $('cpOverlay').classList.remove('show'); }
+
+$('pdCustomBtn').onclick = e => { e.stopPropagation(); openCpModal(); };
+$('cpCancel').onclick = closeCpModal;
+$('cpOverlay').onclick = e => { if (e.target === $('cpOverlay')) closeCpModal(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCpModal(); });
+
+$('cpSave').onclick = () => {
+  const name  = $('cpName').value.trim();
+  const w     = parseInt($('cpW').value);
+  const h     = parseInt($('cpH').value);
+  const dpi   = parseInt($('cpDpi').value)   || 300;
+  const maxKB = parseInt($('cpMaxKB').value) || 200;
+  const fmt   = $('cpFmt').value;
+  const bg    = $('cpBg').value;
+  if (!name)            { $('cpName').focus(); toast('❌ Enter a preset name.','err'); return; }
+  if (!w||w<10||!h||h<10){ toast('❌ Enter valid width & height (min 10 px).','err'); return; }
+  const id   = 'custom_' + Date.now();
+  const mime = fmt === 'PNG' ? 'image/png' : 'image/jpeg';
+  const ext  = fmt === 'PNG' ? 'png' : 'jpg';
+  const list = loadCustom();
+  list.push({ id, name, icon:'⚙️', fmt, mime, ext, w, h, dpi, bg, maxKB, q:0.88, custom:true });
+  saveCustom(list);
+  updateSubtitle();
+  closeCpModal();
+  toast(`✅ "${name}" saved!`, 'ok');
+  pickPreset(id);
+};
+
+// ── SEARCHABLE DROPDOWN ────────────────────────────────────────────────────────
+const pdTrigger  = $('pdTrigger');
+const pdPanel    = $('pdPanel');
+const pdSearch   = $('pdSearch');
+const pdClear    = $('pdClear');
+const pdList     = $('pdList');
+const pdEmpty    = $('pdEmpty');
+const pdEmptyQ   = $('pdEmptyQ');
+const pdSpecCard = $('pdSpecCard');
+
+let ddOpen = false;
+let kbdIdx = -1;  // keyboard-focused item index in current filtered list
+let filtered = [...allPresets()];
+
+function buildList(query='') {
+  const q = query.trim().toLowerCase();
+  const all = allPresets();
+  filtered = q
+    ? all.filter(p => p.name.toLowerCase().includes(q) || p.fmt.toLowerCase().includes(q) || p.id.includes(q))
+    : [...all];
+
+  pdList.innerHTML = '';
+  if (!filtered.length) {
+    pdEmpty.classList.add('show');
+    pdEmptyQ.textContent = query;
+    return;
+  }
+  pdEmpty.classList.remove('show');
+
+  filtered.forEach((p) => {
+    const el = document.createElement('div');
+    el.className = 'pd-item' + (S.preset?.id === p.id ? ' selected' : '');
+    el.dataset.id = p.id;
+    el.setAttribute('role', 'option');
+    el.setAttribute('aria-selected', S.preset?.id === p.id ? 'true' : 'false');
+
+    // Highlight matched text
+    let nameHtml = p.name;
+    if (q) {
+      const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+      nameHtml = p.name.replace(re, '<mark>$1</mark>');
+    }
+
+    el.innerHTML = `
+      <div class="pd-item-icon">${p.icon}</div>
+      <div class="pd-item-info">
+        <div class="pd-item-name">${nameHtml}${p.custom ? ' <span class="pd-item-badge">custom</span>' : ''}</div>
+        <div class="pd-item-specs">
+          <span>📐 ${p.w}×${p.h}px</span>
+          <span>🖨️ ${p.dpi} DPI</span>
+          <span>📦 ${p.fmt}</span>
+          <span>⬇️ ≤${p.maxKB}KB</span>
+        </div>
+      </div>
+      <div class="pd-item-tick">✓</div>
+      ${p.custom ? `<button class="pd-item-del" data-del="${p.id}" title="Delete preset">🗑</button>` : ''}
+    `;
+    el.querySelector('.pd-item-icon, .pd-item-info, .pd-item-tick')?.closest?.('.pd-item');
+    // Delete button — stop propagation so it doesn't also pick the preset
+    if (p.custom) {
+      el.querySelector('.pd-item-del').addEventListener('click', e => {
+        e.stopPropagation();
+        deleteCustomPreset(p.id);
+      });
+    }
+    el.addEventListener('click', e => {
+      if (e.target.closest('.pd-item-del')) return;
+      pickPreset(p.id); closeDD();
+    });
+    pdList.appendChild(el);
+  });
+  kbdIdx = -1;
+}
+
+function openDD() {
+  ddOpen = true;
+  pdTrigger.classList.add('open');
+  pdTrigger.setAttribute('aria-expanded','true');
+  pdPanel.classList.add('open');
+  pdSearch.value = '';
+  pdClear.classList.remove('show');
+  buildList('');
+  setTimeout(() => pdSearch.focus(), 30);
+}
+
+function closeDD() {
+  ddOpen = false;
+  pdTrigger.classList.remove('open');
+  pdTrigger.setAttribute('aria-expanded','false');
+  pdPanel.classList.remove('open');
+  kbdIdx = -1;
+}
+
+pdTrigger.addEventListener('click', () => ddOpen ? closeDD() : openDD());
+pdTrigger.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ddOpen ? closeDD() : openDD(); }
+  if (e.key === 'Escape') closeDD();
+});
+
+pdSearch.addEventListener('input', () => {
+  const q = pdSearch.value;
+  pdClear.classList.toggle('show', q.length > 0);
+  buildList(q);
+});
+
+pdSearch.addEventListener('keydown', e => {
+  const items = pdList.querySelectorAll('.pd-item');
+  if (!items.length) return;
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (kbdIdx >= 0) items[kbdIdx].classList.remove('kbd');
+    kbdIdx = Math.min(kbdIdx + 1, items.length - 1);
+    items[kbdIdx].classList.add('kbd');
+    items[kbdIdx].scrollIntoView({ block:'nearest' });
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (kbdIdx >= 0) items[kbdIdx].classList.remove('kbd');
+    kbdIdx = Math.max(kbdIdx - 1, 0);
+    items[kbdIdx].classList.add('kbd');
+    items[kbdIdx].scrollIntoView({ block:'nearest' });
+  } else if (e.key === 'Enter' && kbdIdx >= 0) {
+    e.preventDefault();
+    const id = items[kbdIdx].dataset.id;
+    if (id) { pickPreset(id); closeDD(); }
+  } else if (e.key === 'Escape') {
+    closeDD();
+  }
+});
+
+pdClear.addEventListener('click', () => {
+  pdSearch.value = '';
+  pdClear.classList.remove('show');
+  buildList('');
+  pdSearch.focus();
+});
+
+// Close on outside click
+document.addEventListener('click', e => {
+  if (ddOpen && !pdTrigger.contains(e.target) && !pdPanel.contains(e.target)) closeDD();
+});
+
+function pickPreset(id) {
+  S.preset = allPresets().find(p => p.id === id);
+  const p = S.preset;
+
+  // Update trigger
+  $('pdTriggerIcon').textContent = p.icon;
+  $('pdTriggerLabel').textContent = p.name;
+  $('pdTriggerSub').textContent   = `${p.w}×${p.h}px · ${p.fmt} · ${p.dpi} DPI · ≤${p.maxKB}KB`;
+
+  // Update spec card
+  $('pdSpecIcon').textContent = p.icon + ' ';
+  $('pdSpecName').textContent = p.name;
+  $('pdSpecDim').textContent  = `${p.w} × ${p.h} px`;
+  $('pdSpecFmt').textContent  = p.fmt;
+  $('pdSpecDpi').textContent  = `${p.dpi} DPI`;
+  $('pdSpecSz').textContent   = `≤ ${p.maxKB} KB`;
+  pdSpecCard.classList.add('show');
+
+  // Rebuild list to show tick
+  buildList(pdSearch.value);
+  updateBtn(); step(2);
+  if (S.img) sched();
+}
+
+// Upload
+const dz=$('dz'), fi=$('fi');
+fi.onchange=e=>{ if(e.target.files[0]) load(e.target.files[0]); };
+dz.ondragover=e=>{ e.preventDefault(); dz.classList.add('over'); };
+dz.ondragleave=()=>dz.classList.remove('over');
+dz.ondrop=e=>{ e.preventDefault(); dz.classList.remove('over'); if(e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); };
+
+function load(f){
+  if(!/\.(jpe?g|png|bmp|gif|tiff?|heic|heif)$/i.test(f.name) && !['image/jpeg','image/png','image/bmp','image/gif','image/tiff','image/heic','image/heif'].includes(f.type)){
+    toast('❌ Invalid file type. Use JPG, PNG, BMP, GIF, TIFF or HEIC.','err'); return;
+  }
+  if(f.size>10485760){ toast('❌ File too large — max 10 MB.','err'); return; }
+  const r=new FileReader();
+  r.onload=ev=>{
+    const i=new Image();
+    i.onload=()=>{
+      S.img=i; $('si').src=ev.target.result;
+      $('sp').classList.add('show'); $('at').classList.add('show');
+      $('bgCard').style.display='block'; dz.style.display='none';
+      $('sm').innerHTML=`<span class="mt">📐 <b>${i.width}×${i.height}px</b></span><span class="mt">📦 <b>${fb(f.size)}</b></span><span class="mt">🖼️ <b>${f.type.split('/')[1].toUpperCase()}</b></span>`;
+      updateBtn(); step(1); toast('✅ Photo loaded!','ok');
+      if(S.preset) sched();
+    };
+    i.src=ev.target.result;
+  };
+  r.readAsDataURL(f);
+}
+
+// Sliders
+$('zr').oninput=()=>{ S.zoom=+$('zr').value; $('zn').textContent=S.zoom+'%'; if(S.img&&S.preset) sched(); };
+$('rr').oninput=()=>{ S.rot =+$('rr').value; $('rn').textContent=S.rot+'°';  if(S.img&&S.preset) sched(); };
+
+// Swatches
+$('swr').onclick=e=>{
+  const sw=e.target.closest('.sw');
+  if(!sw||sw.classList.contains('sw-c')) return;
+  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('on'));
+  sw.classList.add('on'); S.bg=sw.dataset.c;
+  if(S.img&&S.preset) sched();
+};
+$('cc').oninput=e=>{
+  S.bg=e.target.value;
+  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('on'));
+  e.target.closest('.sw').classList.add('on');
+  if(S.img&&S.preset) sched();
+};
+
+// Convert
+let t=null;
+function sched(){ clearTimeout(t); t=setTimeout(convert,260); }
+
+async function convert(){
+  if(!S.img||!S.preset) return;
+  const p=S.preset;
+  const pw=$('pw'), pb=$('pb2');
+  pw.classList.add('show'); pb.style.width='20%';
+  await new Promise(r=>setTimeout(r,40));
+
+  const cv=$('cv');
+  const mime=p.mime==='image/png'?'image/png':'image/jpeg';
+
+  // Draw image onto canvas at given pixel dimensions
+  function drawAt(cw,ch){
+    cv.width=cw; cv.height=ch;
+    const ctx=cv.getContext('2d');
+    ctx.fillStyle=S.bg; ctx.fillRect(0,0,cw,ch);
+    ctx.save(); ctx.translate(cw/2,ch/2); ctx.rotate(S.rot*Math.PI/180);
+    const sc=S.zoom/100, ar=S.img.width/S.img.height;
+    let dw,dh;
+    if(cw/ch<ar){dw=cw*sc;dh=dw/ar;}else{dh=ch*sc;dw=dh*ar;}
+    ctx.drawImage(S.img,-dw/2,-dh/2,dw,dh); ctx.restore();
+  }
+  // Decode base64 dataURL byte size → KB
+  function sizeKB(du){ return Math.ceil(du.split(',')[1].length*0.75)/1024; }
+
+  drawAt(p.w,p.h);
+  pb.style.width='40%';
+  await new Promise(r=>setTimeout(r,20));
+
+  let du, skb;
+
+  if(mime==='image/jpeg'){
+    // ── Binary-search JPEG quality to guarantee output ≤ maxKB ───────────────
+    let lo=0.01, hi=1.0, q=p.q;
+    du=cv.toDataURL(mime,q); skb=sizeKB(du);
+
+    if(skb>p.maxKB){
+      // Shrink search space: start from preset quality downward
+      hi=q;
+      for(let i=0;i<14;i++){
+        q=(lo+hi)/2;
+        du=cv.toDataURL(mime,q); skb=sizeKB(du);
+        if(skb<=p.maxKB) lo=q; else hi=q;
+        if(hi-lo<0.004) break;
+      }
+      // Settle on the last passing (lo) side to guarantee under limit
+      q=lo; du=cv.toDataURL(mime,q); skb=sizeKB(du);
+    }
+
+    // Last resort: if even q≈0.01 can't fit (very large canvas), scale dimensions
+    if(skb>p.maxKB){
+      const sc=Math.sqrt(p.maxKB/skb)*0.96;
+      drawAt(Math.max(1,Math.round(p.w*sc)),Math.max(1,Math.round(p.h*sc)));
+      lo=0.01; hi=1.0; q=p.q;
+      for(let i=0;i<14;i++){
+        q=(lo+hi)/2;
+        du=cv.toDataURL(mime,q); skb=sizeKB(du);
+        if(skb<=p.maxKB) lo=q; else hi=q;
+        if(hi-lo<0.004) break;
+      }
+      q=lo; du=cv.toDataURL(mime,q); skb=sizeKB(du);
+    }
+
+  }else{
+    // ── PNG is lossless — iteratively scale canvas down until ≤ maxKB ─────────
+    let sc=1.0;
+    du=cv.toDataURL('image/png'); skb=sizeKB(du);
+    while(skb>p.maxKB && sc>0.02){
+      sc*=Math.sqrt(p.maxKB/skb)*0.97; // slight under-shoot to converge
+      drawAt(Math.max(1,Math.round(p.w*sc)),Math.max(1,Math.round(p.h*sc)));
+      du=cv.toDataURL('image/png'); skb=sizeKB(du);
+    }
+  }
+
+  pb.style.width='90%';
+  await new Promise(r=>setTimeout(r,20));
+
+  S.dataURL=du;
+  cv.style.display='block'; $('oph').style.display='none';
+  const os=$('os'); os.style.display='grid';
+  $('od').textContent=`${cv.width}×${cv.height}`; $('odpi').textContent=p.dpi; $('osz').textContent=`~${Math.round(skb)}KB`;
+
+  const sw=$('sw2'), swt=$('swt');
+  if(skb>p.maxKB){ sw.classList.add('show'); swt.textContent=`Could not compress to ≤${p.maxKB}KB — final size ~${Math.round(skb)}KB.`; }
+  else sw.classList.remove('show');
+
+  pb.style.width='100%';
+  setTimeout(()=>{ pw.classList.remove('show'); pb.style.width='0%'; },500);
+  $('dlBtn').disabled=false;
+  step(3);
+}
+
+$('dlBtn').onclick=()=>{
+  if(!S.dataURL||!S.preset) return;
+  const p=S.preset, a=document.createElement('a');
+  a.href=S.dataURL; a.download=`ilovephoto_${p.id}_${p.w}x${p.h}.${p.ext}`; a.click();
+  step(4); toast(`✅ Saved! ${p.fmt} · ${p.w}×${p.h}px — ilovephoto.in`,'ok');
+};
+
+updateSubtitle();
+function fb(b){ if(b<1024) return b+'B'; if(b<1048576) return (b/1024).toFixed(1)+'KB'; return (b/1048576).toFixed(1)+'MB'; }
+function updateBtn(){}
+let tt; function toast(m,t='ok'){ const e=$('toast'); e.textContent=m; e.className=`toast show ${t}`; clearTimeout(tt); tt=setTimeout(()=>e.classList.remove('show'),3600); }
+function step(n){
+  for(let i=1;i<=4;i++){ const s=$('s'+i); s.classList.remove('active','done'); if(i<n)s.classList.add('done'); else if(i===n)s.classList.add('active'); }
+  for(let i=1;i<=3;i++){ const c=$('c'+i); if(c) c.classList.toggle('done',i<n); }
+}
+</script>
+</body>
+</html>
