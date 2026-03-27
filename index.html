@@ -138,6 +138,16 @@
   .sl input[type=range] { -webkit-appearance: none; width: 110px; height: 3px; background: rgba(255,255,255,.1); border-radius: 3px; outline: none; }
   .sl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--rose); cursor: pointer; }
   .sv { font-size: 0.71rem; color: var(--rose); font-weight: 700; min-width: 32px; }
+  .sl input[type=number] {
+    width: 54px; background: rgba(255,255,255,.06); border: 1px solid var(--ink-border);
+    border-radius: 7px; padding: 3px 6px; color: var(--white); outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; font-weight: 700;
+    text-align: center; -moz-appearance: textfield; transition: border-color .15s;
+  }
+  .sl input[type=number]::-webkit-inner-spin-button,
+  .sl input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .sl input[type=number]:focus { border-color: var(--rose); box-shadow: 0 0 0 2px rgba(255,45,91,.15); }
+  .sl input[type=number].invalid { border-color: rgba(255,59,59,.6); color: #ff8484; }
 
   /* BG PICKER */
   .bgp { padding: 0 22px 18px; }
@@ -345,6 +355,33 @@
   footer a { color: var(--rose); text-decoration: none; }
   .disc { background: rgba(255,255,255,.02); border: 1px solid var(--ink-border); border-radius: 10px; padding: 11px 16px; margin: 14px 0 0; font-size: 0.72rem; color: rgba(255,255,255,.3); line-height: 1.65; }
 
+  /* CONTACT SECTION */
+  .contact-section { margin: 56px 0 20px; }
+  .contact-section-head { text-align: center; margin-bottom: 28px; }
+  .contact-section-head h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.5px; margin-bottom: 8px; }
+  .contact-section-head p { color: var(--muted); font-size: 0.9rem; }
+  .contact-card { background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 20px; padding: 30px 32px; max-width: 620px; margin: 0 auto; }
+  @media (max-width: 600px) { .contact-card { padding: 22px 18px; } }
+  .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .cf-row.full { grid-template-columns: 1fr; }
+  @media (max-width: 520px) { .cf-row { grid-template-columns: 1fr; } }
+  .cf-field { display: flex; flex-direction: column; gap: 6px; }
+  .cf-field label { font-size: 0.69rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .cf-field input, .cf-field select, .cf-field textarea {
+    background: rgba(255,255,255,.05); border: 1px solid var(--ink-border);
+    border-radius: 10px; padding: 10px 13px; color: var(--white); outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem;
+    transition: border-color .15s; width: 100%;
+  }
+  .cf-field input:focus, .cf-field select:focus, .cf-field textarea:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(255,45,91,.1); }
+  .cf-field select option { background: #1C1328; }
+  .cf-field textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+  .cf-field input.err, .cf-field textarea.err { border-color: rgba(255,59,59,.55); }
+  .cf-submit { margin-top: 18px; }
+  .cf-status { margin-top: 14px; border-radius: 10px; padding: 11px 14px; font-size: 0.82rem; display: none; gap: 8px; align-items: flex-start; }
+  .cf-status.ok  { display: flex; background: rgba(0,201,122,.08); border: 1px solid rgba(0,201,122,.28); color: #4ddfab; }
+  .cf-status.err { display: flex; background: rgba(255,59,59,.08); border: 1px solid rgba(255,59,59,.28); color: #ff8484; }
+
   /* ANIMS */
   @keyframes up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
   .hero { animation: up .5s ease both; }
@@ -355,6 +392,104 @@
 
   /* Decorative big heart */
   .bg-heart { position: fixed; top: -90px; right: -70px; font-size: 320px; opacity: .018; pointer-events: none; line-height: 1; z-index: 0; user-select: none; }
+
+  /* REAL-TIME PREVIEW */
+  .rt-preview { margin: 0 22px 0; display: none; }
+  .rt-preview.show { display: block; }
+  .rt-preview-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+  .rt-preview-label .preset-name { color: var(--rose); }
+  .rt-preview-cw {
+    background: repeating-conic-gradient(rgba(255,255,255,.038) 0% 25%, transparent 0% 50%) 0 0 / 18px 18px;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    min-height: 140px; overflow: hidden; padding: 10px;
+  }
+  .rt-preview-cw canvas { max-width: 100%; max-height: 200px; border-radius: 6px; display: block; }
+  .rt-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 10px 0 4px; }
+  .rt-stat { background: rgba(255,255,255,.04); border: 1px solid var(--ink-border); border-radius: 10px; padding: 8px 10px; text-align: center; }
+  .rt-stat-val { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.88rem; color: var(--rose); }
+  .rt-stat-lbl { font-size: 0.6rem; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+  .rt-warn { display: none; padding: 7px 10px; background: rgba(255,59,59,.09); border: 1px solid rgba(255,59,59,.28); border-radius: 8px; font-size: 0.73rem; color: #ff8484; margin-bottom: 8px; gap: 5px; align-items: flex-start; }
+  .rt-warn.show { display: flex; }
+  .rt-pw { height: 3px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; margin-bottom: 8px; display: none; }
+  .rt-pw.show { display: block; }
+  .rt-pb { height: 100%; background: linear-gradient(90deg, var(--rose), var(--violet)); width: 0%; transition: width .3s; border-radius: 3px; }
+
+  /* CROP BUTTON (in upload card) */
+  .crop-trigger-row { padding: 0 22px 16px; display: none; }
+  .crop-trigger-row.show { display: block; }
+  .crop-trigger-btn {
+    width: 100%; padding: 9px 14px; border-radius: 10px; cursor: pointer;
+    border: 1px dashed rgba(255,255,255,.18); background: rgba(255,255,255,.03);
+    color: rgba(255,255,255,.6); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.8rem; font-weight: 600; transition: all .15s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .crop-trigger-btn:hover { border-color: var(--rose); color: var(--rose); background: rgba(255,45,91,.06); }
+  .crop-active-badge {
+    display: none; align-items: center; gap: 5px;
+    font-size: 0.68rem; color: var(--success); font-weight: 700;
+    background: rgba(0,201,122,.1); border: 1px solid rgba(0,201,122,.25);
+    border-radius: 6px; padding: 3px 9px; margin-left: 8px;
+    cursor: pointer;
+  }
+  .crop-active-badge.show { display: inline-flex; }
+
+  /* CROP MODAL */
+  .crop-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.84); z-index: 700;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+    backdrop-filter: blur(6px);
+  }
+  .crop-overlay.show { display: flex; animation: up .22s ease both; }
+  .crop-modal {
+    background: var(--ink-card); border: 1px solid rgba(255,45,91,.28);
+    border-radius: 20px; padding: 22px 24px; width: 100%; max-width: 650px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.85);
+    display: flex; flex-direction: column; gap: 13px;
+  }
+  .crop-modal-head { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; }
+  .crop-ar-row { display: flex; gap: 7px; flex-wrap: wrap; }
+  .crop-ar-btn {
+    padding: 5px 12px; border-radius: 8px; font-size: 0.72rem; font-weight: 700;
+    border: 1px solid var(--ink-border); background: rgba(255,255,255,.04);
+    color: var(--muted); cursor: pointer; transition: all .14s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .crop-ar-btn:hover { border-color: rgba(255,45,91,.4); color: var(--white); }
+  .crop-ar-btn.on { background: rgba(255,45,91,.15); border-color: var(--rose); color: var(--rose); }
+  .crop-wrap {
+    position: relative; overflow: hidden; border-radius: 10px; height: 360px;
+    background: repeating-conic-gradient(rgba(255,255,255,.04) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px;
+    cursor: crosshair; user-select: none; touch-action: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .crop-wrap img { max-width: 100%; max-height: 100%; display: block; pointer-events: none; user-select: none; }
+  .crop-sel {
+    position: absolute; border: 2px solid var(--rose);
+    box-shadow: 0 0 0 9999px rgba(0,0,0,.52); cursor: move; display: none;
+  }
+  .crop-sel::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,45,91,.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,45,91,.25) 1px, transparent 1px);
+    background-size: 33.33% 33.33%;
+  }
+  .croph {
+    position: absolute; width: 10px; height: 10px;
+    background: var(--rose); border: 1px solid #fff; border-radius: 2px;
+  }
+  .croph.nw { top:-5px; left:-5px; cursor:nw-resize; }
+  .croph.n  { top:-5px; left:calc(50% - 5px); cursor:n-resize; }
+  .croph.ne { top:-5px; right:-5px; cursor:ne-resize; }
+  .croph.e  { top:calc(50% - 5px); right:-5px; cursor:e-resize; }
+  .croph.se { bottom:-5px; right:-5px; cursor:se-resize; }
+  .croph.s  { bottom:-5px; left:calc(50% - 5px); cursor:s-resize; }
+  .croph.sw { bottom:-5px; left:-5px; cursor:sw-resize; }
+  .croph.w  { top:calc(50% - 5px); left:-5px; cursor:w-resize; }
+  .crop-hint { font-size: 0.71rem; color: var(--muted); text-align: center; }
+  .crop-btns { display: flex; gap: 10px; }
+  .crop-btns .btn { flex: 1; }
 </style>
 </head>
 <body>
@@ -378,7 +513,7 @@
   <div class="wrap">
 
     <div class="hero">
-      <div class="hero-tag">🇮🇳 Made for Indian Government Forms</div>
+      <div class="hero-tag">Made for Government Forms</div>
       <h1>Your Photo,<br><em>Perfectly Formatted</em></h1>
       <p class="hero-sub">Convert your portrait to the exact size, DPI and format required for PAN, Passport, Voter ID &amp; more — instantly in your browser.</p>
       <div class="hero-pills">
@@ -425,8 +560,35 @@
           <div class="at" id="at">
             <div class="at-lbl">🔧 Adjustments</div>
             <div class="at-row">
-              <div class="sl"><label>Zoom</label><input type="range" id="zr" min="50" max="200" value="100"><span class="sv" id="zn">100%</span></div>
-              <div class="sl"><label>Rotate</label><input type="range" id="rr" min="-180" max="180" value="0"><span class="sv" id="rn">0°</span></div>
+              <div class="sl"><label>Zoom</label><input type="range" id="zr" min="50" max="200" value="100"><input type="number" id="zn" min="50" max="200" value="100" title="50 – 200 %"><span class="sv">%</span></div>
+              <div class="sl"><label>Rotate</label><input type="range" id="rr" min="-180" max="180" value="0"><input type="number" id="rn" min="-180" max="180" value="0" title="-180 – 180 °"><span class="sv">°</span></div>
+            </div>
+          </div>
+
+          <!-- Crop trigger -->
+          <div class="crop-trigger-row" id="cropTriggerRow">
+            <button class="crop-trigger-btn" id="cropBtn">
+              ✂️ Crop Photo
+              <span class="crop-active-badge" id="cropBadge">✓ Cropped — click to re-crop</span>
+            </button>
+          </div>
+
+          <!-- Real-time preview (shown when preset is selected) -->
+          <div class="rt-preview" id="rtPreview">
+            <div class="rt-preview-label">
+              <span>Live Preview</span>
+              <span class="preset-name" id="rtPresetName"></span>
+            </div>
+            <div class="rt-pw" id="rtPw"><div class="rt-pb" id="rtPb"></div></div>
+            <div class="rt-warn" id="rtWarn">⚠️ <span id="rtWarnTxt"></span></div>
+            <div class="rt-preview-cw">
+              <div class="oph" id="rtOph" style="padding:28px 16px"><div class="oi">🖼️</div><p>Select a preset to see<br>live preview here</p></div>
+              <canvas id="rtCv" style="display:none"></canvas>
+            </div>
+            <div class="rt-stats" id="rtStats" style="display:none">
+              <div class="rt-stat"><div class="rt-stat-val" id="rtDim">—</div><div class="rt-stat-lbl">Dimensions</div></div>
+              <div class="rt-stat"><div class="rt-stat-val" id="rtDpi">—</div><div class="rt-stat-lbl">DPI</div></div>
+              <div class="rt-stat"><div class="rt-stat-val" id="rtSz">—</div><div class="rt-stat-lbl">File Size</div></div>
             </div>
           </div>
         </div>
@@ -492,31 +654,66 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="ch"><div class="ci">✨</div><h2>Converted Output</h2></div>
-          <div class="ob">
-            <div class="cw">
-              <div class="oph" id="oph"><div class="oi">🖼️</div><p>Upload a photo &amp; select a preset<br>to see the preview here</p></div>
-              <canvas id="cv" style="display:none"></canvas>
-            </div>
-            <div class="sw-warn" id="sw2">⚠️ <span id="swt"></span></div>
-            <div class="os" id="os">
-              <div class="ostat"><div class="osv" id="od">—</div><div class="osl">Dimensions</div></div>
-              <div class="ostat"><div class="osv" id="odpi">—</div><div class="osl">DPI</div></div>
-              <div class="ostat"><div class="osv" id="osz">—</div><div class="osl">File Size</div></div>
-            </div>
-            <div class="pw" id="pw"><div class="pb2" id="pb2"></div></div>
-          </div>
-          <div class="br">
+        <!-- Download button lives here, shown once output is ready -->
+        <div class="card" id="dlCard" style="display:none">
+          <div class="ch"><div class="ci">⬇️</div><h2>Download</h2></div>
+          <div class="br" style="padding-top:18px">
             <button class="btn bp" id="dlBtn" disabled>⬇️ Download File</button>
           </div>
         </div>
+        <!-- Hidden canvas used for actual conversion & download -->
+        <canvas id="cv" style="display:none"></canvas>
       </div>
 
     </div>
 
     <div class="disc">
       ⚠️ <strong>Disclaimer:</strong> All image processing happens entirely in your browser — no photo is ever sent to any server. Preset specifications are based on commonly published guidelines; always verify the latest requirements from official government portals before submission. ilovephoto.in makes no warranty of compliance with any specific government system.
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div class="contact-section">
+      <div class="contact-section-head">
+        <h2>Contact <em>Us</em></h2>
+        <p>Have a question, request, or spotted a bug? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-card">
+        <form id="contactForm" novalidate>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label>Your Name</label>
+              <input type="text" id="cfName" placeholder="Rahul Sharma" autocomplete="name">
+            </div>
+            <div class="cf-field">
+              <label>Email Address</label>
+              <input type="email" id="cfEmail" placeholder="you@example.com" autocomplete="email">
+            </div>
+          </div>
+          <div class="cf-row full">
+            <div class="cf-field">
+              <label>Subject</label>
+              <select id="cfSubject">
+                <option value="">— Select a topic —</option>
+                <option value="Feature Request">💡 Feature Request</option>
+                <option value="Bug Report">🐛 Bug Report</option>
+                <option value="Preset Request">📋 Preset Request</option>
+                <option value="General Query">💬 General Query</option>
+                <option value="Other">✉️ Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="cf-row full">
+            <div class="cf-field">
+              <label>Message</label>
+              <textarea id="cfMessage" placeholder="Tell us what's on your mind…"></textarea>
+            </div>
+          </div>
+          <div class="cf-submit">
+            <button type="submit" class="btn bp" id="cfBtn">✉️ Send Message</button>
+          </div>
+          <div class="cf-status" id="cfStatus"></div>
+        </form>
+      </div>
     </div>
 
   </div>
@@ -530,6 +727,39 @@
 </footer>
 
 <div class="toast" id="toast"></div>
+
+<!-- Crop Modal -->
+<div class="crop-overlay" id="cropOverlay">
+  <div class="crop-modal">
+    <div class="crop-modal-head">✂️ Crop Photo</div>
+    <div class="crop-ar-row">
+      <button class="crop-ar-btn on" data-ar="free">Free</button>
+      <button class="crop-ar-btn" data-ar="1:1">1 : 1</button>
+      <button class="crop-ar-btn" data-ar="3:4">3 : 4</button>
+      <button class="crop-ar-btn" data-ar="35:45">35 : 45</button>
+      <button class="crop-ar-btn" data-ar="4:3">4 : 3</button>
+    </div>
+    <div class="crop-wrap" id="cropWrap">
+      <img id="cropImg" alt="Photo to crop">
+      <div class="crop-sel" id="cropSel">
+        <div class="croph nw" data-h="nw"></div>
+        <div class="croph n"  data-h="n"></div>
+        <div class="croph ne" data-h="ne"></div>
+        <div class="croph e"  data-h="e"></div>
+        <div class="croph se" data-h="se"></div>
+        <div class="croph s"  data-h="s"></div>
+        <div class="croph sw" data-h="sw"></div>
+        <div class="croph w"  data-h="w"></div>
+      </div>
+    </div>
+    <div class="crop-hint">Drag on the image to select a crop area · Drag handles to resize · Drag inside to move</div>
+    <div class="crop-btns">
+      <button class="btn bd" id="cropCancelBtn">Cancel</button>
+      <button class="btn bd" id="cropResetBtn" style="display:none; border-color:rgba(255,59,59,.35); color:#ff8484;">↺ Reset to Original</button>
+      <button class="btn bp" id="cropApplyBtn" disabled>✂️ Apply Crop</button>
+    </div>
+  </div>
+</div>
 
 <!-- Custom Preset Modal -->
 <div class="cp-overlay" id="cpOverlay">
@@ -582,6 +812,7 @@
 </div>
 
 <script>
+// ── PRESETS ────────────────────────────────────────────────────────────────────
 const PRESETS = [
 
   // ── HIGH VOLUME — INDIA ──────────────────────────────────────────────────────
@@ -627,7 +858,7 @@ const PRESETS = [
   { id:'ration',      name:'Ration Card',                icon:'🏠', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:400,  h:400,  dpi:200, bg:'#ffffff', maxKB:100,  q:0.85 },
 ];
 
-let S = { img:null, preset:null, bg:'#ffffff', zoom:100, rot:0, dataURL:null };
+let S = { img:null, origImg:null, cropped:false, preset:null, bg:'#ffffff', zoom:100, rot:0, dataURL:null };
 const $=id=>document.getElementById(id);
 
 // ── CUSTOM PRESETS (localStorage) ─────────────────────────────────────────────
@@ -648,7 +879,9 @@ function deleteCustomPreset(id) {
     $('pdTriggerIcon').textContent = '📋';
     $('pdTriggerLabel').textContent = 'Select a preset…';
     pdSpecCard.classList.remove('show');
-    updateBtn();
+    $('rtPresetName').textContent = '';
+    $('dlBtn').disabled = true;
+    $('dlCard').style.display = 'none';
   }
   updateSubtitle();
   buildList($('pdSearch').value);
@@ -852,13 +1085,16 @@ function pickPreset(id) {
   $('pdSpecSz').textContent   = `≤ ${p.maxKB} KB`;
   pdSpecCard.classList.add('show');
 
+  // Update live preview label
+  $('rtPresetName').textContent = p.name;
+
   // Rebuild list to show tick
   buildList(pdSearch.value);
-  updateBtn(); step(2);
+  step(2);
   if (S.img) sched();
 }
 
-// Upload
+// ── UPLOAD ─────────────────────────────────────────────────────────────────────
 const dz=$('dz'), fi=$('fi');
 fi.onchange=e=>{ if(e.target.files[0]) load(e.target.files[0]); };
 dz.ondragover=e=>{ e.preventDefault(); dz.classList.add('over'); };
@@ -874,11 +1110,15 @@ function load(f){
   r.onload=ev=>{
     const i=new Image();
     i.onload=()=>{
-      S.img=i; $('si').src=ev.target.result;
+      S.img=i; S.origImg=i; S.cropped=false;
+      $('si').src=ev.target.result;
       $('sp').classList.add('show'); $('at').classList.add('show');
+      $('cropTriggerRow').classList.add('show');
+      $('cropBadge').classList.remove('show');
       $('bgCard').style.display='block'; dz.style.display='none';
+      $('rtPreview').classList.add('show');
       $('sm').innerHTML=`<span class="mt">📐 <b>${i.width}×${i.height}px</b></span><span class="mt">📦 <b>${fb(f.size)}</b></span><span class="mt">🖼️ <b>${f.type.split('/')[1].toUpperCase()}</b></span>`;
-      updateBtn(); step(1); toast('✅ Photo loaded!','ok');
+      step(1); toast('✅ Photo loaded!','ok');
       if(S.preset) sched();
     };
     i.src=ev.target.result;
@@ -886,11 +1126,46 @@ function load(f){
   r.readAsDataURL(f);
 }
 
-// Sliders
-$('zr').oninput=()=>{ S.zoom=+$('zr').value; $('zn').textContent=S.zoom+'%'; if(S.img&&S.preset) sched(); };
-$('rr').oninput=()=>{ S.rot =+$('rr').value; $('rn').textContent=S.rot+'°';  if(S.img&&S.preset) sched(); };
+// ── SLIDERS + NUMBER INPUTS ────────────────────────────────────────────────────
+function setZoom(v){
+  v = Math.round(Math.min(200, Math.max(50, v)));
+  S.zoom = v; $('zr').value = v; $('zn').value = v;
+  $('zn').classList.remove('invalid');
+  if(S.img && S.preset) sched();
+}
+function setRot(v){
+  v = Math.round(Math.min(180, Math.max(-180, v)));
+  S.rot = v; $('rr').value = v; $('rn').value = v;
+  $('rn').classList.remove('invalid');
+  if(S.img && S.preset) sched();
+}
 
-// Swatches
+$('zr').oninput = () => setZoom(+$('zr').value);
+$('rr').oninput = () => setRot(+$('rr').value);
+
+$('zn').oninput = () => {
+  const v = +$('zn').value;
+  $('zn').classList.toggle('invalid', v < 50 || v > 200 || isNaN(v));
+};
+$('zn').onchange = () => {
+  const v = +$('zn').value;
+  if(isNaN(v)) { $('zn').value = S.zoom; $('zn').classList.remove('invalid'); return; }
+  setZoom(v);
+};
+$('zn').onkeydown = e => { if(e.key === 'Enter') $('zn').blur(); };
+
+$('rn').oninput = () => {
+  const v = +$('rn').value;
+  $('rn').classList.toggle('invalid', v < -180 || v > 180 || isNaN(v));
+};
+$('rn').onchange = () => {
+  const v = +$('rn').value;
+  if(isNaN(v)) { $('rn').value = S.rot; $('rn').classList.remove('invalid'); return; }
+  setRot(v);
+};
+$('rn').onkeydown = e => { if(e.key === 'Enter') $('rn').blur(); };
+
+// ── SWATCHES ───────────────────────────────────────────────────────────────────
 $('swr').onclick=e=>{
   const sw=e.target.closest('.sw');
   if(!sw||sw.classList.contains('sw-c')) return;
@@ -905,21 +1180,20 @@ $('cc').oninput=e=>{
   if(S.img&&S.preset) sched();
 };
 
-// Convert
-let t=null;
-function sched(){ clearTimeout(t); t=setTimeout(convert,260); }
+// ── CONVERT (real-time preview + download prep) ────────────────────────────────
+let convTimer=null;
+function sched(){ clearTimeout(convTimer); convTimer=setTimeout(convert,280); }
 
 async function convert(){
   if(!S.img||!S.preset) return;
   const p=S.preset;
-  const pw=$('pw'), pb=$('pb2');
-  pw.classList.add('show'); pb.style.width='20%';
+  const rtPw=$('rtPw'), rtPb=$('rtPb');
+  rtPw.classList.add('show'); rtPb.style.width='20%';
   await new Promise(r=>setTimeout(r,40));
 
-  const cv=$('cv');
+  const cv=$('rtCv');
   const mime=p.mime==='image/png'?'image/png':'image/jpeg';
 
-  // Draw image onto canvas at given pixel dimensions
   function drawAt(cw,ch){
     cv.width=cw; cv.height=ch;
     const ctx=cv.getContext('2d');
@@ -930,22 +1204,18 @@ async function convert(){
     if(cw/ch<ar){dw=cw*sc;dh=dw/ar;}else{dh=ch*sc;dw=dh*ar;}
     ctx.drawImage(S.img,-dw/2,-dh/2,dw,dh); ctx.restore();
   }
-  // Decode base64 dataURL byte size → KB
   function sizeKB(du){ return Math.ceil(du.split(',')[1].length*0.75)/1024; }
 
   drawAt(p.w,p.h);
-  pb.style.width='40%';
+  rtPb.style.width='40%';
   await new Promise(r=>setTimeout(r,20));
 
   let du, skb;
 
   if(mime==='image/jpeg'){
-    // ── Binary-search JPEG quality to guarantee output ≤ maxKB ───────────────
     let lo=0.01, hi=1.0, q=p.q;
     du=cv.toDataURL(mime,q); skb=sizeKB(du);
-
     if(skb>p.maxKB){
-      // Shrink search space: start from preset quality downward
       hi=q;
       for(let i=0;i<14;i++){
         q=(lo+hi)/2;
@@ -953,14 +1223,11 @@ async function convert(){
         if(skb<=p.maxKB) lo=q; else hi=q;
         if(hi-lo<0.004) break;
       }
-      // Settle on the last passing (lo) side to guarantee under limit
       q=lo; du=cv.toDataURL(mime,q); skb=sizeKB(du);
     }
-
-    // Last resort: if even q≈0.01 can't fit (very large canvas), scale dimensions
     if(skb>p.maxKB){
-      const sc=Math.sqrt(p.maxKB/skb)*0.96;
-      drawAt(Math.max(1,Math.round(p.w*sc)),Math.max(1,Math.round(p.h*sc)));
+      const sc2=Math.sqrt(p.maxKB/skb)*0.96;
+      drawAt(Math.max(1,Math.round(p.w*sc2)),Math.max(1,Math.round(p.h*sc2)));
       lo=0.01; hi=1.0; q=p.q;
       for(let i=0;i<14;i++){
         q=(lo+hi)/2;
@@ -970,32 +1237,33 @@ async function convert(){
       }
       q=lo; du=cv.toDataURL(mime,q); skb=sizeKB(du);
     }
-
-  }else{
-    // ── PNG is lossless — iteratively scale canvas down until ≤ maxKB ─────────
-    let sc=1.0;
+  } else {
+    let sc2=1.0;
     du=cv.toDataURL('image/png'); skb=sizeKB(du);
-    while(skb>p.maxKB && sc>0.02){
-      sc*=Math.sqrt(p.maxKB/skb)*0.97; // slight under-shoot to converge
-      drawAt(Math.max(1,Math.round(p.w*sc)),Math.max(1,Math.round(p.h*sc)));
+    while(skb>p.maxKB && sc2>0.02){
+      sc2*=Math.sqrt(p.maxKB/skb)*0.97;
+      drawAt(Math.max(1,Math.round(p.w*sc2)),Math.max(1,Math.round(p.h*sc2)));
       du=cv.toDataURL('image/png'); skb=sizeKB(du);
     }
   }
 
-  pb.style.width='90%';
+  rtPb.style.width='90%';
   await new Promise(r=>setTimeout(r,20));
 
   S.dataURL=du;
-  cv.style.display='block'; $('oph').style.display='none';
-  const os=$('os'); os.style.display='grid';
-  $('od').textContent=`${cv.width}×${cv.height}`; $('odpi').textContent=p.dpi; $('osz').textContent=`~${Math.round(skb)}KB`;
+  cv.style.display='block'; $('rtOph').style.display='none';
+  $('rtStats').style.display='grid';
+  $('rtDim').textContent=`${cv.width}×${cv.height}`;
+  $('rtDpi').textContent=p.dpi;
+  $('rtSz').textContent=`~${Math.round(skb)}KB`;
 
-  const sw=$('sw2'), swt=$('swt');
-  if(skb>p.maxKB){ sw.classList.add('show'); swt.textContent=`Could not compress to ≤${p.maxKB}KB — final size ~${Math.round(skb)}KB.`; }
-  else sw.classList.remove('show');
+  const rw=$('rtWarn');
+  if(skb>p.maxKB){ rw.classList.add('show'); $('rtWarnTxt').textContent=`Could not compress to ≤${p.maxKB}KB — final ~${Math.round(skb)}KB.`; }
+  else rw.classList.remove('show');
 
-  pb.style.width='100%';
-  setTimeout(()=>{ pw.classList.remove('show'); pb.style.width='0%'; },500);
+  rtPb.style.width='100%';
+  setTimeout(()=>{ rtPw.classList.remove('show'); rtPb.style.width='0%'; },500);
+  $('dlCard').style.display='block';
   $('dlBtn').disabled=false;
   step(3);
 }
@@ -1007,9 +1275,235 @@ $('dlBtn').onclick=()=>{
   step(4); toast(`✅ Saved! ${p.fmt} · ${p.w}×${p.h}px — ilovephoto.in`,'ok');
 };
 
+// ── CROP MODAL ─────────────────────────────────────────────────────────────────
+let cropAr = 'free';
+let cropDrag = null; // { type:'draw'|'move'|'resize', handle, startMx, startMy, startBox }
+let cropBox = null;  // { x, y, w, h } in display coords relative to image top-left
+
+const cropOverlay = $('cropOverlay');
+const cropWrapEl  = $('cropWrap');
+const cropImgEl   = $('cropImg');
+const cropSelEl   = $('cropSel');
+const cropApplyBtn= $('cropApplyBtn');
+
+function openCropModal(){
+  if(!S.img) return;
+  // Show original image (before previous crop) for re-cropping
+  cropImgEl.src = S.origImg === S.img ? $('si').src : (() => {
+    const tc = document.createElement('canvas');
+    tc.width = S.origImg.width; tc.height = S.origImg.height;
+    tc.getContext('2d').drawImage(S.origImg,0,0);
+    return tc.toDataURL();
+  })();
+  // Actually always show current S.img so user crops from current state
+  const tmpC = document.createElement('canvas');
+  tmpC.width = S.img.width; tmpC.height = S.img.height;
+  tmpC.getContext('2d').drawImage(S.img, 0, 0);
+  cropImgEl.src = tmpC.toDataURL();
+  cropBox = null;
+  cropSelEl.style.display = 'none';
+  cropApplyBtn.disabled = true;
+  // Show Reset button only if a crop has been applied before
+  $('cropResetBtn').style.display = S.cropped ? 'inline-flex' : 'none';
+  // Reset aspect ratio to free
+  document.querySelectorAll('.crop-ar-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelector('.crop-ar-btn[data-ar="free"]').classList.add('on');
+  cropAr = 'free';
+  cropOverlay.classList.add('show');
+}
+
+function closeCropModal(){ cropOverlay.classList.remove('show'); cropDrag=null; }
+
+$('cropBtn').onclick       = openCropModal;
+$('cropCancelBtn').onclick  = closeCropModal;
+$('cropResetBtn').onclick   = ()=>{
+  S.img = S.origImg; S.cropped = false;
+  // Restore original photo preview
+  const tc = document.createElement('canvas');
+  tc.width = S.origImg.width; tc.height = S.origImg.height;
+  tc.getContext('2d').drawImage(S.origImg, 0, 0);
+  $('si').src = tc.toDataURL();
+  $('sm').innerHTML = `<span class="mt">📐 <b>${S.origImg.width}×${S.origImg.height}px</b></span>`;
+  $('cropBadge').classList.remove('show');
+  closeCropModal();
+  toast('↺ Crop reset to original.', 'ok');
+  if(S.preset) sched();
+};
+cropOverlay.onclick     = e=>{ if(e.target===cropOverlay) closeCropModal(); };
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && cropOverlay.classList.contains('show')) closeCropModal(); });
+
+// Aspect ratio buttons
+document.querySelectorAll('.crop-ar-btn').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.crop-ar-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    cropAr = btn.dataset.ar;
+    if(cropBox) enforceAR();
+  };
+});
+
+function getImgRect(){
+  const wR = cropWrapEl.getBoundingClientRect();
+  const iR = cropImgEl.getBoundingClientRect();
+  return { x: iR.left-wR.left, y: iR.top-wR.top, w: iR.width, h: iR.height };
+}
+
+function clamp(box, iw, ih){
+  let {x,y,w,h}=box;
+  w=Math.max(10,w); h=Math.max(10,h);
+  x=Math.max(0,Math.min(x,iw-w)); y=Math.max(0,Math.min(y,ih-h));
+  w=Math.min(w,iw-x); h=Math.min(h,ih-y);
+  return {x,y,w,h};
+}
+
+function enforceAR(){
+  if(cropAr==='free'||!cropBox) return;
+  const [rw,rh]=cropAr.split(':').map(Number);
+  const ir=getImgRect();
+  let {x,y,w}=cropBox;
+  let h=w*rh/rw;
+  if(h>ir.h-y){ h=ir.h-y; w=h*rw/rh; }
+  cropBox=clamp({x,y,w,h},ir.w,ir.h);
+  renderSel(ir);
+}
+
+function renderSel(ir){
+  if(!cropBox) return;
+  const {x,y,w,h}=cropBox;
+  const R=ir||getImgRect();
+  cropSelEl.style.display='block';
+  cropSelEl.style.left  =(R.x+x)+'px';
+  cropSelEl.style.top   =(R.y+y)+'px';
+  cropSelEl.style.width =w+'px';
+  cropSelEl.style.height=h+'px';
+  cropApplyBtn.disabled=false;
+}
+
+cropWrapEl.addEventListener('pointerdown', e=>{
+  e.preventDefault();
+  const handle = e.target.closest('[data-h]');
+  const inSel  = e.target.closest('#cropSel');
+  const ir = getImgRect();
+  const mx = e.clientX, my = e.clientY;
+  if(handle){
+    cropDrag={ type:'resize', handle:handle.dataset.h, startMx:mx, startMy:my, startBox:{...cropBox} };
+  } else if(inSel && cropBox){
+    cropDrag={ type:'move', startMx:mx, startMy:my, startBox:{...cropBox} };
+  } else {
+    const lx = mx-(cropWrapEl.getBoundingClientRect().left+ir.x);
+    const ly = my-(cropWrapEl.getBoundingClientRect().top +ir.y);
+    cropBox={ x:Math.max(0,Math.min(lx,ir.w)), y:Math.max(0,Math.min(ly,ir.h)), w:0, h:0 };
+    cropSelEl.style.display='none'; cropApplyBtn.disabled=true;
+    cropDrag={ type:'draw', startMx:mx, startMy:my, startBox:{...cropBox} };
+  }
+  cropWrapEl.setPointerCapture(e.pointerId);
+});
+
+cropWrapEl.addEventListener('pointermove', e=>{
+  if(!cropDrag) return;
+  const ir = getImgRect();
+  const wR = cropWrapEl.getBoundingClientRect();
+  const dx = e.clientX-cropDrag.startMx, dy = e.clientY-cropDrag.startMy;
+  const sb = cropDrag.startBox;
+
+  if(cropDrag.type==='draw'){
+    const sx=sb.x, sy=sb.y;
+    const ex=Math.max(0,Math.min(e.clientX-wR.left-ir.x, ir.w));
+    const ey=Math.max(0,Math.min(e.clientY-wR.top -ir.y, ir.h));
+    let bx=Math.min(sx,ex), by=Math.min(sy,ey);
+    let bw=Math.abs(ex-sx), bh=Math.abs(ey-sy);
+    if(cropAr!=='free'){ const[rw,rh]=cropAr.split(':').map(Number); bh=bw*rh/rw; if(ey<sy) by=sy-bh; }
+    cropBox=clamp({x:bx,y:by,w:bw,h:bh},ir.w,ir.h);
+    if(bw>6&&bh>6) renderSel(ir);
+
+  } else if(cropDrag.type==='move'){
+    cropBox=clamp({x:sb.x+dx,y:sb.y+dy,w:sb.w,h:sb.h},ir.w,ir.h);
+    renderSel(ir);
+
+  } else if(cropDrag.type==='resize'){
+    let{x,y,w,h}=sb; const hn=cropDrag.handle;
+    if(hn.includes('e')){ w=Math.max(10,sb.w+dx); }
+    if(hn.includes('w')){ x=sb.x+dx; w=Math.max(10,sb.w-dx); }
+    if(hn.includes('s')){ h=Math.max(10,sb.h+dy); }
+    if(hn.includes('n')){ y=sb.y+dy; h=Math.max(10,sb.h-dy); }
+    if(cropAr!=='free'){
+      const[rw,rh]=cropAr.split(':').map(Number);
+      if(hn.includes('n')||hn.includes('s')) w=h*rw/rh; else h=w*rh/rw;
+    }
+    cropBox=clamp({x,y,w,h},ir.w,ir.h);
+    renderSel(ir);
+  }
+});
+
+cropWrapEl.addEventListener('pointerup', ()=>{ cropDrag=null; });
+
+// Apply crop
+cropApplyBtn.onclick=()=>{
+  if(!cropBox||!S.img) return;
+  const ir=getImgRect();
+  const scX=S.img.width/ir.w, scY=S.img.height/ir.h;
+  const sx=Math.round(cropBox.x*scX), sy=Math.round(cropBox.y*scY);
+  const sw=Math.round(cropBox.w*scX), sh=Math.round(cropBox.h*scY);
+  const tmp=document.createElement('canvas');
+  tmp.width=sw; tmp.height=sh;
+  tmp.getContext('2d').drawImage(S.img,sx,sy,sw,sh,0,0,sw,sh);
+  const newImg=new Image();
+  newImg.onload=()=>{
+    S.img=newImg; S.cropped=true;
+    $('si').src=tmp.toDataURL();
+    $('sm').innerHTML=`<span class="mt">📐 <b>${sw}×${sh}px</b></span><span class="mt">✂️ <b>Cropped</b></span>`;
+    $('cropBadge').classList.add('show');
+    closeCropModal();
+    toast('✅ Crop applied!','ok');
+    if(S.preset) sched();
+  };
+  newImg.src=tmp.toDataURL();
+};
+
+// ── CONTACT FORM (mailto) ────────────────────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name    = $('cfName').value.trim();
+  const email   = $('cfEmail').value.trim();
+  const subject = $('cfSubject').value;
+  const message = $('cfMessage').value.trim();
+  const status  = $('cfStatus');
+  const btn     = $('cfBtn');
+
+  // Clear previous error states
+  ['cfName','cfEmail','cfMessage'].forEach(id => $(id).classList.remove('err'));
+  status.className = 'cf-status';
+
+  // Validate
+  let ok = true;
+  if(!name) { $('cfName').classList.add('err'); ok=false; }
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('cfEmail').classList.add('err'); ok=false; }
+  if(!message) { $('cfMessage').classList.add('err'); ok=false; }
+  if(!ok){ status.className='cf-status err'; status.innerHTML='⚠️ Please fill in all required fields with a valid email.'; return; }
+
+  // Build mailto link and open user's email client
+  btn.disabled = true;
+  btn.textContent = '⏳ Opening email…';
+
+  const to = 'ilovephoto.in@gmail.com';
+  const subj = encodeURIComponent((subject && subject.length ? subject : 'General Query') + ' — ilovephoto.in');
+  const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+  const mailto = `mailto:${to}?subject=${subj}&body=${body}`;
+
+  // Open mail client (this will keep privacy — no external submission)
+  window.location.href = mailto;
+
+  // Update UI to indicate action
+  status.className = 'cf-status ok';
+  status.innerHTML = '✉️ Your email client should open with the message pre-filled. Click send to deliver.';
+  btn.disabled = false;
+  btn.textContent = '✉️ Send Message';
+  this.reset();
+});
+
+// ── MISC ───────────────────────────────────────────────────────────────────────
 updateSubtitle();
 function fb(b){ if(b<1024) return b+'B'; if(b<1048576) return (b/1024).toFixed(1)+'KB'; return (b/1048576).toFixed(1)+'MB'; }
-function updateBtn(){}
 let tt; function toast(m,t='ok'){ const e=$('toast'); e.textContent=m; e.className=`toast show ${t}`; clearTimeout(tt); tt=setTimeout(()=>e.classList.remove('show'),3600); }
 function step(n){
   for(let i=1;i<=4;i++){ const s=$('s'+i); s.classList.remove('active','done'); if(i<n)s.classList.add('done'); else if(i===n)s.classList.add('active'); }
