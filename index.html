@@ -96,8 +96,9 @@
   .sc.done { background: var(--success); }
 
   /* GRID */
-  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 64px; }
-  @media (max-width: 720px) { .app-grid { grid-template-columns: 1fr; } }
+  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 64px; align-items: start; }
+  .app-grid > div:last-child { position: sticky; top: 20px; }
+  @media (max-width: 720px) { .app-grid { grid-template-columns: 1fr; } .app-grid > div:last-child { position: static; } }
 
   /* CARDS */
   .card { background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 20px; overflow: hidden; }
@@ -394,10 +395,7 @@
   .bg-heart { position: fixed; top: -90px; right: -70px; font-size: 320px; opacity: .018; pointer-events: none; line-height: 1; z-index: 0; user-select: none; }
 
   /* REAL-TIME PREVIEW */
-  .rt-preview { margin: 0 22px 0; display: none; }
-  .rt-preview.show { display: block; }
-  .rt-preview-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-  .rt-preview-label .preset-name { color: var(--rose); }
+  .rt-preview { margin: 0 22px 0; }
   .rt-preview-cw {
     background: repeating-conic-gradient(rgba(255,255,255,.038) 0% 25%, transparent 0% 50%) 0 0 / 18px 18px;
     border-radius: 12px; display: flex; align-items: center; justify-content: center;
@@ -536,7 +534,7 @@
 
     <div class="app-grid">
 
-      <!-- LEFT COLUMN -->
+      <!-- LEFT COLUMN: Upload + Presets + Background -->
       <div>
         <div class="card">
           <div class="ch">
@@ -572,46 +570,8 @@
               <span class="crop-active-badge" id="cropBadge">✓ Cropped — click to re-crop</span>
             </button>
           </div>
-
-          <!-- Real-time preview (shown when preset is selected) -->
-          <div class="rt-preview" id="rtPreview">
-            <div class="rt-preview-label">
-              <span>Live Preview</span>
-              <span class="preset-name" id="rtPresetName"></span>
-            </div>
-            <div class="rt-pw" id="rtPw"><div class="rt-pb" id="rtPb"></div></div>
-            <div class="rt-warn" id="rtWarn">⚠️ <span id="rtWarnTxt"></span></div>
-            <div class="rt-preview-cw">
-              <div class="oph" id="rtOph" style="padding:28px 16px"><div class="oi">🖼️</div><p>Select a preset to see<br>live preview here</p></div>
-              <canvas id="rtCv" style="display:none"></canvas>
-            </div>
-            <div class="rt-stats" id="rtStats" style="display:none">
-              <div class="rt-stat"><div class="rt-stat-val" id="rtDim">—</div><div class="rt-stat-lbl">Dimensions</div></div>
-              <div class="rt-stat"><div class="rt-stat-val" id="rtDpi">—</div><div class="rt-stat-lbl">DPI</div></div>
-              <div class="rt-stat"><div class="rt-stat-val" id="rtSz">—</div><div class="rt-stat-lbl">File Size</div></div>
-            </div>
-          </div>
         </div>
 
-        <div class="card" id="bgCard" style="display:none">
-          <div class="ch"><div class="ci">🎨</div><h2>Background Color</h2></div>
-          <div class="bgp">
-            <div class="bgp-lbl">Fill background with:</div>
-            <div class="swatches" id="swr">
-              <div class="sw on" style="background:#ffffff" data-c="#ffffff"></div>
-              <div class="sw" style="background:#f5f5f0" data-c="#f5f5f0"></div>
-              <div class="sw" style="background:#e0e0e0" data-c="#e0e0e0"></div>
-              <div class="sw" style="background:#87CEEB" data-c="#87CEEB"></div>
-              <div class="sw" style="background:#ffe4c8" data-c="#ffe4c8"></div>
-              <div class="sw" style="background:#000;border:1px solid #333" data-c="#000000"></div>
-              <div class="sw sw-c">🎨<input type="color" id="cc" value="#ffffff"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN -->
-      <div>
         <div class="card">
           <div class="ch"><div class="ci">📋</div><h2>Conversion Presets</h2></div>
           <div class="pd-wrap">
@@ -651,6 +611,42 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <div class="card" id="bgCard" style="display:none">
+          <div class="ch"><div class="ci">🎨</div><h2>Background Color</h2></div>
+          <div class="bgp">
+            <div class="bgp-lbl">Fill background with:</div>
+            <div class="swatches" id="swr">
+              <div class="sw on" style="background:#ffffff" data-c="#ffffff"></div>
+              <div class="sw" style="background:#f5f5f0" data-c="#f5f5f0"></div>
+              <div class="sw" style="background:#e0e0e0" data-c="#e0e0e0"></div>
+              <div class="sw" style="background:#87CEEB" data-c="#87CEEB"></div>
+              <div class="sw" style="background:#ffe4c8" data-c="#ffe4c8"></div>
+              <div class="sw" style="background:#000;border:1px solid #333" data-c="#000000"></div>
+              <div class="sw sw-c">🎨<input type="color" id="cc" value="#ffffff"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Live Preview + Download -->
+      <div>
+        <div class="card" id="rtPreviewCard">
+          <div class="ch"><div class="ci">✨</div><h2>Live Preview</h2><small class="preset-name" id="rtPresetName"></small></div>
+          <div class="rt-preview" id="rtPreview">
+            <div class="rt-pw" id="rtPw"><div class="rt-pb" id="rtPb"></div></div>
+            <div class="rt-warn" id="rtWarn">⚠️ <span id="rtWarnTxt"></span></div>
+            <div class="rt-preview-cw">
+              <div class="oph" id="rtOph" style="padding:38px 16px"><div class="oi">🖼️</div><p>Upload a photo &amp; select a preset<br>to see the live preview here</p></div>
+              <canvas id="rtCv" style="display:none"></canvas>
+            </div>
+            <div class="rt-stats" id="rtStats" style="display:none">
+              <div class="rt-stat"><div class="rt-stat-val" id="rtDim">—</div><div class="rt-stat-lbl">Dimensions</div></div>
+              <div class="rt-stat"><div class="rt-stat-val" id="rtDpi">—</div><div class="rt-stat-lbl">DPI</div></div>
+              <div class="rt-stat"><div class="rt-stat-val" id="rtSz">—</div><div class="rt-stat-lbl">File Size</div></div>
+            </div>
           </div>
         </div>
 
@@ -1116,7 +1112,6 @@ function load(f){
       $('cropTriggerRow').classList.add('show');
       $('cropBadge').classList.remove('show');
       $('bgCard').style.display='block'; dz.style.display='none';
-      $('rtPreview').classList.add('show');
       $('sm').innerHTML=`<span class="mt">📐 <b>${i.width}×${i.height}px</b></span><span class="mt">📦 <b>${fb(f.size)}</b></span><span class="mt">🖼️ <b>${f.type.split('/')[1].toUpperCase()}</b></span>`;
       step(1); toast('✅ Photo loaded!','ok');
       if(S.preset) sched();
@@ -1512,3 +1507,4 @@ function step(n){
 </script>
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   
