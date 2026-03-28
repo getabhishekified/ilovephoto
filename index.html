@@ -535,6 +535,12 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .spin { animation: spin 1s linear infinite; display: inline-block; }
 
+  /* LANG TOGGLE */
+  .lang-toggle { display: flex; align-items: center; gap: 3px; background: rgba(255,255,255,.06); border: 1px solid var(--ink-border); border-radius: 20px; padding: 3px; }
+  .lang-btn { padding: 4px 11px; border-radius: 14px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.4px; cursor: pointer; border: none; background: none; color: var(--muted); font-family: 'Plus Jakarta Sans', sans-serif; transition: all .15s; line-height: 1.4; }
+  .lang-btn.active { background: var(--rose); color: #fff; box-shadow: 0 2px 8px rgba(255,45,91,.4); }
+  .lang-btn:not(.active):hover { color: var(--white); }
+
   /* Decorative big heart */
   .bg-heart { position: fixed; top: -90px; right: -70px; font-size: 320px; opacity: .018; pointer-events: none; line-height: 1; z-index: 0; user-select: none; }
 
@@ -716,7 +722,11 @@
         <div class="logo-domain">ilovephoto.in</div>
       </div>
     </a>
-    <div class="nav-pill">🇮🇳 Free · Private</div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="hi">हि</button>
+    </div>
+    <div class="nav-pill" id="navPill">🇮🇳 Free · Private</div>
   </div>
 </header>
 
@@ -780,7 +790,7 @@
           <!-- Crop trigger -->
           <div class="crop-trigger-row" id="cropTriggerRow">
             <button class="crop-trigger-btn" id="cropBtn">
-              ✂️ Crop Photo
+              <span id="cropBtnTxt">✂️ Crop Photo</span>
               <span class="crop-active-badge" id="cropBadge">✓ Cropped — click to re-crop</span>
             </button>
           </div>
@@ -1843,6 +1853,276 @@ document.getElementById('contactForm').addEventListener('submit', function(e){
   btn.disabled = false;
   btn.textContent = '✉️ Send Message';
   this.reset();
+});
+
+// ── LANGUAGE TOGGLE ────────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  en: {
+    navPill: '🇮🇳 Free · Private',
+    heroTag: 'Made for Government Forms',
+    heroH1: 'Your Photo,<br><em>Perfectly Formatted</em>',
+    heroSub: 'Convert your portrait to the exact size, DPI and format required for PAN, Passport, Voter ID & more — instantly in your browser.',
+    pills: ['No Server Upload', '100% Browser-based', 'Instant Download', 'Always Free', 'Custom Presets'],
+    steps: ['Upload', 'Pick Form', 'Preview', 'Download'],
+    uploadTitle: 'Upload Your Photo', uploadMax: 'Max 10 MB',
+    dzH3: 'Drag & drop your photo here', dzP: 'or click to browse',
+    adjLbl: '🔧 Adjustments', adjZoom: 'Zoom', adjRotate: 'Rotate',
+    cropBtnTxt: '✂️ Crop Photo', cropBadge: '✓ Cropped — click to re-crop',
+    presetsTitle: 'Conversion Presets',
+    presetPlaceholder: 'Select a preset…',
+    presetSearchPh: 'Search presets — PAN, Passport, LinkedIn…',
+    presetNoMatch: 'No presets match',
+    presetCustomBtn: '＋ Create custom preset',
+    specDim: 'Dimensions', specFmt: 'Format', specDpi: 'DPI', specSz: 'Max Size',
+    bgTitle: 'Background Color', bgLbl: 'Fill background with:',
+    previewTitle: 'Live Preview',
+    previewEmpty: 'Upload a photo &amp; select a preset<br>to see the live preview here',
+    statDim: 'Dimensions', statDpi: 'DPI', statSz: 'File Size',
+    dlTitle: 'Download', dlBtn: '⬇️ Download File',
+    disc: '⚠️ <strong>Disclaimer:</strong> All image processing happens entirely in your browser — no photo is ever sent to any server. Preset specifications are based on commonly published guidelines; always verify the latest requirements from official government portals before submission. ilovephoto.in makes no warranty of compliance with any specific government system.',
+    contactTitle: 'Contact <em>Us</em>',
+    contactSub: "Have a question, request, or spotted a bug? We'd love to hear from you.",
+    cfNameLbl: 'Your Name', cfEmailLbl: 'Email Address', cfSubjLbl: 'Subject', cfMsgLbl: 'Message',
+    cfSubjOpts: ['— Select a topic —', '💡 Feature Request', '🐛 Bug Report', '📋 Preset Request', '💬 General Query', '✉️ Other'],
+    cfNamePh: 'Rahul Sharma', cfMsgPh: "Tell us what's on your mind…",
+    cfBtn: '✉️ Send Message',
+    footerTagline: 'Free government photo converter for Indian citizens · <a href="https://ilovephoto.in">ilovephoto.in</a>',
+    cropModalHead: '✂️ Crop Photo', cropArFree: 'Free',
+    cropHint: 'Drag on the image to select a crop area · Drag handles to resize · Drag inside to move',
+    cropCancel: 'Cancel', cropApply: '✂️ Apply Crop', cropReset: '↺ Reset to Original',
+    cpModalHead: '✏️ Custom Preset', cpNameLbl: 'Preset Name',
+    cpWLbl: 'Width (px)', cpHLbl: 'Height (px)', cpDpiLbl: 'DPI',
+    cpMaxKBLbl: 'Max Size (KB)', cpFmtLbl: 'Format', cpBgLbl: 'Background',
+    cpCancel: 'Cancel', cpSave: '💾 Save Preset', cpNamePh: 'e.g. LinkedIn Profile Photo',
+    // Supported forms section
+    formsTitle: 'Supported Government Forms',
+    formsSub: 'ilovephoto.in includes ready-made presets for all major Indian government documents — updated to March 2026 specifications.',
+    formCards: [
+      { h: 'PAN Card',        p: '200×200 px · JPEG · Max 10 KB' },
+      { h: 'Passport',        p: '35×45 mm · 300 DPI · White background' },
+      { h: 'Voter ID',        p: '35×45 mm · 200 DPI · Colour photo' },
+      { h: 'Aadhar Card',     p: '200×200 px · JPEG · Max 100 KB' },
+      { h: 'Driving Licence', p: '25×35 mm · 200 DPI · Colour photo' },
+      { h: 'Education Forms', p: 'Multiple presets for UPSC, SSC, NEET & more' },
+      { h: 'Custom Preset',   p: 'Set your own dimensions, DPI, format & file size — for any document' },
+    ],
+    // FAQ section
+    faqTitle: 'Frequently Asked Questions',
+    faqs: [
+      { q: 'What photo sizes does ilovephoto.in support?',
+        a: 'ilovephoto.in supports over 16 government form presets including PAN Card (200×200 px), Passport (35×45 mm, 300 DPI), Voter ID (35×45 mm, 200 DPI), Aadhar Card, Driving Licence, and many more. All presets are updated to March 2026 government specifications.' },
+      { q: 'Is my photo uploaded to any server?',
+        a: 'No. All photo processing happens entirely in your browser using JavaScript. Your photo never leaves your device — nothing is sent to any server. This makes ilovephoto.in 100% private and safe.' },
+      { q: 'Is this photo converter completely free?',
+        a: 'Yes, ilovephoto.in is completely free to use. There are no hidden charges, no signup required, no watermarks, and no limits on how many photos you can convert.' },
+      { q: 'What image formats can I upload?',
+        a: 'You can upload photos in JPG, JPEG, PNG, BMP, GIF, TIFF, and HEIC formats. The converter outputs photos in the format required by each government form (usually JPEG or PNG).' },
+      { q: 'How do I convert my photo for a PAN Card application?',
+        a: 'Upload your photo, select PAN Card from the Conversion Presets dropdown, adjust the zoom and crop if needed, check the live preview, then click Download. The tool automatically applies the correct dimensions, DPI, and file size for PAN card applications.' },
+      { q: 'Can I change the background colour of my photo?',
+        a: 'Yes. Use the Background Color section to choose white, light grey, or a custom colour. This is useful for government forms that require a specific background colour like plain white.' },
+      { q: 'Can I create a custom preset for a document not in the list?',
+        a: 'Yes! Click ＋ Create custom preset in the Conversion Presets panel. You can set your own width, height, DPI, file format (JPEG or PNG), maximum file size, and background colour. Your custom preset is saved in your browser for future use.' },
+      { q: 'Are custom presets saved for future visits?',
+        a: 'Yes. Custom presets you create are saved locally in your browser, so they are available every time you return to ilovephoto.in. Since all data stays on your device, your presets remain private and are never shared with any server.' },
+    ],
+  },
+  hi: {
+    navPill: '🇮🇳 मुफ़्त · निजी',
+    heroTag: 'सरकारी फॉर्म के लिए बना',
+    heroH1: 'आपकी फोटो,<br><em>बिल्कुल सही फॉर्मेट में</em>',
+    heroSub: 'PAN, पासपोर्ट, वोटर ID और अन्य के लिए सटीक साइज़, DPI और फॉर्मेट में अपनी फोटो बदलें — तुरंत, आपके ब्राउज़र में।',
+    pills: ['सर्वर अपलोड नहीं', '100% ब्राउज़र-आधारित', 'तुरंत डाउनलोड', 'हमेशा मुफ़्त', 'कस्टम प्रीसेट'],
+    steps: ['अपलोड', 'फॉर्म चुनें', 'पूर्वावलोकन', 'डाउनलोड'],
+    uploadTitle: 'अपनी फोटो अपलोड करें', uploadMax: 'अधिकतम 10 MB',
+    dzH3: 'अपनी फोटो यहाँ खींचें और छोड़ें', dzP: 'या ब्राउज़ करने के लिए क्लिक करें',
+    adjLbl: '🔧 समायोजन', adjZoom: 'ज़ूम', adjRotate: 'घुमाएँ',
+    cropBtnTxt: '✂️ फोटो क्रॉप करें', cropBadge: '✓ क्रॉप हुई — पुनः क्रॉप के लिए क्लिक करें',
+    presetsTitle: 'रूपांतरण प्रीसेट',
+    presetPlaceholder: 'प्रीसेट चुनें…',
+    presetSearchPh: 'प्रीसेट खोजें — PAN, पासपोर्ट, LinkedIn…',
+    presetNoMatch: 'कोई प्रीसेट नहीं मिला',
+    presetCustomBtn: '＋ कस्टम प्रीसेट बनाएं',
+    specDim: 'आयाम', specFmt: 'प्रारूप', specDpi: 'DPI', specSz: 'अधिकतम आकार',
+    bgTitle: 'पृष्ठभूमि रंग', bgLbl: 'पृष्ठभूमि भरें:',
+    previewTitle: 'लाइव पूर्वावलोकन',
+    previewEmpty: 'फोटो अपलोड करें और प्रीसेट चुनें<br>लाइव पूर्वावलोकन यहाँ देखें',
+    statDim: 'आयाम', statDpi: 'DPI', statSz: 'फ़ाइल आकार',
+    dlTitle: 'डाउनलोड', dlBtn: '⬇️ फ़ाइल डाउनलोड करें',
+    disc: '⚠️ <strong>अस्वीकरण:</strong> सभी इमेज प्रोसेसिंग पूरी तरह आपके ब्राउज़र में होती है — कोई भी फोटो किसी सर्वर पर नहीं भेजी जाती। प्रीसेट विवरण सामान्यतः प्रकाशित दिशानिर्देशों पर आधारित हैं; सबमिट करने से पहले आधिकारिक पोर्टल से नवीनतम आवश्यकताएँ सत्यापित करें।',
+    contactTitle: 'हमसे <em>संपर्क करें</em>',
+    contactSub: 'कोई प्रश्न, अनुरोध या बग मिला? हमें बताएं।',
+    cfNameLbl: 'आपका नाम', cfEmailLbl: 'ईमेल पता', cfSubjLbl: 'विषय', cfMsgLbl: 'संदेश',
+    cfSubjOpts: ['— विषय चुनें —', '💡 फीचर अनुरोध', '🐛 बग रिपोर्ट', '📋 प्रीसेट अनुरोध', '💬 सामान्य प्रश्न', '✉️ अन्य'],
+    cfNamePh: 'राहुल शर्मा', cfMsgPh: 'अपना प्रश्न या सुझाव यहाँ लिखें…',
+    cfBtn: '✉️ संदेश भेजें',
+    footerTagline: 'भारतीय नागरिकों के लिए मुफ़्त सरकारी फोटो कन्वर्टर · <a href="https://ilovephoto.in">ilovephoto.in</a>',
+    cropModalHead: '✂️ फोटो क्रॉप करें', cropArFree: 'मुक्त',
+    cropHint: 'क्रॉप क्षेत्र चुनने के लिए खींचें · हैंडल से आकार बदलें · अंदर खींचकर स्थानांतरित करें',
+    cropCancel: 'रद्द करें', cropApply: '✂️ क्रॉप लागू करें', cropReset: '↺ मूल पर वापस जाएं',
+    cpModalHead: '✏️ कस्टम प्रीसेट', cpNameLbl: 'प्रीसेट नाम',
+    cpWLbl: 'चौड़ाई (px)', cpHLbl: 'ऊँचाई (px)', cpDpiLbl: 'DPI',
+    cpMaxKBLbl: 'अधिकतम आकार (KB)', cpFmtLbl: 'प्रारूप', cpBgLbl: 'पृष्ठभूमि',
+    cpCancel: 'रद्द करें', cpSave: '💾 प्रीसेट सहेजें', cpNamePh: 'जैसे LinkedIn प्रोफ़ाइल फोटो',
+    // Supported forms section
+    formsTitle: 'समर्थित सरकारी फॉर्म',
+    formsSub: 'ilovephoto.in में सभी प्रमुख भारतीय सरकारी दस्तावेज़ों के लिए तैयार प्रीसेट हैं — मार्च 2026 के विनिर्देशों के अनुसार अपडेट।',
+    formCards: [
+      { h: 'PAN कार्ड',       p: '200×200 px · JPEG · अधिकतम 10 KB' },
+      { h: 'पासपोर्ट',        p: '35×45 mm · 300 DPI · सफेद पृष्ठभूमि' },
+      { h: 'वोटर ID',         p: '35×45 mm · 200 DPI · रंगीन फोटो' },
+      { h: 'आधार कार्ड',      p: '200×200 px · JPEG · अधिकतम 100 KB' },
+      { h: 'ड्राइविंग लाइसेंस', p: '25×35 mm · 200 DPI · रंगीन फोटो' },
+      { h: 'शिक्षा फॉर्म',    p: 'UPSC, SSC, NEET और अन्य के लिए अनेक प्रीसेट' },
+      { h: 'कस्टम प्रीसेट',   p: 'अपने स्वयं के आयाम, DPI, फॉर्मेट और फ़ाइल साइज़ सेट करें' },
+    ],
+    // FAQ section
+    faqTitle: 'अक्सर पूछे जाने वाले सवाल',
+    faqs: [
+      { q: 'ilovephoto.in कौन-कौन से फोटो साइज़ सपोर्ट करता है?',
+        a: 'ilovephoto.in 16 से अधिक सरकारी फॉर्म प्रीसेट सपोर्ट करता है, जिनमें PAN कार्ड (200×200 px), पासपोर्ट (35×45 mm, 300 DPI), वोटर ID (35×45 mm, 200 DPI), आधार कार्ड, ड्राइविंग लाइसेंस और भी बहुत कुछ शामिल हैं। सभी प्रीसेट मार्च 2026 के सरकारी विनिर्देशों के अनुसार अपडेट हैं।' },
+      { q: 'क्या मेरी फोटो किसी सर्वर पर अपलोड होती है?',
+        a: 'नहीं। सभी फोटो प्रोसेसिंग पूरी तरह आपके ब्राउज़र में होती है। आपकी फोटो आपके डिवाइस से बाहर नहीं जाती — कुछ भी किसी सर्वर को नहीं भेजा जाता। इससे ilovephoto.in 100% निजी और सुरक्षित है।' },
+      { q: 'क्या यह फोटो कन्वर्टर बिल्कुल मुफ़्त है?',
+        a: 'हाँ, ilovephoto.in पूरी तरह मुफ़्त है। कोई छिपा हुआ शुल्क नहीं, कोई साइनअप नहीं, कोई वॉटरमार्क नहीं, और आप जितनी चाहें उतनी फोटो कन्वर्ट कर सकते हैं।' },
+      { q: 'मैं कौन-से इमेज फॉर्मेट अपलोड कर सकता/सकती हूँ?',
+        a: 'आप JPG, JPEG, PNG, BMP, GIF, TIFF और HEIC फॉर्मेट में फोटो अपलोड कर सकते हैं। कन्वर्टर फोटो को प्रत्येक सरकारी फॉर्म के अनुसार आवश्यक फॉर्मेट (आमतौर पर JPEG या PNG) में आउटपुट करता है।' },
+      { q: 'PAN कार्ड आवेदन के लिए फोटो कैसे कन्वर्ट करें?',
+        a: 'अपनी फोटो अपलोड करें, रूपांतरण प्रीसेट ड्रॉपडाउन से PAN कार्ड चुनें, ज़रूरत हो तो ज़ूम और क्रॉप करें, लाइव पूर्वावलोकन जाँचें, फिर डाउनलोड करें। टूल स्वतः सही आयाम, DPI और फ़ाइल साइज़ लागू करता है।' },
+      { q: 'क्या मैं अपनी फोटो की पृष्ठभूमि का रंग बदल सकता/सकती हूँ?',
+        a: 'हाँ। पृष्ठभूमि रंग सेक्शन से सफेद, हल्का ग्रे या कस्टम रंग चुनें। यह उन सरकारी फॉर्म के लिए उपयोगी है जिनमें सफेद पृष्ठभूमि अनिवार्य होती है।' },
+      { q: 'क्या मैं सूची में नहीं है ऐसे दस्तावेज़ के लिए कस्टम प्रीसेट बना सकता/सकती हूँ?',
+        a: 'हाँ! रूपांतरण प्रीसेट पैनल में ＋ कस्टम प्रीसेट बनाएं पर क्लिक करें। आप अपनी चौड़ाई, ऊँचाई, DPI, फ़ाइल फॉर्मेट, अधिकतम फ़ाइल साइज़ और पृष्ठभूमि रंग सेट कर सकते हैं। कस्टम प्रीसेट भविष्य के लिए ब्राउज़र में सहेजा जाता है।' },
+      { q: 'क्या कस्टम प्रीसेट अगली बार के लिए सहेजे जाते हैं?',
+        a: 'हाँ। आपके बनाए कस्टम प्रीसेट ब्राउज़र में लोकल रूप से सहेजे जाते हैं, इसलिए अगली बार ilovephoto.in पर आने पर भी उपलब्ध रहते हैं। सारा डेटा आपके डिवाइस पर रहता है — कोई भी प्रीसेट किसी सर्वर पर नहीं भेजा जाता।' },
+    ],
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const T = TRANSLATIONS[lang];
+  document.documentElement.lang = lang;
+
+  const q  = s => document.querySelector(s);
+  const qa = s => document.querySelectorAll(s);
+  const set  = (el, txt) => { if(el) el.textContent = txt; };
+  const setH = (el, html) => { if(el) el.innerHTML = html; };
+  const setPH = (el, ph)  => { if(el) el.placeholder = ph; };
+
+  // Toggle buttons
+  qa('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+  // Header
+  set($('navPill'), T.navPill);
+
+  // Hero
+  set(q('.hero-tag'), T.heroTag);
+  setH(q('.hero h1'), T.heroH1);
+  set(q('.hero-sub'), T.heroSub);
+  qa('.hero-pills .pill').forEach((el, i) => {
+    if(T.pills[i] !== undefined) el.innerHTML = `<span class="d">●</span> ${T.pills[i]}`;
+  });
+
+  // Steps
+  qa('.step-l').forEach((el, i) => { if(T.steps[i]) set(el, T.steps[i]); });
+
+  // Upload card
+  set(q('#dz').closest('.card').querySelector('h2'), T.uploadTitle);
+  set(q('#dz').closest('.card').querySelector('small'), T.uploadMax);
+  set(q('.dz h3'), T.dzH3);
+  set(q('.dz p'),  T.dzP);
+  set(q('.at-lbl'), T.adjLbl);
+  const slLabels = qa('.sl label');
+  if(slLabels[0]) set(slLabels[0], T.adjZoom);
+  if(slLabels[1]) set(slLabels[1], T.adjRotate);
+  set($('cropBtnTxt'), T.cropBtnTxt);
+  set($('cropBadge'),  T.cropBadge);
+
+  // Presets card
+  set(q('#pdTrigger').closest('.card').querySelector('h2'), T.presetsTitle);
+  if(!S.preset) set($('pdTriggerLabel'), T.presetPlaceholder);
+  setPH($('pdSearch'), T.presetSearchPh);
+  set($('pdCustomBtn'), T.presetCustomBtn);
+  // Spec keys
+  const specKeys = qa('.pd-spec-key');
+  const skMap = [T.specDim, T.specFmt, T.specDpi, T.specSz];
+  specKeys.forEach((el, i) => { if(skMap[i]) set(el, skMap[i]); });
+  // Rebuild dropdown list to reflect new search placeholder
+  buildList($('pdSearch').value);
+
+  // Background card
+  set(q('#bgCard h2'), T.bgTitle);
+  set(q('.bgp-lbl'),   T.bgLbl);
+
+  // Live Preview card
+  set(q('#rtPreviewCard h2'), T.previewTitle);
+  setH(q('#rtOph p'), T.previewEmpty);
+  const statLbls = qa('.rt-stat-lbl');
+  [T.statDim, T.statDpi, T.statSz].forEach((txt, i) => { if(statLbls[i]) set(statLbls[i], txt); });
+
+  // Download card
+  set(q('#dlCard h2'), T.dlTitle);
+  set($('dlBtn'), T.dlBtn);
+
+  // Disclaimer
+  setH(q('.disc'), T.disc);
+
+  // Contact section
+  setH(q('.contact-section-head h2'), T.contactTitle);
+  set(q('.contact-section-head p'), T.contactSub);
+  const cfLabels = qa('.cf-field label');
+  // Labels appear in order: Name, Email, Subject, Message
+  [T.cfNameLbl, T.cfEmailLbl, T.cfSubjLbl, T.cfMsgLbl].forEach((txt, i) => { if(cfLabels[i]) set(cfLabels[i], txt); });
+  setPH($('cfName'), T.cfNamePh);
+  setPH($('cfMessage'), T.cfMsgPh);
+  // Select options
+  const opts = $('cfSubject').options;
+  T.cfSubjOpts.forEach((txt, i) => { if(opts[i]) opts[i].text = txt; });
+  set($('cfBtn'), T.cfBtn);
+
+  // Footer
+  setH(q('footer p'), T.footerTagline);
+
+  // Crop modal
+  set(q('.crop-modal-head'), T.cropModalHead);
+  set(q('.crop-ar-btn[data-ar="free"]'), T.cropArFree);
+  set(q('.crop-hint'), T.cropHint);
+  set($('cropCancelBtn'), T.cropCancel);
+  set($('cropApplyBtn'),  T.cropApply);
+  set($('cropResetBtn'),  T.cropReset);
+
+  // Supported forms section
+  set(q('#supported-forms-heading'), T.formsTitle);
+  set(q('.seo-section-sub'), T.formsSub);
+  qa('.seo-form-card').forEach((card, i) => {
+    if(!T.formCards[i]) return;
+    set(card.querySelector('h3'), T.formCards[i].h);
+    set(card.querySelector('p'),  T.formCards[i].p);
+  });
+
+  // FAQ section
+  set(q('#faq-heading'), T.faqTitle);
+  qa('.faq-item').forEach((item, i) => {
+    if(!T.faqs[i]) return;
+    set(item.querySelector('.faq-q'), T.faqs[i].q);
+    set(item.querySelector('.faq-a p'), T.faqs[i].a);
+  });
+
+  // Custom preset modal
+  set(q('.cp-modal-head'), T.cpModalHead);
+  const cpLabels = qa('.cp-field label');
+  [T.cpNameLbl, T.cpWLbl, T.cpHLbl, T.cpDpiLbl, T.cpMaxKBLbl, T.cpFmtLbl, T.cpBgLbl].forEach((txt, i) => { if(cpLabels[i]) set(cpLabels[i], txt); });
+  setPH($('cpName'), T.cpNamePh);
+  set($('cpCancel'), T.cpCancel);
+  set($('cpSave'),   T.cpSave);
+}
+
+// Wire up toggle buttons
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.dataset.lang));
 });
 
 // ── MISC ───────────────────────────────────────────────────────────────────────
