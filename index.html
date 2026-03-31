@@ -226,8 +226,8 @@
   .pill .d { color: var(--rose); font-size: 0.68rem; }
 
   /* STEPS */
-  .steps { display: flex; align-items: center; justify-content: center; margin: 38px 0 34px; }
-  .step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; max-width: 130px; }
+  .steps { display: flex; align-items: center; margin: 38px 0 34px; width: 100%; }
+  .step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
   .step-n {
     width: 38px; height: 38px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1);
     display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;
@@ -238,13 +238,14 @@
   .step-l { font-size: 0.67rem; color: var(--muted); font-weight: 600; text-align: center; }
   .step.active .step-l { color: var(--rose); }
   .step.done .step-l { color: var(--success); }
-  .sc { flex: 1; height: 2px; background: rgba(255,255,255,.07); margin-bottom: 22px; max-width: 55px; transition: background 0.4s; }
+  .sc { flex: 1; height: 2px; background: rgba(255,255,255,.07); margin-bottom: 22px; transition: background 0.4s; }
   .sc.done { background: var(--success); }
 
-  /* GRID */
-  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 64px; align-items: start; }
-  .app-grid > div:last-child { position: sticky; top: 20px; }
-  @media (max-width: 720px) { .app-grid { grid-template-columns: 1fr; } .app-grid > div:last-child { position: static; } }
+  /* GRID — 60/40 panel layout */
+  .app-panel { display: flex; gap: 20px; padding-bottom: 64px; align-items: flex-start; }
+  .app-left  { flex: 3; min-width: 0; position: sticky; top: 20px; }
+  .app-right { flex: 2; min-width: 260px; max-width: 420px; }
+  @media (max-width: 780px) { .app-panel { flex-direction: column; } .app-left { position: static; } .app-right { max-width: 100%; min-width: 0; width: 100%; } }
 
   /* CARDS */
   .card { background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 20px; overflow: hidden; }
@@ -267,38 +268,52 @@
   .fmts { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
   .fm { background: rgba(255,255,255,.05); border: 1px solid var(--ink-border); border-radius: 5px; padding: 2px 8px; font-size: 0.67rem; font-weight: 700; letter-spacing: .5px; color: var(--muted); }
 
-  /* SRC PREVIEW */
-  .sp { margin: 0 22px 16px; display: none; }
-  .sp.show { display: block; }
-  .sp img { width: 100%; max-height: 250px; object-fit: contain; border-radius: 12px; background: #120e1a; display: block; }
-  .sm { margin-top: 9px; display: flex; gap: 7px; flex-wrap: wrap; }
+  /* PHOTO PREVIEW AREA */
+  .photo-wrap { padding: 14px 16px 0; display: none; }
+  .photo-wrap.show { display: block; }
+  .photo-canvas-area { position: relative; background: #120e1a; border-radius: 12px; overflow: hidden; min-height: 120px; max-height: 420px; display: flex; align-items: center; justify-content: center; }
+  .photo-canvas-area canvas { max-width: 100%; max-height: 420px; width: auto; height: auto; display: block; border-radius: 10px; }
+  #livePreviewBadge {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(13,10,20,.82); border: 1px solid rgba(255,45,91,.45);
+    color: var(--rose-light); font-size: 0.58rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: .5px;
+    backdrop-filter: blur(4px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 16px);
+  }
+  .sm { padding: 8px 16px 14px; display: none; gap: 6px; flex-wrap: wrap; }
+  .sm.show { display: flex; }
   .mt { background: rgba(255,255,255,.05); border: 1px solid var(--ink-border); border-radius: 7px; padding: 3px 9px; font-size: 0.69rem; color: var(--muted); }
   .mt b { color: var(--white); }
 
-  /* ADJUSTMENTS */
-  .at { padding: 0 22px 18px; display: none; }
-  .at.show { display: block; }
-  .at-lbl { font-size: 0.75rem; color: var(--muted); font-weight: 600; margin-bottom: 9px; }
-  .at-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .sl { display: flex; align-items: center; gap: 7px; }
-  .sl label { font-size: 0.73rem; color: var(--muted); white-space: nowrap; }
-  .sl input[type=range] { -webkit-appearance: none; width: 110px; height: 3px; background: rgba(255,255,255,.1); border-radius: 3px; outline: none; }
-  .sl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--rose); cursor: pointer; }
-  .sv { font-size: 0.71rem; color: var(--rose); font-weight: 700; min-width: 32px; }
-  .sl input[type=number] {
-    width: 54px; background: rgba(255,255,255,.06); border: 1px solid var(--ink-border);
-    border-radius: 7px; padding: 3px 6px; color: var(--white); outline: none;
-    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; font-weight: 700;
+  /* SIDEBAR CARD */
+  .sidebar-card { overflow: visible; }
+  .sb-sec { padding: 13px 14px; border-bottom: 1px solid var(--ink-border); }
+  .sb-sec:last-child { border-bottom: none; }
+  .sb-sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; }
+  .sb-sec-lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
+  .sb-sec-val { font-size: 0.75rem; font-weight: 700; color: var(--rose); }
+  .sb-slider-row { display: flex; align-items: center; gap: 7px; }
+  .sb-slider-row input[type=range] { -webkit-appearance: none; flex: 1; height: 3px; background: rgba(255,255,255,.1); border-radius: 3px; outline: none; }
+  .sb-slider-row input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--rose); cursor: pointer; }
+  .sb-slider-row input[type=number] {
+    width: 46px; background: rgba(255,255,255,.06); border: 1px solid var(--ink-border);
+    border-radius: 7px; padding: 3px 5px; color: var(--white); outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.74rem; font-weight: 700;
     text-align: center; -moz-appearance: textfield; transition: border-color .15s;
   }
-  .sl input[type=number]::-webkit-inner-spin-button,
-  .sl input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-  .sl input[type=number]:focus { border-color: var(--rose); box-shadow: 0 0 0 2px rgba(255,45,91,.15); }
-  .sl input[type=number].invalid { border-color: rgba(255,59,59,.6); color: #ff8484; }
+  .sb-slider-row input[type=number]::-webkit-inner-spin-button,
+  .sb-slider-row input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .sb-slider-row input[type=number]:focus { border-color: var(--rose); }
+  .sb-slider-row input[type=number].invalid { border-color: rgba(255,59,59,.6); color: #ff8484; }
+  .sb-sub-lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin: 10px 0 7px; }
+  /* fmt opts compact grid */
+  .sb-fmt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 10px; }
+  .fmt-opt { padding: 6px 8px; border-radius: 8px; font-size: 0.71rem; font-weight: 700; border: 1px solid var(--ink-border); background: rgba(255,255,255,.04); color: var(--muted); cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: all .15s; text-align: center; }
+  .fmt-opt.on { background: rgba(255,45,91,.12); color: var(--rose); border-color: rgba(255,45,91,.35); }
+  .fmt-opt:hover:not(.on) { color: var(--white); border-color: rgba(255,255,255,.18); }
 
   /* BG PICKER */
-  .bgp { padding: 0 22px 18px; }
-  .bgp-lbl { font-size: 0.75rem; color: var(--muted); font-weight: 600; margin-bottom: 9px; }
+  .bgp-lbl { font-size: 0.65rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 9px; }
   .swatches { display: flex; gap: 7px; flex-wrap: wrap; }
   .sw { width: 30px; height: 30px; border-radius: 7px; cursor: pointer; border: 2px solid transparent; transition: all .14s; position: relative; }
   .sw:hover { transform: scale(1.18); }
@@ -423,11 +438,12 @@
     border-radius: 4px; text-transform: uppercase;
     background: rgba(123,79,255,.18); color: var(--violet); border: 1px solid rgba(123,79,255,.28);
   }
-  .pd-item-del {
+  .pd-item-del, .pd-item-edit {
     font-size: 0.72rem; color: rgba(255,255,255,.22); cursor: pointer; padding: 5px 7px;
     border-radius: 6px; border: none; background: none; transition: all .14s; line-height: 1; flex-shrink: 0;
   }
   .pd-item-del:hover { color: #ff5555; background: rgba(255,59,59,.13); }
+  .pd-item-edit:hover { color: var(--violet); background: rgba(123,79,255,.13); }
 
   /* MODAL overlay */
   .cp-overlay {
@@ -546,14 +562,7 @@
   /* Decorative big heart */
   .bg-heart { position: fixed; top: -90px; right: -70px; font-size: 320px; opacity: .018; pointer-events: none; line-height: 1; z-index: 0; user-select: none; }
 
-  /* REAL-TIME PREVIEW */
-  .rt-preview { margin: 0 22px 0; }
-  .rt-preview-cw {
-    background: repeating-conic-gradient(rgba(255,255,255,.038) 0% 25%, transparent 0% 50%) 0 0 / 18px 18px;
-    border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    min-height: 140px; overflow: hidden; padding: 10px;
-  }
-  .rt-preview-cw canvas { max-width: 100%; max-height: 200px; border-radius: 6px; display: block; }
+  /* REAL-TIME PREVIEW STATS / PROGRESS */
   .rt-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 10px 0 4px; }
   .rt-stat { background: rgba(255,255,255,.04); border: 1px solid var(--ink-border); border-radius: 10px; padding: 8px 10px; text-align: center; }
   .rt-stat-val { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.88rem; color: var(--rose); }
@@ -564,9 +573,7 @@
   .rt-pw.show { display: block; }
   .rt-pb { height: 100%; background: linear-gradient(90deg, var(--rose), var(--violet)); width: 0%; transition: width .3s; border-radius: 3px; }
 
-  /* CROP BUTTON (in upload card) */
-  .crop-trigger-row { padding: 0 22px 16px; display: none; }
-  .crop-trigger-row.show { display: block; }
+  /* CROP BUTTON */
   .crop-trigger-btn {
     width: 100%; padding: 9px 14px; border-radius: 10px; cursor: pointer;
     border: 1px dashed rgba(255,255,255,.18); background: rgba(255,255,255,.03);
@@ -738,7 +745,7 @@
     <div class="hero">
       <div class="hero-tag">Made for Government Forms</div>
       <h1>Government Form Photo Converter —<br><em>Free &amp; Instant</em></h1>
-      <p class="hero-sub">Convert your photo to the exact size, DPI and format required for PAN Card, Passport, Voter ID, Aadhar &amp; more — instantly in your browser. Or create your own <strong>custom preset</strong> for any document. No upload, 100% private.</p>
+      <p class="hero-sub">Convert your photo to the exact size, DPI and format required for PAN Card, Passport, Voter ID, Aadhar &amp; more — instantly in your browser. Or create your own <strong>custom preset</strong> for any photo. No server upload, 100% private.</p>
       <div class="hero-pills">
         <div class="pill"><span class="d">●</span> No Server Upload</div>
         <div class="pill"><span class="d">●</span> 100% Browser-based</div>
@@ -749,25 +756,25 @@
     </div>
 
     <div class="steps">
-      <div class="step active" id="s1"><div class="step-n">1</div><div class="step-l">Upload</div></div>
+      <div class="step active" id="s1"><div class="step-n">1</div><div class="step-l">Upload & Preview</div></div>
       <div class="sc" id="c1"></div>
-      <div class="step" id="s2"><div class="step-n">2</div><div class="step-l">Pick Form</div></div>
+      <div class="step" id="s2"><div class="step-n">2</div><div class="step-l">Select Preset</div></div>
       <div class="sc" id="c2"></div>
-      <div class="step" id="s3"><div class="step-n">3</div><div class="step-l">Preview</div></div>
-      <div class="sc" id="c3"></div>
-      <div class="step" id="s4"><div class="step-n">4</div><div class="step-l">Download</div></div>
+      <div class="step" id="s3"><div class="step-n">3</div><div class="step-l">Download</div></div>
     </div>
 
-    <div class="app-grid" id="app">
+    <div class="app-panel" id="app">
 
-      <!-- LEFT COLUMN: Upload + Presets + Background -->
-      <div>
+      <!-- LEFT 75%: Photo / Preview -->
+      <div class="app-left">
         <div class="card">
           <div class="ch">
             <div class="ci">📤</div>
-            <h2>Upload Your Photo</h2>
-            <small>Max 10 MB</small>
+            <h2 id="uploadCardTitle">Upload Your Photo</h2>
+            <small id="uploadCardSub">Max 10 MB</small>
+            <button id="changePhotoBtn" style="display:none;padding:4px 11px;border-radius:8px;border:1px solid var(--ink-border);background:rgba(255,255,255,.05);color:var(--muted);font-size:0.72rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,45,91,.4)';this.style.color='var(--rose-light)'" onmouseout="this.style.borderColor='var(--ink-border)';this.style.color='var(--muted)'">↺ Change</button>
           </div>
+          <!-- Drop zone (hidden after upload) -->
           <div class="dz" id="dz">
             <input type="file" id="fi" accept=".jpg,.jpeg,.png,.bmp,.gif,.tiff,.tif,.heic,.heif" aria-label="Upload your photo for government form conversion">
             <span class="dz-ico">🖼️</span>
@@ -777,73 +784,72 @@
               <span class="fm">JPG</span><span class="fm">PNG</span><span class="fm">BMP</span><span class="fm">GIF</span><span class="fm">TIFF</span><span class="fm">HEIC</span>
             </div>
           </div>
-          <div class="sp" id="sp">
-            <img id="si" alt="Uploaded photo preview for government form conversion">
-            <div class="sm" id="sm"></div>
-          </div>
-          <div class="at" id="at">
-            <div class="at-lbl">🔧 Adjustments</div>
-            <div class="at-row">
-              <div class="sl"><label>Zoom</label><input type="range" id="zr" min="50" max="200" value="100"><input type="number" id="zn" min="50" max="200" value="100" title="50 – 200 %"><span class="sv">%</span></div>
-              <div class="sl"><label>Rotate</label><input type="range" id="rr" min="-180" max="180" value="0"><input type="number" id="rn" min="-180" max="180" value="0" title="-180 – 180 °"><span class="sv">°</span></div>
+          <!-- Photo / live-preview canvas (shown after upload) -->
+          <div class="photo-wrap" id="photoWrap">
+            <div class="rt-pw" id="rtPw"><div class="rt-pb" id="rtPb"></div></div>
+            <div class="rt-warn" id="rtWarn">⚠️ <span id="rtWarnTxt"></span></div>
+            <div class="photo-canvas-area">
+              <canvas id="rtCv"></canvas>
+              <div id="livePreviewBadge" style="display:none">✨ LIVE PREVIEW · <span id="rtPresetName"></span></div>
             </div>
           </div>
-
-          <!-- Crop trigger -->
-          <div class="crop-trigger-row" id="cropTriggerRow">
-            <button class="crop-trigger-btn" id="cropBtn">
-              <span id="cropBtnTxt">✂️ Crop Photo</span>
-              <span class="crop-active-badge" id="cropBadge">✓ Cropped — click to re-crop</span>
-            </button>
+          <!-- Metadata + processed stats -->
+          <div class="sm" id="sm"></div>
+          <div class="rt-stats" id="rtStats" style="display:none">
+            <div class="rt-stat"><div class="rt-stat-val" id="rtDim">—</div><div class="rt-stat-lbl">Dimensions</div></div>
+            <div class="rt-stat"><div class="rt-stat-val" id="rtDpi">—</div><div class="rt-stat-lbl">DPI</div></div>
+            <div class="rt-stat"><div class="rt-stat-val" id="rtSz">—</div><div class="rt-stat-lbl">File Size</div></div>
           </div>
         </div>
+      </div>
 
-        <div class="card">
-          <div class="ch"><div class="ci">📋</div><h2>Conversion Presets</h2></div>
-          <div class="pd-wrap">
+      <!-- RIGHT 25%: All controls -->
+      <div class="app-right">
+        <div class="card sidebar-card">
 
-            <!-- Trigger -->
-            <div class="pd-trigger" id="pdTrigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
-              <div class="pd-trigger-icon" id="pdTriggerIcon">📋</div>
-              <div class="pd-trigger-text">
-                <div class="pd-trigger-label" id="pdTriggerLabel">Select a preset…</div>
-                <div class="pd-trigger-sub" id="pdTriggerSub">8 presets — updated Mar 2026 specs</div>
-              </div>
-              <div class="pd-chevron">▼</div>
+          <!-- Crop + Reset -->
+          <div class="sb-sec" id="cropSection" style="display:none">
+            <div class="sb-sec-lbl" style="margin-bottom:8px">Crop</div>
+            <div style="display:flex;gap:6px">
+              <button class="crop-trigger-btn" id="cropBtn" style="flex:1;font-size:0.78rem;padding:7px 10px">
+                <span id="cropBtnTxt">✂️ Crop Photo</span>
+                <span class="crop-active-badge" id="cropBadge">✓ Cropped</span>
+              </button>
+              <button class="crop-trigger-btn" id="resetBtn" style="flex:1;border-color:rgba(255,59,59,.35);color:#ff8484;padding:7px 10px;font-size:0.78rem;display:none" title="Reset to original">↺ Reset</button>
             </div>
-
-            <!-- Panel -->
-            <div class="pd-panel" id="pdPanel" role="listbox">
-              <div class="pd-search-wrap">
-                <span class="pd-search-ico">🔍</span>
-                <input class="pd-search" id="pdSearch" type="text" placeholder="Search presets — PAN, Passport, LinkedIn…" autocomplete="off" spellcheck="false">
-                <button class="pd-clear" id="pdClear" type="button" aria-label="Clear search">✕</button>
-              </div>
-              <div class="pd-list" id="pdList"></div>
-              <div class="pd-empty" id="pdEmpty">No presets match "<span id="pdEmptyQ"></span>"</div>
-              <div class="pd-footer">
-                <button class="pd-footer-btn" id="pdCustomBtn" type="button">＋ Create custom preset</button>
-              </div>
-            </div>
-
-            <!-- Spec card shown after selection -->
-            <div class="pd-spec-card" id="pdSpecCard">
-              <div class="pd-spec-title"><span id="pdSpecIcon"></span><span id="pdSpecName"></span></div>
-              <div class="pd-spec-grid">
-                <div class="pd-spec-row"><div class="pd-spec-key">Dimensions</div><div class="pd-spec-val" id="pdSpecDim">—</div></div>
-                <div class="pd-spec-row"><div class="pd-spec-key">Format</div><div class="pd-spec-val" id="pdSpecFmt">—</div></div>
-                <div class="pd-spec-row"><div class="pd-spec-key">DPI</div><div class="pd-spec-val" id="pdSpecDpi">—</div></div>
-                <div class="pd-spec-row"><div class="pd-spec-key">Max Size</div><div class="pd-spec-val" id="pdSpecSz">—</div></div>
-              </div>
-            </div>
-
           </div>
-        </div>
 
-        <div class="card" id="bgCard" style="display:none">
-          <div class="ch"><div class="ci">🎨</div><h2>Background Color</h2></div>
-          <div class="bgp">
-            <div class="bgp-lbl">Fill background with:</div>
+          <!-- Rotate -->
+          <div class="sb-sec" id="adjRotSec" style="display:none">
+            <div class="sb-sec-head">
+              <span class="sb-sec-lbl" id="rotLabel">Rotate</span>
+              <span class="sb-sec-val" id="rnDisp">0°</span>
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <button id="rotCCW" title="Rotate 90° anti-clockwise" style="flex:1;padding:6px 0;border-radius:8px;border:1px solid var(--ink-border);background:rgba(255,255,255,.05);color:var(--white);font-size:1rem;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,45,91,.4)'" onmouseout="this.style.borderColor='var(--ink-border)'">↺ 90°</button>
+              <button id="rotCW"  title="Rotate 90° clockwise"      style="flex:1;padding:6px 0;border-radius:8px;border:1px solid var(--ink-border);background:rgba(255,255,255,.05);color:var(--white);font-size:1rem;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,45,91,.4)'" onmouseout="this.style.borderColor='var(--ink-border)'">↻ 90°</button>
+            </div>
+            <div class="sb-slider-row">
+              <input type="range" id="rr" min="-180" max="180" value="0">
+              <input type="number" id="rn" min="-180" max="180" value="0" title="-180 – 180 °">
+            </div>
+          </div>
+
+          <!-- Zoom -->
+          <div class="sb-sec" id="adjZoomSec" style="display:none">
+            <div class="sb-sec-head">
+              <span class="sb-sec-lbl" id="zoomLabel">Zoom</span>
+              <span class="sb-sec-val" id="znDisp">100%</span>
+            </div>
+            <div class="sb-slider-row">
+              <input type="range" id="zr" min="50" max="200" value="100">
+              <input type="number" id="zn" min="50" max="200" value="100" title="50 – 200 %">
+            </div>
+          </div>
+
+          <!-- Background Color -->
+          <div class="sb-sec" id="bgSection" style="display:none">
+            <div class="bgp-lbl" id="bgLabel">Background</div>
             <div class="swatches" id="swr">
               <div class="sw on" style="background:#ffffff" data-c="#ffffff"></div>
               <div class="sw" style="background:#f5f5f0" data-c="#f5f5f0"></div>
@@ -854,38 +860,52 @@
               <div class="sw sw-c">🎨<input type="color" id="cc" value="#ffffff"></div>
             </div>
           </div>
+
+          <!-- Conversion Preset -->
+          <div class="sb-sec">
+            <div class="sb-sec-lbl" style="margin-bottom:8px" id="presetLabel">Conversion Preset</div>
+            <div class="pd-trigger" id="pdTrigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+              <div class="pd-trigger-icon" id="pdTriggerIcon">📋</div>
+              <div class="pd-trigger-text">
+                <div class="pd-trigger-label" id="pdTriggerLabel">Select a preset…</div>
+                <div class="pd-trigger-sub" id="pdTriggerSub">8 presets — updated Mar 2026 specs</div>
+              </div>
+              <div class="pd-chevron">▼</div>
+            </div>
+            <div class="pd-panel" id="pdPanel" role="listbox">
+              <div class="pd-search-wrap">
+                <span class="pd-search-ico">🔍</span>
+                <input class="pd-search" id="pdSearch" type="text" placeholder="Search presets — PAN, Passport…" autocomplete="off" spellcheck="false">
+                <button class="pd-clear" id="pdClear" type="button" aria-label="Clear search">✕</button>
+              </div>
+              <div class="pd-list" id="pdList"></div>
+              <div class="pd-empty" id="pdEmpty">No presets match "<span id="pdEmptyQ"></span>"</div>
+              <div class="pd-footer">
+                <button class="pd-footer-btn" id="pdCustomBtn" type="button">＋ Create custom preset</button>
+              </div>
+            </div>
+            <div class="pd-spec-card" id="pdSpecCard">
+              <div class="pd-spec-title"><span id="pdSpecIcon"></span><span id="pdSpecName"></span></div>
+              <div class="pd-spec-grid">
+                <div class="pd-spec-row"><div class="pd-spec-key">Dimensions</div><div class="pd-spec-val" id="pdSpecDim">—</div></div>
+                <div class="pd-spec-row"><div class="pd-spec-key">Format</div><div class="pd-spec-val" id="pdSpecFmt">—</div></div>
+                <div class="pd-spec-row"><div class="pd-spec-key">DPI</div><div class="pd-spec-val" id="pdSpecDpi">—</div></div>
+                <div class="pd-spec-row"><div class="pd-spec-key">Max Size</div><div class="pd-spec-val" id="pdSpecSz">—</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Download -->
+          <div class="sb-sec" id="dlSection" style="display:none">
+            <div class="sb-sec-lbl" style="margin-bottom:8px" id="dlLabel">Download</div>
+            <button class="btn bp" id="dlBtn" disabled>⬇️ Download</button>
+          </div>
+
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: Live Preview + Download -->
-      <div>
-        <div class="card" id="rtPreviewCard">
-          <div class="ch"><div class="ci">✨</div><h2>Live Preview</h2><small class="preset-name" id="rtPresetName"></small></div>
-          <div class="rt-preview" id="rtPreview">
-            <div class="rt-pw" id="rtPw"><div class="rt-pb" id="rtPb"></div></div>
-            <div class="rt-warn" id="rtWarn">⚠️ <span id="rtWarnTxt"></span></div>
-            <div class="rt-preview-cw">
-              <div class="oph" id="rtOph" style="padding:38px 16px"><div class="oi">🖼️</div><p>Upload a photo &amp; select a preset<br>to see the live preview here</p></div>
-              <canvas id="rtCv" style="display:none"></canvas>
-            </div>
-            <div class="rt-stats" id="rtStats" style="display:none">
-              <div class="rt-stat"><div class="rt-stat-val" id="rtDim">—</div><div class="rt-stat-lbl">Dimensions</div></div>
-              <div class="rt-stat"><div class="rt-stat-val" id="rtDpi">—</div><div class="rt-stat-lbl">DPI</div></div>
-              <div class="rt-stat"><div class="rt-stat-val" id="rtSz">—</div><div class="rt-stat-lbl">File Size</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Download button lives here, shown once output is ready -->
-        <div class="card" id="dlCard" style="display:none">
-          <div class="ch"><div class="ci">⬇️</div><h2>Download</h2></div>
-          <div class="br" style="padding-top:18px">
-            <button class="btn bp" id="dlBtn" disabled>⬇️ Download File</button>
-          </div>
-        </div>
-        <!-- Hidden canvas used for actual conversion & download -->
-        <canvas id="cv" style="display:none"></canvas>
-      </div>
+      <!-- Hidden canvas for compression/download -->
+      <canvas id="cv" style="display:none"></canvas>
 
     </div>
 
@@ -1215,7 +1235,7 @@ const PRESETS = [
   { id:'ration',      name:'Ration Card',                icon:'🏠', fmt:'JPEG', mime:'image/jpeg', ext:'jpg', w:400,  h:400,  dpi:200, bg:'#ffffff', maxKB:100,  q:0.85 },
 ];
 
-let S = { img:null, origImg:null, cropped:false, preset:null, bg:'#ffffff', zoom:100, rot:0, dataURL:null };
+let S = { img:null, origImg:null, cropped:false, preset:null, bg:'#ffffff', zoom:100, rot:0, dataURL:null, editingPresetId:null };
 const $=id=>document.getElementById(id);
 
 // ── CUSTOM PRESETS (localStorage) ─────────────────────────────────────────────
@@ -1238,7 +1258,7 @@ function deleteCustomPreset(id) {
     pdSpecCard.classList.remove('show');
     $('rtPresetName').textContent = '';
     $('dlBtn').disabled = true;
-    $('dlCard').style.display = 'none';
+    $('dlSection').style.display = 'none';
   }
   updateSubtitle();
   buildList($('pdSearch').value);
@@ -1246,20 +1266,38 @@ function deleteCustomPreset(id) {
 }
 
 // ── CUSTOM PRESET MODAL ────────────────────────────────────────────────────────
-function openCpModal() {
+function openCpModal(editId) {
   closeDD();
-  $('cpName').value = ''; $('cpW').value = ''; $('cpH').value = '';
-  $('cpDpi').value = '300'; $('cpMaxKB').value = '200';
-  $('cpFmt').value = 'JPEG'; $('cpBg').value = '#ffffff';
+  S.editingPresetId = editId || null;
+  if (editId) {
+    const p = allPresets().find(pr => pr.id === editId);
+    if (p) {
+      $('cpName').value = p.name; $('cpW').value = p.w; $('cpH').value = p.h;
+      $('cpDpi').value = p.dpi; $('cpMaxKB').value = p.maxKB;
+      $('cpFmt').value = p.fmt; $('cpBg').value = p.bg;
+      $('cpSave').textContent = '💾 Update Preset';
+      document.querySelector('.cp-modal-head').textContent = '✏️ Edit Preset';
+    }
+  } else {
+    $('cpName').value = ''; $('cpW').value = ''; $('cpH').value = '';
+    $('cpDpi').value = '300'; $('cpMaxKB').value = '200';
+    $('cpFmt').value = 'JPEG'; $('cpBg').value = '#ffffff';
+    $('cpSave').textContent = '💾 Save Preset';
+    document.querySelector('.cp-modal-head').textContent = '✏️ Custom Preset';
+  }
   $('cpOverlay').classList.add('show');
   setTimeout(() => $('cpName').focus(), 80);
 }
-function closeCpModal() { $('cpOverlay').classList.remove('show'); }
+function closeCpModal() { $('cpOverlay').classList.remove('show'); S.editingPresetId = null; }
 
 $('pdCustomBtn').onclick = e => { e.stopPropagation(); openCpModal(); };
 $('cpCancel').onclick = closeCpModal;
 $('cpOverlay').onclick = e => { if (e.target === $('cpOverlay')) closeCpModal(); };
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCpModal(); });
+
+function editCustomPreset(id) {
+  openCpModal(id);
+}
 
 $('cpSave').onclick = () => {
   const name  = $('cpName').value.trim();
@@ -1271,16 +1309,33 @@ $('cpSave').onclick = () => {
   const bg    = $('cpBg').value;
   if (!name)            { $('cpName').focus(); toast('❌ Enter a preset name.','err'); return; }
   if (!w||w<10||!h||h<10){ toast('❌ Enter valid width & height (min 10 px).','err'); return; }
-  const id   = 'custom_' + Date.now();
   const mime = fmt === 'PNG' ? 'image/png' : 'image/jpeg';
   const ext  = fmt === 'PNG' ? 'png' : 'jpg';
-  const list = loadCustom();
-  list.push({ id, name, icon:'⚙️', fmt, mime, ext, w, h, dpi, bg, maxKB, q:0.88, custom:true });
-  saveCustom(list);
-  updateSubtitle();
-  closeCpModal();
-  toast(`✅ "${name}" saved!`, 'ok');
-  pickPreset(id);
+
+  if (S.editingPresetId) {
+    // Edit existing custom preset
+    const list = loadCustom();
+    const idx = list.findIndex(p => p.id === S.editingPresetId);
+    if (idx >= 0) {
+      list[idx] = { ...list[idx], name, w, h, dpi, maxKB, fmt, mime, ext, bg, q:0.88 };
+      saveCustom(list);
+      updateSubtitle();
+      closeCpModal();
+      toast(`✅ "${name}" updated!`, 'ok');
+      if (S.preset?.id === S.editingPresetId) pickPreset(S.editingPresetId);
+      else buildList($('pdSearch').value);
+    }
+  } else {
+    // Create new preset
+    const id   = 'custom_' + Date.now();
+    const list = loadCustom();
+    list.push({ id, name, icon:'⚙️', fmt, mime, ext, w, h, dpi, bg, maxKB, q:0.88, custom:true });
+    saveCustom(list);
+    updateSubtitle();
+    closeCpModal();
+    toast(`✅ "${name}" saved!`, 'ok');
+    pickPreset(id);
+  }
 };
 
 // ── SEARCHABLE DROPDOWN ────────────────────────────────────────────────────────
@@ -1338,11 +1393,15 @@ function buildList(query='') {
         </div>
       </div>
       <div class="pd-item-tick">✓</div>
-      ${p.custom ? `<button class="pd-item-del" data-del="${p.id}" title="Delete preset">🗑</button>` : ''}
+      ${p.custom ? `<button class="pd-item-edit" data-edit="${p.id}" title="Edit preset">✏️</button><button class="pd-item-del" data-del="${p.id}" title="Delete preset">🗑</button>` : ''}
     `;
     el.querySelector('.pd-item-icon, .pd-item-info, .pd-item-tick')?.closest?.('.pd-item');
-    // Delete button — stop propagation so it doesn't also pick the preset
+    // Edit & Delete buttons — stop propagation so they don't also pick the preset
     if (p.custom) {
+      el.querySelector('.pd-item-edit').addEventListener('click', e => {
+        e.stopPropagation();
+        editCustomPreset(p.id);
+      });
       el.querySelector('.pd-item-del').addEventListener('click', e => {
         e.stopPropagation();
         deleteCustomPreset(p.id);
@@ -1445,6 +1504,14 @@ function pickPreset(id) {
   // Update live preview label
   $('rtPresetName').textContent = p.name;
 
+  // Update sm bar to show output spec when photo is loaded
+  if(S.img){
+    $('sm').innerHTML=`<span class="mt">📐 <b>${S.img.width}×${S.img.height}px</b></span>`
+      +`<span class="mt" style="color:var(--rose-light)">→ <b>${p.w}×${p.h}px</b></span>`
+      +`<span class="mt">🖼️ <b>${p.fmt}</b></span>`
+      +`<span class="mt">💾 <b>≤${p.maxKB}KB</b></span>`;
+  }
+
   // Rebuild list to show tick
   buildList(pdSearch.value);
   step(2);
@@ -1468,14 +1535,28 @@ function load(f){
     const i=new Image();
     i.onload=()=>{
       S.img=i; S.origImg=i; S.cropped=false;
-      $('si').src=ev.target.result;
-      $('sp').classList.add('show'); $('at').classList.add('show');
-      $('cropTriggerRow').classList.add('show');
+      // Show controls + preview immediately on upload
+      dz.style.display='none';
+      $('photoWrap').classList.add('show');
+      $('livePreviewBadge').style.display='none';
+      $('rtStats').style.display='none';
+      $('rtWarn').classList.remove('show');
+      $('adjZoomSec').style.display='block';
+      $('adjRotSec').style.display='block';
+      $('cropSection').style.display='block';
+      $('bgSection').style.display='block';
       $('cropBadge').classList.remove('show');
-      $('bgCard').style.display='block'; dz.style.display='none';
-      $('sm').innerHTML=`<span class="mt">📐 <b>${i.width}×${i.height}px</b></span><span class="mt">📦 <b>${fb(f.size)}</b></span><span class="mt">🖼️ <b>${f.type.split('/')[1].toUpperCase()}</b></span>`;
+      $('resetBtn').style.display='none';
+      // Update card header
+      $('uploadCardTitle').textContent='Photo Preview';
+      $('uploadCardSub').style.display='none';
+      $('changePhotoBtn').style.display='inline-flex';
+      // Source info tags
+      S._srcName=f.name; S._srcSize=f.size; S._srcType=f.type;
+      $('sm').innerHTML=`<span class="mt">📐 <b>${i.width}×${i.height}px</b></span><span class="mt">📦 <b>${fb(f.size)}</b></span><span class="mt">🖼️ <b>${(f.type.split('/')[1]||'').toUpperCase()}</b></span>`;
+      $('sm').classList.add('show');
       step(1); toast('✅ Photo loaded!','ok');
-      if(S.preset) sched();
+      sched(); // draw preview immediately (no preset needed)
     };
     i.src=ev.target.result;
   };
@@ -1487,13 +1568,15 @@ function setZoom(v){
   v = Math.round(Math.min(200, Math.max(50, v)));
   S.zoom = v; $('zr').value = v; $('zn').value = v;
   $('zn').classList.remove('invalid');
-  if(S.img && S.preset) sched();
+  $('znDisp').textContent = v + '%';
+  if(S.img) sched();
 }
 function setRot(v){
   v = Math.round(Math.min(180, Math.max(-180, v)));
   S.rot = v; $('rr').value = v; $('rn').value = v;
   $('rn').classList.remove('invalid');
-  if(S.img && S.preset) sched();
+  $('rnDisp').textContent = v + '°';
+  if(S.img) sched();
 }
 
 $('zr').oninput = () => setZoom(+$('zr').value);
@@ -1521,24 +1604,51 @@ $('rn').onchange = () => {
 };
 $('rn').onkeydown = e => { if(e.key === 'Enter') $('rn').blur(); };
 
+$('rotCCW').onclick = () => { let v = S.rot - 90; if(v < -180) v += 360; setRot(v); };
+$('rotCW').onclick  = () => { let v = S.rot + 90; if(v > 180)  v -= 360; setRot(v); };
+
 // ── SWATCHES ───────────────────────────────────────────────────────────────────
 $('swr').onclick=e=>{
   const sw=e.target.closest('.sw');
   if(!sw||sw.classList.contains('sw-c')) return;
   document.querySelectorAll('.sw').forEach(s=>s.classList.remove('on'));
   sw.classList.add('on'); S.bg=sw.dataset.c;
-  if(S.img&&S.preset) sched();
+  if(S.img) sched();
 };
 $('cc').oninput=e=>{
   S.bg=e.target.value;
   document.querySelectorAll('.sw').forEach(s=>s.classList.remove('on'));
   e.target.closest('.sw').classList.add('on');
-  if(S.img&&S.preset) sched();
+  if(S.img) sched();
 };
 
-// ── CONVERT (real-time preview + download prep) ────────────────────────────────
+// ── DRAW / CONVERT ─────────────────────────────────────────────────────────────
+function drawAt(cw,ch){
+  const cv=$('rtCv');
+  cv.width=cw; cv.height=ch;
+  const ctx=cv.getContext('2d');
+  ctx.fillStyle=S.bg; ctx.fillRect(0,0,cw,ch);
+  ctx.save(); ctx.translate(cw/2,ch/2); ctx.rotate(S.rot*Math.PI/180);
+  const sc=S.zoom/100, ar=S.img.width/S.img.height;
+  let dw,dh;
+  if(cw/ch<ar){dw=cw*sc;dh=dw/ar;}else{dh=ch*sc;dw=dh*ar;}
+  ctx.drawImage(S.img,-dw/2,-dh/2,dw,dh); ctx.restore();
+}
+
+function drawPreview(){
+  if(!S.img) return;
+  let pw,ph;
+  if(S.preset){ pw=S.preset.w; ph=S.preset.h; }
+  else{ const maxPx=1400,ar=S.img.width/S.img.height; pw=Math.min(S.img.width,maxPx); ph=Math.round(pw/ar); }
+  drawAt(pw,ph);
+  $('livePreviewBadge').style.display=S.preset?'block':'none';
+}
+
 let convTimer=null;
-function sched(){ clearTimeout(convTimer); convTimer=setTimeout(convert,280); }
+function sched(){
+  drawPreview(); // instant visual update
+  if(S.preset){ clearTimeout(convTimer); convTimer=setTimeout(convert,280); }
+}
 
 async function convert(){
   if(!S.img||!S.preset) return;
@@ -1549,17 +1659,6 @@ async function convert(){
 
   const cv=$('rtCv');
   const mime=p.mime==='image/png'?'image/png':'image/jpeg';
-
-  function drawAt(cw,ch){
-    cv.width=cw; cv.height=ch;
-    const ctx=cv.getContext('2d');
-    ctx.fillStyle=S.bg; ctx.fillRect(0,0,cw,ch);
-    ctx.save(); ctx.translate(cw/2,ch/2); ctx.rotate(S.rot*Math.PI/180);
-    const sc=S.zoom/100, ar=S.img.width/S.img.height;
-    let dw,dh;
-    if(cw/ch<ar){dw=cw*sc;dh=dw/ar;}else{dh=ch*sc;dw=dh*ar;}
-    ctx.drawImage(S.img,-dw/2,-dh/2,dw,dh); ctx.restore();
-  }
   function sizeKB(du){ return Math.ceil(du.split(',')[1].length*0.75)/1024; }
 
   drawAt(p.w,p.h);
@@ -1581,35 +1680,19 @@ async function convert(){
       }
       q=lo; du=cv.toDataURL(mime,q); skb=sizeKB(du);
     }
-    if(skb>p.maxKB){
-      const sc2=Math.sqrt(p.maxKB/skb)*0.96;
-      drawAt(Math.max(1,Math.round(p.w*sc2)),Math.max(1,Math.round(p.h*sc2)));
-      lo=0.01; hi=1.0; q=p.q;
-      for(let i=0;i<14;i++){
-        q=(lo+hi)/2;
-        du=cv.toDataURL(mime,q); skb=sizeKB(du);
-        if(skb<=p.maxKB) lo=q; else hi=q;
-        if(hi-lo<0.004) break;
-      }
-      q=lo; du=cv.toDataURL(mime,q); skb=sizeKB(du);
-    }
+    // Always keep preset dimensions — never scale down pixels
   } else {
-    let sc2=1.0;
     du=cv.toDataURL('image/png'); skb=sizeKB(du);
-    while(skb>p.maxKB && sc2>0.02){
-      sc2*=Math.sqrt(p.maxKB/skb)*0.97;
-      drawAt(Math.max(1,Math.round(p.w*sc2)),Math.max(1,Math.round(p.h*sc2)));
-      du=cv.toDataURL('image/png'); skb=sizeKB(du);
-    }
+    // PNG is lossless — if over limit, warn; dimensions preserved
   }
 
   rtPb.style.width='90%';
   await new Promise(r=>setTimeout(r,20));
 
   S.dataURL=du;
-  cv.style.display='block'; $('rtOph').style.display='none';
+  $('livePreviewBadge').style.display='block';
   $('rtStats').style.display='grid';
-  $('rtDim').textContent=`${cv.width}×${cv.height}`;
+  $('rtDim').textContent=`${p.w}×${p.h}`;
   $('rtDpi').textContent=p.dpi;
   $('rtSz').textContent=`~${Math.round(skb)}KB`;
 
@@ -1619,16 +1702,80 @@ async function convert(){
 
   rtPb.style.width='100%';
   setTimeout(()=>{ rtPw.classList.remove('show'); rtPb.style.width='0%'; },500);
-  $('dlCard').style.display='block';
+  $('dlSection').style.display='block';
   $('dlBtn').disabled=false;
   step(3);
 }
 
+
+// ── CHANGE PHOTO (full reset back to drop zone) ───────────────────────────────
+$('changePhotoBtn').onclick = () => {
+  // Reset full state
+  S.img=null; S.origImg=null; S.cropped=false; S.preset=null;
+  S.zoom=100; S.rot=0; S.bg='#ffffff'; S.dataURL=null;
+  $('zr').value=100; $('zn').value=100; $('rr').value=0; $('rn').value=0;
+  $('znDisp').textContent='100%'; $('rnDisp').textContent='0°';
+  // Hide preview, show drop zone
+  $('photoWrap').classList.remove('show');
+  dz.style.display='';
+  $('fi').value='';
+  // Hide sidebar sections
+  $('adjZoomSec').style.display='none';
+  $('adjRotSec').style.display='none';
+  $('cropSection').style.display='none';
+  $('bgSection').style.display='none';
+  $('dlSection').style.display='none';
+  $('rtStats').style.display='none';
+  $('rtWarn').classList.remove('show');
+  $('sm').classList.remove('show'); $('sm').innerHTML='';
+  // Reset preset selector
+  $('pdTriggerIcon').textContent='📋';
+  $('pdTriggerLabel').textContent='Select a preset…';
+  $('pdTriggerSub').textContent=`${allPresets().length} presets — updated Mar 2026 specs`;
+  $('pdSpecCard').classList.remove('show');
+  $('livePreviewBadge').style.display='none';
+  // Restore card header
+  $('uploadCardTitle').textContent='Upload Your Photo';
+  $('uploadCardSub').style.display='';
+  $('changePhotoBtn').style.display='none';
+  // Reset bg swatches
+  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('on'));
+  document.querySelector('.sw[data-c="#ffffff"]').classList.add('on');
+  // Rebuild preset list
+  buildList('');
+  step(0);
+};
+
+// ── RESET TO ORIGINAL ────────────────────────────────────────────────────────
+$('resetBtn').onclick = () => {
+  if (!S.origImg) return;
+  S.img = S.origImg;
+  S.cropped = false;
+  S.zoom = 100; S.rot = 0;
+  $('zr').value = 100; $('zn').value = 100;
+  $('rr').value = 0; $('rn').value = 0;
+  $('sm').innerHTML = `<span class="mt">📐 <b>${S.origImg.width}×${S.origImg.height}px</b></span>`;
+  $('rtStats').style.display = 'none';
+  $('cropBadge').classList.remove('show');
+  $('resetBtn').style.display = 'none';
+  // Reset background to white
+  S.bg = '#ffffff';
+  document.querySelectorAll('.sw').forEach(s => s.classList.remove('on'));
+  document.querySelector('.sw[data-c="#ffffff"]').classList.add('on');
+  toast('↺ Reset to original photo.', 'ok');
+  sched();
+};
+
 $('dlBtn').onclick=()=>{
   if(!S.dataURL||!S.preset) return;
-  const p=S.preset, a=document.createElement('a');
-  a.href=S.dataURL; a.download=`ilovephoto_${p.id}_${p.w}x${p.h}.${p.ext}`; a.click();
-  step(4); toast(`✅ Saved! ${p.fmt} · ${p.w}×${p.h}px — ilovephoto.in`,'ok');
+  const p=S.preset;
+  const dlData = S.dataURL;
+  const ext = p.ext;
+  const fmtLabel = p.fmt;
+
+  const a=document.createElement('a');
+  a.href=dlData; a.download=`ilovephoto_${p.id}_${p.w}x${p.h}.${ext}`; a.click();
+  step(4); toast(`✅ Saved! ${fmtLabel} · ${p.w}×${p.h}px — ilovephoto.in`,'ok');
 };
 
 // ── CROP MODAL ─────────────────────────────────────────────────────────────────
@@ -1644,14 +1791,7 @@ const cropApplyBtn= $('cropApplyBtn');
 
 function openCropModal(){
   if(!S.img) return;
-  // Show original image (before previous crop) for re-cropping
-  cropImgEl.src = S.origImg === S.img ? $('si').src : (() => {
-    const tc = document.createElement('canvas');
-    tc.width = S.origImg.width; tc.height = S.origImg.height;
-    tc.getContext('2d').drawImage(S.origImg,0,0);
-    return tc.toDataURL();
-  })();
-  // Actually always show current S.img so user crops from current state
+  // Always show current S.img so user crops from current state
   const tmpC = document.createElement('canvas');
   tmpC.width = S.img.width; tmpC.height = S.img.height;
   tmpC.getContext('2d').drawImage(S.img, 0, 0);
@@ -1678,7 +1818,6 @@ $('cropResetBtn').onclick   = ()=>{
   const tc = document.createElement('canvas');
   tc.width = S.origImg.width; tc.height = S.origImg.height;
   tc.getContext('2d').drawImage(S.origImg, 0, 0);
-  $('si').src = tc.toDataURL();
   $('sm').innerHTML = `<span class="mt">📐 <b>${S.origImg.width}×${S.origImg.height}px</b></span>`;
   $('cropBadge').classList.remove('show');
   closeCropModal();
@@ -1806,12 +1945,12 @@ cropApplyBtn.onclick=()=>{
   const newImg=new Image();
   newImg.onload=()=>{
     S.img=newImg; S.cropped=true;
-    $('si').src=tmp.toDataURL();
     $('sm').innerHTML=`<span class="mt">📐 <b>${sw}×${sh}px</b></span><span class="mt">✂️ <b>Cropped</b></span>`;
     $('cropBadge').classList.add('show');
+    $('resetBtn').style.display='inline-flex';
     closeCropModal();
     toast('✅ Crop applied!','ok');
-    if(S.preset) sched();
+    sched();
   };
   newImg.src=tmp.toDataURL();
 };
@@ -1865,7 +2004,7 @@ const TRANSLATIONS = {
     heroH1: 'Your Photo,<br><em>Perfectly Formatted</em>',
     heroSub: 'Convert your portrait to the exact size, DPI and format required for PAN, Passport, Voter ID & more — instantly in your browser.',
     pills: ['No Server Upload', '100% Browser-based', 'Instant Download', 'Always Free', 'Custom Presets'],
-    steps: ['Upload', 'Pick Form', 'Preview', 'Download'],
+    steps: ['Upload & Preview', 'Select Preset', 'Download'],
     uploadTitle: 'Upload Your Photo', uploadMax: 'Max 10 MB',
     dzH3: 'Drag & drop your photo here', dzP: 'or click to browse',
     adjLbl: '🔧 Adjustments', adjZoom: 'Zoom', adjRotate: 'Rotate',
@@ -1935,7 +2074,7 @@ const TRANSLATIONS = {
     heroH1: 'आपकी फोटो,<br><em>बिल्कुल सही फॉर्मेट में</em>',
     heroSub: 'PAN, पासपोर्ट, वोटर ID और अन्य के लिए सटीक साइज़, DPI और फॉर्मेट में अपनी फोटो बदलें — तुरंत, आपके ब्राउज़र में।',
     pills: ['सर्वर अपलोड नहीं', '100% ब्राउज़र-आधारित', 'तुरंत डाउनलोड', 'हमेशा मुफ़्त', 'कस्टम प्रीसेट'],
-    steps: ['अपलोड', 'फॉर्म चुनें', 'पूर्वावलोकन', 'डाउनलोड'],
+    steps: ['अपलोड और पूर्वावलोकन', 'प्रीसेट चुनें', 'डाउनलोड'],
     uploadTitle: 'अपनी फोटो अपलोड करें', uploadMax: 'अधिकतम 10 MB',
     dzH3: 'अपनी फोटो यहाँ खींचें और छोड़ें', dzP: 'या ब्राउज़ करने के लिए क्लिक करें',
     adjLbl: '🔧 समायोजन', adjZoom: 'ज़ूम', adjRotate: 'घुमाएँ',
@@ -2036,15 +2175,13 @@ function setLang(lang) {
   set(q('#dz').closest('.card').querySelector('small'), T.uploadMax);
   set(q('.dz h3'), T.dzH3);
   set(q('.dz p'),  T.dzP);
-  set(q('.at-lbl'), T.adjLbl);
-  const slLabels = qa('.sl label');
-  if(slLabels[0]) set(slLabels[0], T.adjZoom);
-  if(slLabels[1]) set(slLabels[1], T.adjRotate);
+  set($('zoomLabel'), T.adjZoom);
+  set($('rotLabel'),  T.adjRotate);
   set($('cropBtnTxt'), T.cropBtnTxt);
   set($('cropBadge'),  T.cropBadge);
 
-  // Presets card
-  set(q('#pdTrigger').closest('.card').querySelector('h2'), T.presetsTitle);
+  // Presets section
+  set($('presetLabel'), T.presetsTitle);
   if(!S.preset) set($('pdTriggerLabel'), T.presetPlaceholder);
   setPH($('pdSearch'), T.presetSearchPh);
   set($('pdCustomBtn'), T.presetCustomBtn);
@@ -2055,18 +2192,15 @@ function setLang(lang) {
   // Rebuild dropdown list to reflect new search placeholder
   buildList($('pdSearch').value);
 
-  // Background card
-  set(q('#bgCard h2'), T.bgTitle);
-  set(q('.bgp-lbl'),   T.bgLbl);
+  // Background section
+  set($('bgLabel'),  T.bgTitle);
 
-  // Live Preview card
-  set(q('#rtPreviewCard h2'), T.previewTitle);
-  setH(q('#rtOph p'), T.previewEmpty);
+  // Live Preview (in upload card)
   const statLbls = qa('.rt-stat-lbl');
   [T.statDim, T.statDpi, T.statSz].forEach((txt, i) => { if(statLbls[i]) set(statLbls[i], txt); });
 
-  // Download card
-  set(q('#dlCard h2'), T.dlTitle);
+  // Download section
+  set($('dlLabel'), T.dlTitle);
   set($('dlBtn'), T.dlBtn);
 
   // Disclaimer
@@ -2132,8 +2266,8 @@ updateSubtitle();
 function fb(b){ if(b<1024) return b+'B'; if(b<1048576) return (b/1024).toFixed(1)+'KB'; return (b/1048576).toFixed(1)+'MB'; }
 let tt; function toast(m,t='ok'){ const e=$('toast'); e.textContent=m; e.className=`toast show ${t}`; clearTimeout(tt); tt=setTimeout(()=>e.classList.remove('show'),3600); }
 function step(n){
-  for(let i=1;i<=4;i++){ const s=$('s'+i); s.classList.remove('active','done'); if(i<n)s.classList.add('done'); else if(i===n)s.classList.add('active'); }
-  for(let i=1;i<=3;i++){ const c=$('c'+i); if(c) c.classList.toggle('done',i<n); }
+  for(let i=1;i<=3;i++){ const s=$('s'+i); if(!s) continue; s.classList.remove('active','done'); if(i<n)s.classList.add('done'); else if(i===n)s.classList.add('active'); }
+  for(let i=1;i<=2;i++){ const c=$('c'+i); if(c) c.classList.toggle('done',i<n); }
 }
 </script>
 </body>
