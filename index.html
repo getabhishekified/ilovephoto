@@ -1126,7 +1126,6 @@
     <div style="position:absolute;top:10px;right:10px;font-size:0.65rem;font-weight:700;background:rgba(255,45,91,.18);border:1px solid rgba(255,45,91,.4);color:var(--rose-light);padding:3px 9px;border-radius:6px;backdrop-filter:blur(4px)" id="camFaceHint"></div>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
-    <button id="camFlipBtn" style="padding:8px 16px;border-radius:10px;border:1px solid var(--ink-border);background:rgba(255,255,255,.07);color:var(--white);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit">⇄ Flip</button>
     <button id="camCaptureBtn" style="padding:12px 32px;border-radius:12px;background:var(--rose);border:none;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 0 20px rgba(255,45,91,.4)">📸 Capture</button>
     <button id="camCancelBtn" style="padding:8px 16px;border-radius:10px;border:1px solid var(--ink-border);background:rgba(255,255,255,.07);color:var(--muted);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit">Cancel</button>
   </div>
@@ -1700,8 +1699,9 @@ async function openCamera(){
   }
 }
 
-// Hide overlay but keep stream alive so reopening needs no new permission
+// Stop stream AND hide overlay
 function closeCamera(){
+  stopCameraStream();
   $('camOverlay').style.display = 'none';
 }
 
@@ -1709,54 +1709,30 @@ $('cameraBtn').onclick = () => openCamera();
 
 $('camCancelBtn').onclick = () => closeCamera();
 
-$('camFlipBtn').onclick = async () => {
-  _camFacingMode = _camFacingMode === 'environment' ? 'user' : 'environment';
-  // Stop current stream, then start new one with switched facing mode
-  stopCameraStream();
-  const video = $('camVideo');
-  try {
-    _camStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { ideal: _camFacingMode }, width: { ideal: 1280 }, height: { ideal: 720 } },
-      audio: false
-    });
-    video.srcObject = _camStream;
-    video.play().catch(()=>{});
-  } catch(e){
-    // If the new mode failed, try without facingMode constraint
-    try {
-      _camStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-      video.srcObject = _camStream;
-      video.play().catch(()=>{});
-    } catch(e2){ toast('❌ Could not switch camera: ' + e2.message, 'err'); }
-  }
-};
 
 $('camCaptureBtn').onclick = () => {
   const video = $('camVideo');
-  // Guard: stream must be active and video must have produced at least one frame
   if(!_camStream || !_camStream.active){
     toast('❌ Camera not ready. Please wait.', 'err'); return;
   }
   if(video.readyState < 2 || video.videoWidth === 0){
     toast('❌ Camera warming up — try again in a moment.', 'err'); return;
   }
-  // Draw current frame to canvas (synchronous — before anything else)
+  // Draw frame synchronously BEFORE stopping stream
   const tc = document.createElement('canvas');
   tc.width  = video.videoWidth;
   tc.height = video.videoHeight;
   tc.getContext('2d').drawImage(video, 0, 0, tc.width, tc.height);
-  // Hide overlay (stream stays alive for next capture)
+  // Stop camera (turns off green indicator) and hide overlay
   closeCamera();
   tc.toBlob(blob => {
     if(!blob){ toast('❌ Capture failed. Try again.', 'err'); return; }
-    const file = new File([blob], 'camera_photo.jpg', { type: 'image/jpeg' });
-    load(file);
+    load(new File([blob], 'camera_photo.jpg', { type: 'image/jpeg' }));
   }, 'image/jpeg', 0.95);
 };
 
-// Close on backdrop click
+// Backdrop click and Escape also fully close camera
 $('camOverlay').addEventListener('click', e => { if(e.target === $('camOverlay')) closeCamera(); });
-// Close on Escape
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && $('camOverlay').style.display === 'flex') closeCamera(); });
 // Release camera when page unloads
 window.addEventListener('beforeunload', () => stopCameraStream());
