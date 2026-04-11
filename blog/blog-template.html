@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} | ilovephoto.in</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #FF2D5B;
+      --rose-light: #FF6080;
+      --rose-glow: rgba(255,45,91,0.13);
+      --rose-deep: #C4003B;
+      --ink: #0D0A14;
+      --ink-mid: #160F22;
+      --ink-card: #1C1328;
+      --ink-border: rgba(255,255,255,0.07);
+      --white: #FFFFFF;
+      --muted: rgba(255,255,255,0.42);
+      --success: #00C97A;
+      --violet: #7B4FFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); color: var(--white); min-height: 100vh; line-height: 1.6; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background:
+        radial-gradient(ellipse 70% 55% at 15% -10%, rgba(255,45,91,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 85% 105%, rgba(123,79,255,0.12) 0%, transparent 65%);
+    }
+    .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; }
+
+    header { padding: 20px 0; border-bottom: 1px solid var(--ink-border); margin-bottom: 40px; }
+    .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .logo-mark {
+      width: 40px; height: 40px; background: linear-gradient(140deg, var(--rose), var(--rose-deep));
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; box-shadow: 0 4px 20px rgba(255,45,91,0.3);
+    }
+    .logo-text { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.3rem; color: var(--white); }
+    .logo-text .h { color: var(--rose); }
+
+    .blog-content { padding-bottom: 80px; }
+    h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+    h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.6rem; margin: 40px 0 20px; color: var(--rose-light); }
+    p { margin-bottom: 20px; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+
+    .spec-card {
+      background: var(--ink-card); border: 1px solid var(--ink-border);
+      border-radius: 20px; padding: 24px; margin: 30px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .spec-item { display: flex; flex-direction: column; gap: 4px; }
+    .spec-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+    .spec-value { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+
+    .cta-box {
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      border-radius: 24px; padding: 32px; text-align: center; margin: 40px 0;
+      box-shadow: 0 20px 40px rgba(255,45,91,0.2);
+    }
+    .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 16px; color: var(--white); }
+    .cta-btn {
+      display: inline-block; background: var(--white); color: var(--rose-deep);
+      padding: 14px 28px; border-radius: 12px; text-decoration: none;
+      font-weight: 700; font-size: 1rem; transition: transform 0.2s;
+    }
+    .cta-btn:hover { transform: scale(1.05); }
+
+    .step-list { list-style: none; margin: 30px 0; }
+    .step-item {
+      display: flex; gap: 16px; margin-bottom: 24px;
+      background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px;
+      border: 1px solid var(--ink-border);
+    }
+    .step-num {
+      width: 32px; height: 32px; background: var(--rose); color: var(--white);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; flex-shrink: 0;
+    }
+
+    .faq-item { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--ink-border); }
+    .faq-q { font-weight: 600; color: var(--white); font-size: 1.1rem; margin-bottom: 8px; display: block; }
+    .faq-a { color: var(--muted); font-weight: 300; }
+
+    footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--ink-border); color: var(--muted); font-size: 0.8rem; }
+    .back-link { color: var(--rose-light); text-decoration: none; font-weight: 600; margin-bottom: 20px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a href="/" class="logo">
+        <div class="logo-mark">❤️</div>
+        <span class="logo-text">I <span class="h">❤️</span> Photo</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <a href="/" class="back-link">← Back to Converter</a>
+    <article class="blog-content">
+      <h1>{{H1}}</h1>
+      <p>{{INTRO}}</p>
+
+      <div class="spec-card">
+        <h2>Technical Specifications</h2>
+        <div class="spec-grid">
+          {{SPECS}}
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>Ready to format your photo?</h3>
+        <p style="color: white; margin-bottom: 20px;">Get the perfect size and DPI instantly with our free tool.</p>
+        <a href="/" class="cta-btn">Convert My Photo Now</a>
+      </div>
+
+      <h2>Step-by-Step Guide</h2>
+      <div class="step-list">
+        {{STEPS}}
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-section">
+        {{FAQ}}
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      &copy; 2026 ilovephoto.in — The fastest way to resize government form photos.
+    </div>
+  </footer>
+</body>
+</html>
