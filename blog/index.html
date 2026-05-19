@@ -46,7 +46,12 @@
     .page-head p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
     .back-link { color: var(--rose-light); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-block; margin-bottom: 20px; }
     .back-link:hover { text-decoration: underline; }
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-bottom: 60px; }
+    .intro-content { max-width: 780px; margin: 0 auto 40px; }
+    .intro-content p { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 16px; font-weight: 300; }
+    .intro-content p strong { color: var(--white); font-weight: 600; }
+    .cat-heading { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; margin: 48px 0 20px; color: var(--rose-light); }
+    .cat-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; max-width: 700px; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-bottom: 40px; }
     .blog-card {
       background: var(--ink-card); border: 1px solid var(--ink-border);
       border-radius: 20px; padding: 24px; transition: border-color 0.2s, transform 0.2s;
@@ -87,6 +92,13 @@
       <p>Find the exact photo size, DPI, format, and background requirements for every Indian government document, exam, and visa application.</p>
     </div>
 
+    <div class="intro-content">
+      <p>Applying for a government document in India often requires submitting a photograph that meets very specific technical specifications — precise pixel dimensions, exact DPI, strict file size limits, and particular background colours. Each agency sets its own rules: the Income Tax Department for PAN cards, the Election Commission for Voter ID, the Ministry of External Affairs for passports, and the Union Public Service Commission for civil services exams.</p>
+      <p>An incorrectly sized photo is one of the most common reasons for application rejection in India. A rejected application means losing your processing fee, waiting another 15–30 days, and potentially missing critical deadlines for exams or travel. These guides explain exactly what each form requires so you can get it right the first time.</p>
+    </div>
+
+    <h2 class="cat-heading">Government ID Cards</h2>
+    <p class="cat-desc">PAN Card, Passport, Voter ID, Aadhar, Driving Licence, OCI Card, Ration Card, and other identity documents issued by Indian government agencies. These forms typically require passport-style photos with white backgrounds and specific pixel dimensions.</p>
     <div class="blog-grid">
 
       <div class="blog-card">
@@ -140,6 +152,32 @@
       </div>
 
       <div class="blog-card">
+        <div class="blog-card-icon">🌏</div>
+        <h2><a href="oci-card-photo-requirements.html">OCI Card Photo Size Requirements</a></h2>
+        <p>Overseas Citizen of India photo specs — 600×600 px square, 200 DPI, white background, JPEG max 200 KB. Complete guide.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-tag tag-gov">Government ID</span>
+          <span>5 min read</span>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-icon">🏠</div>
+        <h2><a href="ration-card-photo-size.html">Ration Card Photo Size &amp; Requirements</a></h2>
+        <p>State-wise ration card photo specifications — 400×400 px, 200 DPI, white background. Covers NREGA and food security schemes.</p>
+        <div class="blog-card-meta">
+          <span class="blog-card-tag tag-gov">Government ID</span>
+          <span>5 min read</span>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="cat-heading">Competitive Exams</h2>
+    <p class="cat-desc">Photo requirements for National Testing Agency (NTA) and Union Public Service Commission (UPSC) examinations. These applications have strict deadlines — a rejected photo can mean a missed exam cycle.</p>
+    <div class="blog-grid">
+
+      <div class="blog-card">
         <div class="blog-card-icon">🎓</div>
         <h2><a href="neet-photo-size.html">NEET/JEE/GATE NTA Exam Photo Size Requirements</a></h2>
         <p>NTA exam photo specifications for NEET, JEE, GATE applications — 413×531 px, 300 DPI, white background, max 200 KB.</p>
@@ -158,6 +196,12 @@
           <span>5 min read</span>
         </div>
       </div>
+
+    </div>
+
+    <h2 class="cat-heading">Visa &amp; International Travel</h2>
+    <p class="cat-desc">Photo specifications for Schengen (Europe), US, UK, and India e-Visa applications. Visa photo requirements vary significantly by country and often have stricter DPI and background colour rules than domestic documents.</p>
+    <div class="blog-grid">
 
       <div class="blog-card">
         <div class="blog-card-icon">🇪🇺</div>
@@ -199,6 +243,12 @@
         </div>
       </div>
 
+    </div>
+
+    <h2 class="cat-heading">Professional Profiles</h2>
+    <p class="cat-desc">Photo specifications for professional networking platforms. While not a government document, getting your LinkedIn profile photo right can significantly impact your job search and professional networking.</p>
+    <div class="blog-grid">
+
       <div class="blog-card">
         <div class="blog-card-icon">💼</div>
         <h2><a href="linkedin-profile-photo-size.html">LinkedIn Profile Photo Size &amp; Tips</a></h2>
@@ -209,26 +259,11 @@
         </div>
       </div>
 
-      <div class="blog-card">
-        <div class="blog-card-icon">🌏</div>
-        <h2><a href="oci-card-photo-requirements.html">OCI Card Photo Size Requirements</a></h2>
-        <p>Overseas Citizen of India photo specs — 600×600 px square, 200 DPI, white background, JPEG max 200 KB. Complete guide.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>5 min read</span>
-        </div>
-      </div>
+    </div>
 
-      <div class="blog-card">
-        <div class="blog-card-icon">🏠</div>
-        <h2><a href="ration-card-photo-size.html">Ration Card Photo Size &amp; Requirements</a></h2>
-        <p>State-wise ration card photo specifications — 400×400 px, 200 DPI, white background. Covers NREGA and food security schemes.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
+    <div class="intro-content" style="margin-top:48px;padding-top:40px;border-top:1px solid var(--ink-border)">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;margin-bottom:16px;color:var(--rose-light)">Need a Different Photo Size?</h2>
+      <p>If your document is not listed above, use the <strong>Custom Preset</strong> feature on the <a href="/" style="color:var(--rose-light);text-decoration:none">main converter tool</a>. You can set any width, height, DPI, file format, and maximum file size. Custom presets are saved in your browser for future use. The converter is 100% free, works entirely in your browser, and requires no signup or installation.</p>
     </div>
   </main>
   <footer>

@@ -682,6 +682,9 @@
   .seo-form-card p { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
   .seo-form-card--custom { border-color: rgba(255,45,91,0.3); background: rgba(255,45,91,0.04); }
   .seo-form-card--custom h3 { color: var(--rose-light); }
+  .seo-content { max-width: 780px; margin: 0 auto; }
+  .seo-content p { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 18px; font-weight: 300; }
+  .seo-content p strong { color: var(--white); font-weight: 600; }
 
   /* SEO: FAQ SECTION */
   .faq-section { margin: 0 0 52px; }
@@ -980,6 +983,40 @@
       </div>
     </section>
 
+    <!-- SEO: WHY PHOTO SIZE MATTERS -->
+    <section class="seo-section" aria-labelledby="why-matters-heading">
+      <h2 id="why-matters-heading">Why Photo Size Matters for Government Forms</h2>
+      <div class="seo-content">
+        <p>Every year, thousands of government applications in India are rejected or delayed because the uploaded photograph does not meet the specified requirements. The Income Tax Department (PAN Card), Ministry of External Affairs (Passport), Election Commission (Voter ID), and other agencies use automated systems to validate uploaded photos. If your photo does not match the exact pixel dimensions, DPI, file format, or file size, the system rejects it automatically — often without any explanation of what went wrong.</p>
+        <p>Each government form has unique photo specifications tailored to its printing and database requirements. A PAN card photo must be exactly <strong>200×200 pixels at 200 DPI with a file size under 10 KB</strong>, while a passport photo requires <strong>630×810 pixels at 300 DPI with a max file size of 100 KB</strong>. A voter ID photo requires <strong>35×45 mm at 200 DPI in colour</strong>, and a driving licence calls for <strong>25×35 mm at 200 DPI</strong>. Using a photo prepared for one document on another application will almost certainly result in rejection.</p>
+        <p>The consequences of photo rejection go beyond mere inconvenience. For PAN card applications, the entire application must be resubmitted and you wait another 15–20 days for processing. For passport applications, the appointment itself may need to be rescheduled. For competitive exams like NEET, JEE, or UPSC, incorrect photo uploads can result in the application being summarily rejected after the deadline has passed — meaning you lose an entire year. Getting the photo right the first time is not just about convenience; it is about not missing critical deadlines.</p>
+        <p>ilovephoto.in was built to eliminate this friction entirely. Instead of manually calculating pixel dimensions, adjusting DPI settings, or guessing the right compression level, you simply select the form you are applying for, and the tool applies the correct specifications automatically. All processing happens in your browser — nothing is uploaded to any server — so your privacy is guaranteed while you get a submission-ready photo in seconds.</p>
+      </div>
+    </section>
+
+    <!-- SEO: HOW TO USE -->
+    <section class="seo-section" aria-labelledby="how-to-use-heading">
+      <h2 id="how-to-use-heading">How to Use the Government Photo Converter</h2>
+      <div class="seo-content">
+        <p><strong>Step 1: Upload your photo.</strong> Click the upload area or drag and drop a photo from your computer or phone. The tool supports all common formats including JPG, JPEG, PNG, BMP, GIF, TIFF, and HEIC. Your photo is loaded directly into your browser and never leaves your device.</p>
+        <p><strong>Step 2: Select your form preset.</strong> Open the Conversion Presets dropdown and choose the government form you are applying for. The tool includes presets for PAN Card, Passport, Voter ID, Aadhar Card, Driving Licence, NEET, JEE, UPSC, SSC, and many more. Each preset is configured with the official dimensions, DPI, format, and file size limit for that document.</p>
+        <p><strong>Step 3: Adjust the crop and framing.</strong> Use the zoom slider and drag handles to position your face correctly within the frame. The live preview panel shows exactly how the final photo will look. A good rule of thumb is to keep your face centred with your eyes roughly two-thirds of the way up from the bottom of the frame.</p>
+        <p><strong>Step 4: Set the background colour.</strong> If your photo has a coloured wall or uneven background, use the Background Color tool to set a plain white or light-grey background — whichever your selected preset requires. The tool lets you preview the background change in real time.</p>
+        <p><strong>Step 5: Download your photo.</strong> Click the Download button to save a perfectly sized, correctly formatted photo to your device. The tool automatically ensures the file stays within the required size limit and uses the correct JPEG quality setting. All metadata is stripped for privacy. If you need multiple copies on a single sheet for passport applications, use the Print Sheet feature.</p>
+      </div>
+    </section>
+
+    <!-- SEO: WHAT IS DPI -->
+    <section class="seo-section" aria-labelledby="dpi-heading">
+      <h2 id="dpi-heading">Common Photo Size Mistakes and How to Avoid Them</h2>
+      <div class="seo-content">
+        <p><strong>Confusing pixel dimensions with physical size.</strong> Many applicants think a passport photo is "35×45 mm" and upload a photo cropped to those millimetres without considering the DPI requirement. At 300 DPI, 35×45 mm equals approximately 413×531 pixels. At 200 DPI, the same physical size would be only 276×354 pixels — which would be rejected. Always check both the pixel dimensions and the DPI for your specific form.</p>
+        <p><strong>Uploading a photo that is too large in file size.</strong> Government portals strictly enforce file size limits. A PAN card photo can be no more than 10 KB, while a passport photo can be up to 100 KB. Our tool uses a smart compression algorithm that finds the optimal JPEG quality setting to stay under the limit while retaining maximum visual quality. If you are using a photo editing application manually, you may need to experiment with the compression settings to get it right.</p>
+        <p><strong>Using the wrong file format.</strong> Most Indian government portals require JPEG format for photographs. PNG files, while higher quality, produce larger file sizes that often exceed the limits. Some portals also require a specific colour profile. Always check the format requirement before uploading.</p>
+        <p><strong>Incorrect background colour.</strong> A white background is standard for most Indian documents, but the UK passport requires a cream or light-grey background, and some visa applications have specific colour requirements. Make sure you select the correct preset for the document you are applying for.</p>
+      </div>
+    </section>
+
     <!-- SEO: FAQ SECTION -->
     <section class="faq-section" aria-labelledby="faq-heading">
       <h2 id="faq-heading">Frequently Asked Questions</h2>
@@ -1038,6 +1075,41 @@
           <summary class="faq-q">Are custom presets saved for future visits?</summary>
           <div class="faq-a">
             <p>Yes. Custom presets you create are saved locally in your browser, so they are available every time you return to ilovephoto.in. Since all data stays on your device, your presets remain private and are never shared with any server.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">What is the difference between pixel dimensions and DPI?</summary>
+          <div class="faq-a">
+            <p>Pixel dimensions (e.g., 200×276 pixels) describe the number of pixels in your image. DPI (dots per inch) describes how densely those pixels are printed. At 200 DPI, a 200×276 pixel image prints at 1×1.38 inches (25×35 mm). At 300 DPI, the same pixel size would print smaller. Both values matter — government forms specify both because they determine how the photo appears on the printed card.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">How do I know if my photo meets the DPI requirement?</summary>
+          <div class="faq-a">
+            <p>When you upload a photo to ilovephoto.in and select a preset, the tool automatically calculates and applies the correct DPI for your selected form. The live spec card displays the target DPI, and the downloaded file includes the correct DPI metadata. If you are checking an existing photo on your computer, you can view its DPI in the file properties (Windows) or Get Info (Mac).</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">Can I use this tool on my phone or tablet?</summary>
+          <div class="faq-a">
+            <p>Yes. ilovephoto.in works on any device with a modern browser — desktop, laptop, tablet, or phone. The interface adapts to your screen size automatically. You can take a photo with your phone camera and convert it immediately without needing a computer.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">What should I do if my photo keeps getting rejected?</summary>
+          <div class="faq-a">
+            <p>First, check the rejection reason if the portal provides one. Common issues include: incorrect pixel dimensions, file size too large, wrong file format, coloured background, or incorrect DPI. Use ilovephoto.in to verify all specifications before uploading. Make sure you have selected the correct preset for your form (PAN Card, Passport, etc.) and that the downloaded photo matches the official requirements listed in the spec card.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">Can I convert a photo to multiple form sizes at once?</summary>
+          <div class="faq-a">
+            <p>Each conversion processes one photo for one preset at a time. However, you can repeat the process for different presets using the same uploaded photo. For example, after converting your photo for PAN Card, you can download it again with different settings for Passport or Voter ID without re-uploading — just switch the preset and download again.</p>
           </div>
         </details>
 
@@ -2495,4 +2567,3 @@ function step(n){
 </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                   
