@@ -3,91 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Resize Photo for PAN Card Application | ilovephoto.in</title>
-  <meta name="description" content="Struggling with PAN card photo size? Learn the exact dimensions, DPI, and format required for PAN Card applications and how to convert them instantly.">
+  <title>PAN Card Photo Size & Requirements (2026) | ilovephoto.in</title>
+  <meta name="description" content="Complete guide to PAN card photo size: exact dimensions 200×276 px, 200 DPI, JPEG max 50 KB. Learn how to resize your photo for PAN card application with step-by-step instructions.">
+  <link rel="canonical" href="https://ilovephoto.in/blog/pan-card-photo-size.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose: #FF2D5B;
-      --rose-light: #FF6080;
-      --rose-glow: rgba(255,45,91,0.13);
-      --rose-deep: #C4003B;
-      --ink: #0D0A14;
-      --ink-mid: #160F22;
-      --ink-card: #1C1328;
-      --ink-border: rgba(255,255,255,0.07);
-      --white: #FFFFFF;
-      --muted: rgba(255,255,255,0.42);
-      --success: #00C97A;
-      --violet: #7B4FFF;
+      --rose: #FF2D5B; --rose-light: #FF6080; --rose-glow: rgba(255,45,91,0.13);
+      --rose-deep: #C4003B; --ink: #0D0A14; --ink-mid: #160F22;
+      --ink-card: #1C1328; --ink-border: rgba(255,255,255,0.07);
+      --white: #FFFFFF; --muted: rgba(255,255,255,0.42);
+      --success: #00C97A; --violet: #7B4FFF;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); color: var(--white); min-height: 100vh; line-height: 1.6; }
     body::before {
       content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-      background:
-        radial-gradient(ellipse 70% 55% at 15% -10%, rgba(255,45,91,0.13) 0%, transparent 65%),
-        radial-gradient(ellipse 55% 45% at 85% 105%, rgba(123,79,255,0.12) 0%, transparent 65%);
+      background: radial-gradient(ellipse 70% 55% at 15% -10%, rgba(255,45,91,0.13) 0%, transparent 65%), radial-gradient(ellipse 55% 45% at 85% 105%, rgba(123,79,255,0.12) 0%, transparent 65%);
     }
     .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; }
-
     header { padding: 20px 0; border-bottom: 1px solid var(--ink-border); margin-bottom: 40px; }
     .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-    .logo-mark {
-      width: 40px; height: 40px; background: linear-gradient(140deg, var(--rose), var(--rose-deep));
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; box-shadow: 0 4px 20px rgba(255,45,91,0.3);
-    }
+    .logo-mark { width: 40px; height: 40px; background: linear-gradient(140deg, var(--rose), var(--rose-deep)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 20px rgba(255,45,91,0.3); }
     .logo-text { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.3rem; color: var(--white); }
     .logo-text .h { color: var(--rose); }
-
     .blog-content { padding-bottom: 80px; }
     h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
     h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.6rem; margin: 40px 0 20px; color: var(--rose-light); }
+    h3 { font-size: 1.2rem; font-weight: 700; margin: 28px 0 12px; color: var(--white); }
     p { margin-bottom: 20px; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
-
-    .spec-card {
-      background: var(--ink-card); border: 1px solid var(--ink-border);
-      border-radius: 20px; padding: 24px; margin: 30px 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+    p strong { color: var(--white); font-weight: 600; }
+    ul, ol { margin-bottom: 20px; padding-left: 24px; color: var(--muted); font-size: 1.05rem; }
+    li { margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.95rem; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--ink-border); }
+    th { background: var(--ink-mid); color: var(--rose-light); font-weight: 700; }
+    td { color: var(--muted); }
+    .spec-card { background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 20px; padding: 24px; margin: 30px 0; }
     .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
     .spec-item { display: flex; flex-direction: column; gap: 4px; }
     .spec-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
     .spec-value { font-size: 1.1rem; font-weight: 700; color: var(--white); }
-
-    .cta-box {
-      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
-      border-radius: 24px; padding: 32px; text-align: center; margin: 40px 0;
-      box-shadow: 0 20px 40px rgba(255,45,91,0.2);
-    }
+    .cta-box { background: linear-gradient(135deg, var(--rose), var(--rose-deep)); border-radius: 24px; padding: 32px; text-align: center; margin: 40px 0; }
     .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 16px; color: var(--white); }
-    .cta-btn {
-      display: inline-block; background: var(--white); color: var(--rose-deep);
-      padding: 14px 28px; border-radius: 12px; text-decoration: none;
-      font-weight: 700; font-size: 1rem; transition: transform 0.2s;
-    }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--rose-deep); padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.2s; }
     .cta-btn:hover { transform: scale(1.05); }
-
     .step-list { list-style: none; margin: 30px 0; }
-    .step-item {
-      display: flex; gap: 16px; margin-bottom: 24px;
-      background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px;
-      border: 1px solid var(--ink-border);
-    }
-    .step-num {
-      width: 32px; height: 32px; background: var(--rose); color: var(--white);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-weight: 700; flex-shrink: 0;
-    }
-
+    .step-item { display: flex; gap: 16px; margin-bottom: 24px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; border: 1px solid var(--ink-border); }
+    .step-num { width: 32px; height: 32px; background: var(--rose); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
     .faq-item { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--ink-border); }
     .faq-q { font-weight: 600; color: var(--white); font-size: 1.1rem; margin-bottom: 8px; display: block; }
     .faq-a { color: var(--muted); font-weight: 300; }
-
+    .rel-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0; }
+    .rel-link { background: var(--ink-card); border: 1px solid var(--ink-border); border-radius: 12px; padding: 14px 18px; text-decoration: none; color: var(--white); flex: 1; min-width: 200px; transition: border-color 0.2s; }
+    .rel-link:hover { border-color: rgba(255,45,91,0.35); }
+    .rel-link span { display: block; font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
     footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--ink-border); color: var(--muted); font-size: 0.8rem; }
     .back-link { color: var(--rose-light); text-decoration: none; font-weight: 600; margin-bottom: 20px; display: inline-block; }
+    .back-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -99,83 +73,165 @@
       </a>
     </div>
   </header>
-
   <main class="wrap">
     <a href="/" class="back-link">← Back to Converter</a>
+    <a href="index.html" class="back-link" style="margin-left:16px">← All Guides</a>
     <article class="blog-content">
-      <h1>How to Resize Photo for PAN Card Application</h1>
-      <p>Applying for a PAN card can be stressful, and one of the most common reasons for application delays is an incorrectly sized photo. Whether you are applying for a new PAN card or updating an existing one, having the exact photo specifications is crucial for a smooth process.</p>
+      <h1>PAN Card Photo Size & Requirements — Complete Guide (2026)</h1>
+
+      <p>Applying for a PAN (Permanent Account Number) card is one of the most common financial tasks for Indian citizens. Yet, countless applications get delayed or rejected because the uploaded photo doesn't meet the exact specifications required by NSDL and UTIITSL portals.</p>
+      <p>If your PAN card photo is rejected, you have to resubmit your entire application and wait another 15–20 days. This guide covers everything you need to know about PAN card photo size, dimensions, DPI, file format, and how to get it right the first time.</p>
 
       <div class="spec-card">
-        <h2>PAN Card Photo Specifications</h2>
+        <h2>Official PAN Card Photo Specifications</h2>
         <div class="spec-grid">
           <div class="spec-item">
             <span class="spec-label">Dimensions</span>
-            <span class="spec-value">25 x 35 mm</span>
+            <span class="spec-value">200 × 276 pixels</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Equivalent Size</span>
+            <span class="spec-value">25 × 35 mm</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Resolution (DPI)</span>
-            <span class="spec-value">300 DPI</span>
+            <span class="spec-value">200 DPI</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">File Format</span>
-            <span class="spec-value">JPEG / JPG</span>
+            <span class="spec-value">JPEG / JPG only</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Max File Size</span>
             <span class="spec-value">50 KB</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Background</span>
+            <span class="spec-value">Plain white / off-white</span>
           </div>
         </div>
       </div>
 
       <div class="cta-box">
         <h3>Ready to format your PAN photo?</h3>
-        <p style="color: white; margin-bottom: 20px;">Get the perfect 25x35mm size and 300 DPI instantly with our free tool.</p>
+        <p style="color: white; margin-bottom: 20px;">Get the perfect 200×276 px size at 200 DPI instantly with our free tool.</p>
         <a href="/" class="cta-btn">Convert My PAN Photo Now</a>
       </div>
 
-      <h2>Step-by-Step Guide to Resize PAN Photo</h2>
+      <h2>Why PAN Card Photo Specifications Matter</h2>
+      <p>The Income Tax Department processes millions of PAN applications every year. To automate the workflow, the system validates uploaded photos programmatically. If your photo doesn't match the preset criteria — wrong pixel dimensions, excessive file size, or incorrect format — the system automatically rejects it.</p>
+      <p>Common problems include uploading a photo that is too large (exceeding 50 KB), using the wrong format (PNG instead of JPEG), or having a coloured or patterned background that fails the background detection check.</p>
+
+      <h2>Step-by-Step Guide to Convert Your PAN Photo</h2>
+
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
-          <div class="step-text">Visit <strong>ilovephoto.in</strong> on your browser.</div>
+          <div class="step-text"><strong>Open ilovephoto.in</strong> in any browser — Chrome, Firefox, Safari, or Edge. No installation needed.</div>
         </div>
         <div class="step-item">
           <div class="step-num">2</div>
-          <div class="step-text">Upload your recent passport-size photograph using the upload area.</div>
+          <div class="step-text"><strong>Upload your photo</strong> by clicking the upload area or dragging and dropping a photo. Supported formats: JPG, PNG, BMP, GIF, TIFF, HEIC.</div>
         </div>
         <div class="step-item">
           <div class="step-num">3</div>
-          <div class="step-text">From the presets dropdown, select <strong>"PAN Card"</strong>. This automatically applies the 25x35mm size and 300 DPI.</div>
+          <div class="step-text"><strong>Select "PAN Card" preset</strong> from the dropdown menu. This automatically applies the 200×276 px dimensions and 200 DPI.</div>
         </div>
         <div class="step-item">
           <div class="step-num">4</div>
-          <div class="step-text">Adjust the zoom and crop to ensure your face is centered and clearly visible.</div>
+          <div class="step-text"><strong>Adjust the zoom and crop</strong> so your face fills about 70% of the frame. Use the zoom slider to get the right framing.</div>
         </div>
         <div class="step-item">
           <div class="step-num">5</div>
-          <div class="step-text">Click <strong>Download</strong> to save your SEO-optimized, correctly sized photo.</div>
+          <div class="step-text"><strong>Set the background</strong> to pure white using the Background Color tool if your photo has a coloured wall behind you.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">6</div>
+          <div class="step-text"><strong>Click Download</strong> to save the correctly sized photo. The tool automatically ensures the file size stays under 50 KB.</div>
         </div>
       </div>
+
+      <h2>PAN Card Photo: Technical Details</h2>
+
+      <h3>Pixel Dimensions vs Physical Size</h3>
+      <p>The PAN card photo requirement is 200 pixels wide by 276 pixels tall at 200 DPI (dots per inch). This translates to a physical size of approximately 25 mm × 35 mm — similar to a standard passport photo but with lower DPI requirements.</p>
+
+      <h3>Why 50 KB File Size Limit?</h3>
+      <p>The NSDL and UTIITSL portals limit photo uploads to 50 KB to ensure fast processing and minimal server load. This is a strict limit — files even 1 KB over will be rejected. While this makes the photo quite compressed, it is sufficient for identification purposes at the low resolution required.</p>
+      <p>ilovephoto.in uses a binary search algorithm on the JPEG quality setting to find the optimal compression level that keeps your photo under 50 KB while retaining maximum visual quality.</p>
+
+      <h3>JPEG Format Only</h3>
+      <p>The PAN card portal accepts only JPEG/JPG format. PNG files, while offering better quality, produce larger file sizes that typically exceed the 50 KB limit. Our tool automatically converts your photo to JPEG when you select the PAN Card preset.</p>
+
+      <h2>Common Reasons for PAN Photo Rejection</h2>
+      <table>
+        <tr><th>Reason</th><th>Solution</th></tr>
+        <tr><td>Photo dimensions incorrect</td><td>Resize to exactly 200 × 276 pixels</td></tr>
+        <tr><td>File size exceeds 50 KB</td><td>Compress to under 50 KB</td></tr>
+        <tr><td>Wrong file format (PNG/BMP)</td><td>Convert to JPEG</td></tr>
+        <tr><td>Coloured background</td><td>Replace with plain white background</td></tr>
+        <tr><td>Face too small or too large</td><td>Face should occupy ~70% of the frame</td></tr>
+        <tr><td>Blurry or pixelated image</td><td>Use a high-quality source photo</td></tr>
+        <tr><td>Low resolution / wrong DPI</td><td>Set to minimum 200 DPI</td></tr>
+      </table>
+
+      <h2>PAN Photo Tips for a Smooth Application</h2>
+      <p>Here are some practical tips to ensure your PAN card photo is accepted on the first attempt:</p>
+      <ul>
+        <li><strong>Use a recent photo</strong> — should be no more than 6 months old</li>
+        <li><strong>Face the camera directly</strong> with both eyes open and a neutral expression</li>
+        <li><strong>Avoid wearing sunglasses or tinted glasses</strong> — clear prescription glasses are acceptable but avoid glare</li>
+        <li><strong>Keep the background plain</strong> — white or off-white without any patterns, curtains, or shadows</li>
+        <li><strong>Ensure even lighting</strong> — no harsh shadows on your face or behind you</li>
+        <li><strong>No hats or head coverings</strong> unless for religious reasons, and even then the face must be fully visible from forehead to chin</li>
+      </ul>
+
+      <h2>How PAN Card Photo Differs from Other Documents</h2>
+      <p>Unlike a passport (which requires 35×45 mm at 300 DPI) or a voter ID (also 35×45 mm but colour), the PAN card photo has a unique combination of a small pixel size and tight file size limit. This often confuses applicants who try to use the same photo they used for their passport or voter ID. Each government form has its own distinct photo specifications, and it's important to generate the correct version for each application.</p>
 
       <h2>Frequently Asked Questions</h2>
       <div class="faq-section">
         <div class="faq-item">
-          <span class="faq-q">What is the standard photo size for PAN card?</span>
-          <span class="faq-a">The standard size for a PAN card photo is 25mm x 35mm with a resolution of 300 DPI.</span>
+          <span class="faq-q">What is the exact PAN card photo size in pixels?</span>
+          <span class="faq-a">The exact PAN card photo size is 200 pixels wide × 276 pixels tall at 200 DPI. This is equivalent to 25 mm × 35 mm in physical size.</span>
         </div>
         <div class="faq-item">
           <span class="faq-q">Can I use a selfie for PAN card application?</span>
-          <span class="faq-a">While possible, it is recommended to use a professional passport-style photo with a plain background to avoid rejection.</span>
+          <span class="faq-a">While possible, selfies often have poor lighting and incorrect framing. It is better to use a proper passport-style photograph taken against a plain white wall.</span>
         </div>
         <div class="faq-item">
-          <span class="faq-q">Why is my PAN card photo being rejected?</span>
-          <span class="faq-a">Most rejections happen due to incorrect dimensions, low resolution (below 300 DPI), or the file size exceeding the limit. Using ilovephoto.in ensures all these technical specs are met.</span>
+          <span class="faq-q">Why is my PAN card photo being rejected repeatedly?</span>
+          <span class="faq-q">Most rejections happen due to three reasons: incorrect pixel dimensions, file size exceeding 50 KB, or a non-white background. Use ilovephoto.in to check your photo against all these criteria before uploading.</span>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">What is the minimum DPI required for PAN card photo?</span>
+          <span class="faq-a">The minimum resolution required is 200 DPI. However, 300 DPI or higher is acceptable as long as the pixel dimensions and file size remain within limits.</span>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">Is a PAN card photo different from a passport photo?</span>
+          <span class="faq-a">Yes. PAN card requires 200×276 px at 200 DPI (max 50 KB), while a passport requires 630×810 px at 300 DPI (max 100 KB). They are not interchangeable.</span>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">Can I wear glasses in my PAN card photo?</span>
+          <span class="faq-a">Clear prescription glasses are allowed, but avoid sunglasses, tinted lenses, or frames that cover your eyes. Make sure there is no glare on the lenses.</span>
         </div>
       </div>
+
+      <h2>Related Guides</h2>
+      <div class="rel-links">
+        <a href="passport-photo-size.html" class="rel-link">Indian Passport Photo Size <span>35×45 mm, 300 DPI guide</span></a>
+        <a href="voter-id-photo-size.html" class="rel-link">Voter ID Photo Size <span>EPIC card photo specifications</span></a>
+        <a href="aadhar-photo-specifications.html" class="rel-link">Aadhar Photo Guide <span>UIDAI photo requirements</span></a>
+      </div>
+
+      <div class="cta-box">
+        <h3>Convert your PAN photo in seconds</h3>
+        <p style="color: white; margin-bottom: 20px;">Free, instant, and 100% private — no uploads, no signups.</p>
+        <a href="/" class="cta-btn">Convert My Photo Now</a>
+      </div>
+
     </article>
   </main>
-
   <footer>
     <div class="wrap">
       &copy; 2026 ilovephoto.in — The fastest way to resize government form photos.

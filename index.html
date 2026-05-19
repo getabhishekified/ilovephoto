@@ -195,6 +195,13 @@
   .logo-text .h { color: var(--rose); display: inline-block; animation: hb 2.4s ease-in-out infinite; }
   @keyframes hb { 0%,100%{transform:scale(1)} 15%{transform:scale(1.25)} 30%{transform:scale(1)} 45%{transform:scale(1.15)} 60%{transform:scale(1)} }
   .logo-domain { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.64rem; color: var(--muted); font-weight: 500; letter-spacing: 0.4px; }
+  .nav-blog {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 20px; font-size: 0.74rem; font-weight: 600;
+    color: var(--muted); text-decoration: none; transition: color 0.2s, background 0.2s;
+  }
+  .nav-blog:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+  .nav-blog span { font-size: 0.85rem; }
   .nav-pill {
     padding: 6px 14px; background: rgba(255,45,91,0.09); border: 1px solid rgba(255,45,91,0.25);
     border-radius: 20px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.8px;
@@ -737,6 +744,7 @@
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="hi">हि</button>
     </div>
+    <a href="/blog/" class="nav-blog"><span>📖</span> Guides</a>
     <div class="nav-pill" id="navPill">🇮🇳 Free · Private</div>
   </div>
 </header>
@@ -1109,6 +1117,23 @@
             <li><a href="https://ilovephoto.in/#app">Convert Photo</a></li>
             <li><a href="https://ilovephoto.in/#faq-heading">FAQ</a></li>
             <li><a href="https://ilovephoto.in/#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-head">Resources</h3>
+          <ul>
+            <li><a href="https://ilovephoto.in/blog/">Photo Size Guides</a></li>
+            <li><a href="https://ilovephoto.in/blog/pan-card-photo-size.html">PAN Card Photo Guide</a></li>
+            <li><a href="https://ilovephoto.in/blog/passport-photo-size.html">Passport Photo Guide</a></li>
+            <li><a href="https://ilovephoto.in/blog/voter-id-photo-size.html">Voter ID Photo Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-head">Company</h3>
+          <ul>
+            <li><a href="https://ilovephoto.in/about.html">About</a></li>
+            <li><a href="https://ilovephoto.in/privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="https://ilovephoto.in/terms-of-service.html">Terms of Service</a></li>
           </ul>
         </div>
       </div>
