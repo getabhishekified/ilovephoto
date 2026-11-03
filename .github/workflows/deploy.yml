@@ -27,10 +27,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # Publish only the website — keep notes, docs and build scripts out of it.
+      - name: Collect site files
+        run: |
+          rsync -a ./ _site/ \
+            --exclude '.git*' --exclude '.github/' --exclude '.claude/' \
+            --exclude 'scripts/' --exclude '*.md' --exclude '_site/'
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
