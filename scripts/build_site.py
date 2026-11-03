@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://ilovephoto.in"
 REVIEWED = "November 2026"
 LASTMOD = "2026-11-03"
+PUBLISHED = "2026-03-27"
+INDEXNOW_KEY = "29e78a8aaef5383a7e60445c796c5e12"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PRESETS — only documents where YOU take and upload (or print) the photo.
@@ -129,6 +131,7 @@ FOOTER = """<footer class="site-footer"><div class="wrap">
       <li><a href="/blog/us-visa-photo-requirements.html">US visa photo</a></li>
     </ul></div>
     <div><h3>Learn</h3><ul>
+      <li><a href="/blog/photo-size-chart.html">Photo size chart</a></li>
       <li><a href="/blog/faq.html">FAQ</a></li>
       <li><a href="/blog/photo-size-dpi-kb-explained.html">Pixels, DPI &amp; KB explained</a></li>
       <li><a href="/blog/take-passport-photo-at-home.html">Take a photo at home</a></li>
@@ -145,8 +148,68 @@ FOOTER = """<footer class="site-footer"><div class="wrap">
 </div></footer>"""
 
 
-def page(path, title, desc, body, active="", jsonld=None, robots="index, follow"):
+def strip_tags(s):
+    import re
+    return re.sub(r"<[^>]+>", "", s)
+
+
+def og_name(path):
+    return path.replace("/", "-").replace(".html", "") + ".png"
+
+
+def og_url(path):
+    return f"{SITE}/assets/og/{og_name(path)}"
+
+
+def make_og_image(path, heading, sub):
+    """1200×630 social/preview card, so links in WhatsApp, X, LinkedIn and AI answers show a real image."""
+    from PIL import Image, ImageDraw, ImageFont
+
+    def font(bold, size):
+        names = ["arialbd.ttf", "DejaVuSans-Bold.ttf"] if bold else ["arial.ttf", "DejaVuSans.ttf"]
+        for n in names:
+            for d in ["C:/Windows/Fonts/", "/usr/share/fonts/truetype/dejavu/", "/Library/Fonts/", ""]:
+                try:
+                    return ImageFont.truetype(d + n, size)
+                except OSError:
+                    pass
+        return ImageFont.load_default()
+
+    def wrap(draw, text, f, width):
+        lines, cur = [], ""
+        for w in text.split():
+            t = (cur + " " + w).strip()
+            if draw.textlength(t, font=f) <= width:
+                cur = t
+            else:
+                lines.append(cur)
+                cur = w
+        return lines + [cur]
+
+    img = Image.new("RGB", (1200, 630), "#f6f6f3")
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, 1200, 14], fill="#c8244a")
+    d.text((80, 70), "I ", font=font(True, 40), fill="#17191e")
+    d.text((80 + d.textlength("I ", font=font(True, 40)), 70), "\u2665", font=font(True, 40), fill="#c8244a")
+    d.text((80 + d.textlength("I \u2665 ", font=font(True, 40)), 70), "Photo  ·  ilovephoto.in", font=font(True, 40), fill="#17191e")
+    y = 190
+    for line in wrap(d, heading, font(True, 76), 1040)[:3]:
+        d.text((80, y), line, font=font(True, 76), fill="#17191e")
+        y += 92
+    y += 16
+    for line in wrap(d, sub, font(False, 38), 1040)[:3]:
+        d.text((80, y), line, font=font(False, 38), fill="#5a6170")
+        y += 50
+    d.text((80, 548), "Free · private · runs in your browser", font=font(True, 32), fill="#c8244a")
+    out = ROOT / "assets" / "og" / og_name(path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    img.save(out, optimize=True)
+
+
+def page(path, title, desc, body, active="", jsonld=None, robots="index, follow", og=None):
     url = SITE + "/" + path.replace("index.html", "")
+    make_og_image(path, *(og or (title.split(" | ")[0], desc)))
+    image = og_url(path)
     ld = ""
     for block in jsonld or []:
         ld += f'<script type="application/ld+json">{json.dumps(block, ensure_ascii=False)}</script>\n'
@@ -165,6 +228,11 @@ def page(path, title, desc, body, active="", jsonld=None, robots="index, follow"
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:site_name" content="ilovephoto.in">
 <meta property="og:locale" content="en_IN">
+<meta property="og:image" content="{image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{image}">
 {HEAD_COMMON}
 {ld}</head>
 <body>
@@ -689,6 +757,71 @@ guide(
     related=["pan-card-photo-size.html", "ibps-bank-exam-photo-size.html", "photo-size-dpi-kb-explained.html"],
 )
 
+# Search-facing copy: short titles (≤60 chars with suffix), descriptions ≤155 chars,
+# and a one-paragraph direct answer shown at the top of each guide (featured
+# snippets, AI overviews and answer engines quote this).
+SEO = {
+    "pan-card-photo-size.html": (
+        "PAN Card Photo Size 2026: Protean & UTIITSL",
+        "PAN card photo size: 197×276 px (2.5×3.5 cm, 200 DPI) under 50 KB for Protean; 213×213 px under 30 KB for UTIITSL. Signature size and rules.",
+        "For a <strong>Protean (NSDL)</strong> PAN application, the photo is <strong>2.5 × 3.5 cm at 200 DPI — 197 × 276 pixels, JPEG, under 50 KB</strong>. For <strong>UTIITSL</strong> it is a square <strong>213 × 213 pixels, under about 30 KB</strong>. The Protean signature is 4.5 × 2 cm at 200 DPI (354 × 157 px), under 50 KB. No upload is needed if you apply with Aadhaar e-KYC."),
+    "voter-id-photo-size.html": (
+        "Voter ID Photo Size 2026 (Form 6 & Form 8)",
+        "Voter ID photo size for Form 6 and Form 8: passport size 3.5×4.5 cm, white background, JPEG. Get a 413×531 px file under 100 KB free.",
+        "The Voter ID (EPIC) photo for <strong>Form 6 or Form 8</strong> is a recent <strong>passport-size colour photo, 3.5 × 4.5 cm, on a plain white background</strong>, uploaded as JPEG. At 300 DPI that is <strong>413 × 531 pixels</strong>; keeping it under 100 KB works with every published limit."),
+    "driving-licence-photo-size.html": (
+        "Driving Licence Photo Size 2026 (Sarathi)",
+        "Sarathi Parivahan learner's licence photo: JPEG between 10 KB and 20 KB, 420×525 px recommended. When the RTO takes the photo instead.",
+        "For a <strong>learner's licence on Sarathi Parivahan</strong>, upload a <strong>JPEG between 10 KB and 20 KB</strong>; <strong>420 × 525 pixels</strong> is a safe size. For the permanent driving licence, many RTOs take your photo at the driving test, so no upload is needed."),
+    "neet-photo-size.html": (
+        "NEET UG Photo Size 2026: Passport & Postcard",
+        "NEET UG 2026 photo size: passport photo and 4×6 postcard photo, JPEG 10–200 KB each, white background, plus signature and live photo rules.",
+        "NEET UG needs a <strong>passport-size photo and a 4 × 6 inch postcard photo, each a JPEG between 10 KB and 200 KB</strong>, on a white background with the face covering about 80% of the frame. Since 2026 a <strong>live photo</strong> is also captured by webcam in the form. Use the same recent photo for both uploads."),
+    "upsc-photo-size.html": (
+        "UPSC Photo Size 2026: Photo, Signature, Date",
+        "UPSC photo size: JPEG 20–200 KB, 350–1000 px per side, recent, with name and date below the face when required. Free resizer adds the strip.",
+        "The UPSC photo is a <strong>JPEG between 20 KB and 200–300 KB</strong> (depending on the notice) with each side <strong>between 350 and 1000 pixels</strong>. It must be very recent and, when the notice asks, show <strong>your name and the date the photo was taken</strong> below the face. The signature follows the same limits."),
+    "ibps-bank-exam-photo-size.html": (
+        "IBPS & SBI Photo and Signature Size 2026",
+        "IBPS and SBI exam photo: 200×230 px, JPEG, 20–50 KB. Signature: 140×60 px, 10–20 KB. Thumb impression, declaration and live photo rules.",
+        "For IBPS (PO, Clerk, RRB, SO) and SBI forms, the <strong>photo is 200 × 230 pixels, JPEG, 20–50 KB</strong> and the <strong>signature is 140 × 60 pixels, JPEG, 10–20 KB</strong>. You also upload a left thumb impression and a handwritten declaration, and capture a live photo."),
+    "cat-exam-photo-size.html": (
+        "CAT Exam Photo Size 2026 (IIM CAT)",
+        "CAT registration photo: 1200×1200 px JPEG. Keep it under 80 KB to pass every published limit. Signature size and exam-day tips.",
+        "The CAT registration photo is commonly specified as <strong>1200 × 1200 pixels, JPEG</strong>. Published file limits differ (80 KB or 1 MB), so <strong>a file under 80 KB</strong> passes either. The signature is usually given as 80 × 35 mm."),
+    "oci-card-photo-requirements.html": (
+        "OCI Card Photo & Signature Size 2026",
+        "OCI photo: square JPEG, 200×200 px minimum; 600×600 px under 200 KB is safe. OCI signature must be 3:1 width to height.",
+        "The OCI photo is a <strong>square JPEG, at least 200 × 200 pixels</strong> — <strong>600 × 600 pixels under 200 KB</strong> fits every published limit. The OCI <strong>signature must have a 3:1 width-to-height ratio</strong>, for example 600 × 200 pixels."),
+    "india-evisa-photo.html": (
+        "India e-Visa Photo Requirements 2026",
+        "India e-Visa photo: square JPEG, height equal to width, 10 KB to 300 KB, plain white background. Free private resizer.",
+        "The Indian e-Visa photo must be a <strong>square JPEG (height equal to width) between 10 KB and 300 KB</strong>, showing the full face on a plain white background, centred, with no border."),
+    "us-visa-photo-requirements.html": (
+        "US Visa Photo Size 2026 (DS-160 Upload)",
+        "US visa DS-160 photo: square JPEG 600×600 to 1200×1200 px, max 240 KB, head 50–69% of height, no glasses, taken in the last 6 months.",
+        "The DS-160 photo must be a <strong>square colour JPEG, 600 × 600 to 1200 × 1200 pixels, 240 KB or smaller</strong>, with the head taking <strong>50–69% of the image height</strong>. No glasses, white or off-white background, taken in the last 6 months."),
+    "schengen-visa-photo-size.html": (
+        "Schengen Visa Photo Size: 35×45 mm Guide",
+        "Schengen visa photo: 35×45 mm print, face 70–80% of height (32–36 mm), light background. Print correct-size photos at home on A4.",
+        "A Schengen visa photo is a <strong>35 × 45 mm print</strong> with the face (chin to crown) taking <strong>70–80% of the height — about 32–36 mm</strong> — on a plain light background. Most countries ask you to bring one or two printed photos to the VFS or embassy appointment."),
+    "uk-passport-photo-size.html": (
+        "UK Passport Photo Size (Online) 2026",
+        "UK passport digital photo: at least 600×750 px, 50 KB to 10 MB, plain light background, taken in the last month by someone else.",
+        "For an online UK passport application, the photo must be <strong>at least 600 pixels wide and 750 pixels tall, between 50 KB and 10 MB</strong>, in colour, against a plain light background, and taken in the last month."),
+    "linkedin-profile-photo-size.html": (
+        "LinkedIn Profile Photo Size 2026",
+        "LinkedIn profile photo size: minimum 400×400 px, 800×800 px recommended, up to 8 MB. How to take a professional headshot with a phone.",
+        "LinkedIn profile photos should be <strong>at least 400 × 400 pixels; 800 × 800 pixels</strong> stays sharp everywhere. Files up to 8 MB are accepted. Keep your face centred because the photo is shown as a circle."),
+    "signature-size-guide.html": (
+        "Signature Size for Online Forms 2026",
+        "Signature size for PAN (354×157 px), NEET (10–30 KB), UPSC (20–200 KB), IBPS (140×60 px, 10–20 KB) and OCI (3:1). How to scan it cleanly.",
+        "Common signature sizes: <strong>PAN (Protean) 354 × 157 px under 50 KB</strong>; <strong>IBPS/SBI 140 × 60 px, 10–20 KB</strong>; <strong>NEET 10–30 KB</strong>; <strong>UPSC 20–200 KB, 350–1000 px</strong>; <strong>OCI 3:1 ratio</strong>. Sign in black ink on white paper and crop tight before resizing."),
+}
+for g in GUIDES:
+    g["title"], g["desc"], g["answer"] = SEO[g["slug"]]
+    g["title"] += " | ilovephoto.in"
+
 GUIDES_BY_SLUG = {g["slug"]: g for g in GUIDES}
 
 # Article-style pages that aren't tied to a single preset
@@ -719,8 +852,9 @@ def render_guide(g):
 <div class="crumbs"><a href="/">Home</a> › <a href="/blog/">Guides</a> › {esc(g["short"])}</div>
 <article class="prose">
 <h1>{g["h1"]}</h1>
+<div class="answer"><strong>Quick answer</strong><p>{g["answer"]}</p></div>
 <p class="lede">{g["lede"]}</p>
-<p class="meta">Last reviewed {REVIEWED} · {esc(g["category"])}</p>
+<p class="meta">Last reviewed <time datetime="{LASTMOD}">{REVIEWED}</time> · {esc(g["category"])} · <a href="/blog/photo-size-chart.html">All sizes in one chart</a></p>
 {toc(g["sections"] + [("faq", "FAQ", "")])}
 {cta(main_pid, "Resize your photo for this form")}
 {body_sections}
@@ -733,13 +867,16 @@ def render_guide(g):
 </div>"""
     ld = [
         {"@context": "https://schema.org", "@type": "Article", "headline": g["h1"], "description": g["desc"],
-         "dateModified": LASTMOD, "author": {"@type": "Organization", "name": "ilovephoto.in"},
+         "abstract": strip_tags(g["answer"]), "image": og_url("blog/" + g["slug"]),
+         "datePublished": PUBLISHED, "dateModified": LASTMOD, "author": {"@type": "Organization", "name": "ilovephoto.in", "url": SITE},
          "publisher": {"@type": "Organization", "name": "ilovephoto.in", "url": SITE},
          "mainEntityOfPage": f'{SITE}/blog/{g["slug"]}'},
         faq_ld(g["faqs"]),
         crumbs_ld([("Home", "/"), ("Guides", "/blog/"), (g["short"], "/blog/" + g["slug"])]),
     ]
-    page("blog/" + g["slug"], g["title"], g["desc"], body, active="/blog/", jsonld=ld)
+    page("blog/" + g["slug"], g["title"], g["desc"], body, active="/blog/", jsonld=ld,
+         og=(g["short"] + " — size guide",
+             f'{P[main_pid]["w"]} × {P[main_pid]["h"]} px · {kb_range(P[main_pid])} · reviewed {REVIEWED}'))
 
 
 # What each portal publicly states — shown next to what the preset produces.
@@ -834,7 +971,7 @@ def render_articles():
 </ul></div>
 {related(["pan-card-photo-size.html", "neet-photo-size.html", "take-passport-photo-at-home.html"])}
 </article></div>"""
-    page("blog/photo-not-required.html", "Aadhaar, Passport, JEE & SSC — When You Don't Upload a Photo | ilovephoto.in",
+    page("blog/photo-not-required.html", "No Photo Upload: Aadhaar, Passport, JEE, SSC | ilovephoto.in",
          "Aadhaar and Indian passport photos are taken at the centre; JEE Main and SSC use live photo capture. What happens, how to change your photo, and how to prepare.",
          body, active="/blog/", jsonld=[faq_ld(faqs), crumbs_ld([("Home", "/"), ("Guides", "/blog/"), ("When you don't upload a photo", "/blog/photo-not-required.html")])])
 
@@ -878,7 +1015,7 @@ def render_articles():
 {faq_html(faqs)}
 {related(["take-passport-photo-at-home.html", "signature-size-guide.html", "pan-card-photo-size.html"])}
 </article></div>"""
-    page("blog/photo-size-dpi-kb-explained.html", "Photo Size, DPI & KB Explained — Fix Form Upload Errors | ilovephoto.in",
+    page("blog/photo-size-dpi-kb-explained.html", "Photo Size, DPI & KB Explained | ilovephoto.in",
          "What pixels, DPI, cm and KB mean in form photo instructions, how to convert cm to pixels, and why uploads get rejected for file size.",
          body, active="/blog/", jsonld=[faq_ld(faqs), crumbs_ld([("Home", "/"), ("Guides", "/blog/"), ("Pixels, DPI & KB explained", "/blog/photo-size-dpi-kb-explained.html")])])
 
@@ -926,7 +1063,7 @@ def render_articles():
 {faq_html(faqs)}
 {related(["photo-size-dpi-kb-explained.html", "us-visa-photo-requirements.html", "neet-photo-size.html"])}
 </article></div>"""
-    page("blog/take-passport-photo-at-home.html", "How to Take a Passport-Size Photo at Home with Your Phone | ilovephoto.in",
+    page("blog/take-passport-photo-at-home.html", "Take a Passport-Size Photo at Home | ilovephoto.in",
          "Step-by-step: take a passport-size photo at home for PAN, Voter ID, exams and visas — background, light, pose, and how to resize it correctly.",
          body, active="/blog/", jsonld=[faq_ld(faqs), crumbs_ld([("Home", "/"), ("Guides", "/blog/"), ("Take a photo at home", "/blog/take-passport-photo-at-home.html")])])
 
@@ -993,6 +1130,7 @@ def render_index():
         cards = "".join(f'<a class="card-link" href="/blog/{g["slug"]}"><strong>{g["short"]}</strong><span>{g["card"]}</span></a>' for g in items)
         sections += f'<p class="section-label">{cat}</p><div class="cards">{cards}</div>'
     learn = "".join(f'<a class="card-link" href="/blog/{a["slug"]}"><strong>{a["short"]}</strong><span>{a["card"]}</span></a>' for a in ARTICLES)
+    learn = '<a class="card-link" href="/blog/photo-size-chart.html"><strong>Photo size chart</strong><span>Every form in one table</span></a>' + learn
     learn += '<a class="card-link" href="/blog/faq.html"><strong>FAQ</strong><span>Using the converter, KB limits, privacy</span></a>'
     body = f"""<div class="wrap page">
 <div class="crumbs"><a href="/">Home</a> › Guides</div>
@@ -1001,7 +1139,7 @@ def render_index():
 {sections}
 <p class="section-label">Learn</p><div class="cards">{learn}</div>
 </div>"""
-    page("blog/index.html", "Photo & Signature Size Guides for Indian Forms (2026) | ilovephoto.in",
+    page("blog/index.html", "Photo & Signature Size Guides 2026 | ilovephoto.in",
          "Photo and signature size guides for PAN, Voter ID, driving licence, NEET, UPSC, IBPS, CAT, OCI and visa applications.",
          body, active="/blog/")
 
@@ -1132,6 +1270,100 @@ def render_redirects():
 """, encoding="utf-8")
 
 
+def chart_rows():
+    """(preset, guide) pairs in display order — the one table answer engines can cite."""
+    return [(p, p["guide"]) for p in PRESETS]
+
+
+def render_chart():
+    rows = ""
+    for p, guide in chart_rows():
+        rows += (f'<tr><td><a href="/blog/{guide}">{esc(p["name"])}</a></td><td>{p["w"]} × {p["h"]} px</td>'
+                 f'<td>{kb_range(p)}</td><td>{p["dpi"]}</td><td>{print_size(p)}</td>'
+                 f'<td><a href="/?preset={p["id"]}">Resize</a></td></tr>')
+    faqs = [
+        ("What is passport size photo size in India?", "3.5 × 4.5 cm. At 300 DPI that is 413 × 531 pixels; at 200 DPI it is 276 × 354 pixels."),
+        ("What is the PAN card photo size?", "2.5 × 3.5 cm at 200 DPI (197 × 276 pixels), JPEG under 50 KB for Protean; 213 × 213 pixels under 30 KB for UTIITSL."),
+        ("Which forms don't need a photo upload?", "Aadhaar and the Indian passport (photo taken at the centre), and JEE Main and SSC (live webcam capture)."),
+    ]
+    body = f"""<div class="wrap page">
+<div class="crumbs"><a href="/">Home</a> › <a href="/blog/">Guides</a> › Photo size chart</div>
+<article class="prose">
+<h1>Photo and signature size chart for Indian forms (2026)</h1>
+<div class="answer"><strong>Quick answer</strong><p>Indian passport-size photos are <strong>3.5 × 4.5 cm (413 × 531 px at 300 DPI)</strong>. Online forms differ mainly in file size: PAN under 50 KB, Sarathi 10–20 KB, IBPS 20–50 KB, NEET 10–200 KB, UPSC 20–200 KB, US visa under 240 KB. The full chart is below.</p></div>
+<p class="meta">Last reviewed <time datetime="{LASTMOD}">{REVIEWED}</time> · Each row links to a guide with sources</p>
+<div class="table-scroll"><table class="data-table">
+<thead><tr><th>Form</th><th>Pixels</th><th>File size</th><th>DPI</th><th>Printed size</th><th></th></tr></thead>
+<tbody>{rows}</tbody></table></div>
+<p>Where official sources disagree, these sizes satisfy every published limit. Each guide shows what the portal asks for next to what the preset produces.</p>
+<h2>Not in the chart</h2>
+<p>Aadhaar, the Indian passport, JEE Main and SSC don't take an uploaded photo — <a href="/blog/photo-not-required.html">see why</a>.</p>
+<h2 id="faq">Frequently asked questions</h2>
+{faq_html(faqs)}
+</article></div>"""
+    table_ld = {
+        "@context": "https://schema.org", "@type": "Dataset",
+        "name": "Photo and signature size requirements for Indian application forms",
+        "description": "Pixel dimensions, file-size limits and DPI for photos and signatures uploaded to Indian government, exam and visa forms.",
+        "url": SITE + "/blog/photo-size-chart.html", "dateModified": LASTMOD, "isAccessibleForFree": True,
+        "creator": {"@type": "Organization", "name": "ilovephoto.in", "url": SITE},
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+    }
+    page("blog/photo-size-chart.html", "Photo Size Chart for Indian Forms 2026 | ilovephoto.in",
+         "One chart of photo and signature sizes for PAN, Voter ID, Sarathi, NEET, UPSC, IBPS, CAT, OCI, e-Visa and US visa — pixels, KB and DPI.",
+         body, active="/blog/", jsonld=[table_ld, faq_ld(faqs),
+                                         crumbs_ld([("Home", "/"), ("Guides", "/blog/"), ("Photo size chart", "/blog/photo-size-chart.html")])],
+         og=("Photo size chart for Indian forms", "PAN, Voter ID, NEET, UPSC, IBPS, OCI, visas — pixels, KB and DPI"))
+
+
+def render_404():
+    body = """<div class="wrap narrow page"><article class="prose">
+<h1>Page not found</h1>
+<p class="lede">That page doesn't exist — it may have moved when we reorganised the guides.</p>
+<p><a class="btn btn-primary" href="/">Open the converter</a> <a class="btn btn-secondary" href="/blog/photo-size-chart.html">See all photo sizes</a></p>
+</article></div>"""
+    page("404.html", "Page not found | ilovephoto.in", "Page not found.", body, robots="noindex, follow")
+
+
+def render_crawler_files():
+    # Every search and AI crawler is welcome; nothing on the site is private.
+    bots = ["Googlebot", "Bingbot", "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot",
+            "PerplexityBot", "Google-Extended", "Applebot", "Applebot-Extended", "DuckDuckBot", "YandexBot"]
+    robots = "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots)
+    (ROOT / "robots.txt").write_text(f"{robots}User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
+
+    chart = "\n".join(f'- {p["name"]}: {p["w"]}×{p["h"]} px, {kb_range(p)}, {p["dpi"]} DPI — {SITE}/blog/{p["guide"]}'
+                      for p, _ in chart_rows())
+    guides = "\n".join(f'- [{g["short"]}]({SITE}/blog/{g["slug"]}): {strip_tags(g["answer"])}' for g in GUIDES)
+    articles = "\n".join(f'- [{a["short"]}]({SITE}/blog/{a["slug"]}): {a["card"]}' for a in ARTICLES)
+    (ROOT / "llms.txt").write_text(f"""# ilovephoto.in
+
+> Free photo and signature resizer for Indian application forms (PAN, Voter ID, Sarathi driving licence, NEET UG, UPSC, IBPS/SBI, CAT, OCI, India e-Visa, US visa, Schengen, UK passport). It outputs a JPEG with the exact pixel size, DPI and file-size window each portal accepts. All processing happens in the user's browser; photos are never uploaded. Specs last reviewed {REVIEWED}.
+
+Key facts:
+- Indian passport-size photo: 3.5 × 4.5 cm = 413 × 531 px at 300 DPI.
+- Aadhaar and Indian passport photos are taken at the enrolment centre / Passport Seva Kendra — no upload.
+- JEE Main (2026 cycle) and SSC use live webcam photo capture inside the form — no photo file to upload.
+- Where official sources disagree, the site's presets use values that satisfy every published limit.
+
+## Size chart
+{chart}
+
+## Guides
+{guides}
+
+## Explainers
+{articles}
+- [Photo size chart]({SITE}/blog/photo-size-chart.html): all sizes in one table
+- [FAQ]({SITE}/blog/faq.html): using the converter, KB limits, privacy
+
+## Tool
+- [Converter]({SITE}/): open with ?preset=<id> to preselect a form, e.g. {SITE}/?preset=pan_protean
+""", encoding="utf-8")
+
+    (ROOT / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
+
+
 def render_presets_js():
     rows = [{k: v for k, v in p.items()} for p in PRESETS]
     (ROOT / "assets" / "presets.js").write_text(
@@ -1141,7 +1373,7 @@ def render_presets_js():
 
 
 def render_sitemap():
-    urls = [("", "1.0"), ("blog/", "0.8"), ("blog/faq.html", "0.6")]
+    urls = [("", "1.0"), ("blog/", "0.8"), ("blog/photo-size-chart.html", "0.8"), ("blog/faq.html", "0.6")]
     urls += [("blog/" + g["slug"], "0.7") for g in GUIDES]
     urls += [("blog/" + a["slug"], "0.6") for a in ARTICLES]
     urls += [("about.html", "0.4"), ("contact.html", "0.3"), ("privacy-policy.html", "0.2"), ("terms-of-service.html", "0.2")]
@@ -1159,6 +1391,11 @@ if __name__ == "__main__":
     render_index()
     render_static()
     render_redirects()
+    render_chart()
+    render_404()
+    render_crawler_files()
+    make_og_image("index.html", "Resize your photo & signature for Indian forms",
+                  "PAN, Voter ID, NEET, UPSC, IBPS, OCI, visas — exact pixels and KB")
     render_presets_js()
     render_sitemap()
     print(f"Built {len(GUIDES)} guides, {len(ARTICLES)} articles, {len(PRESETS)} presets.")

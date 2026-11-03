@@ -75,7 +75,7 @@ img { max-width: 100%; }
 .btn-small { padding: 6px 12px; font-size: .82rem; border-radius: 8px; }
 
 /* Content pages */
-.page { padding: 40px 0 8px; }
+.page { padding-top: 40px; padding-bottom: 8px; }
 .crumbs { font-size: .84rem; color: var(--faint); margin-bottom: 14px; }
 .crumbs a { color: var(--muted); text-decoration: none; }
 .crumbs a:hover { text-decoration: underline; }
@@ -105,8 +105,11 @@ img { max-width: 100%; }
 .spec td { font-weight: 600; }
 .spec td small { display: block; font-weight: 400; color: var(--muted); }
 
+.answer { border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 0 0 18px; box-shadow: var(--shadow); }
+.answer > strong { display: block; font-size: .76rem; text-transform: uppercase; letter-spacing: .6px; color: var(--accent); margin-bottom: 4px; }
+.answer p { margin: 0; }
 .note { border-radius: var(--radius); padding: 14px 18px; margin: 22px 0; font-size: .94rem; border: 1px solid var(--line); background: var(--surface); }
-.note strong:first-child { display: block; margin-bottom: 2px; }
+.note > strong { display: block; margin-bottom: 2px; }
 .note p { margin: 4px 0 0; }
 .note-warn { background: var(--warn-soft); border-color: transparent; }
 .note-ok { background: var(--ok-soft); border-color: transparent; }

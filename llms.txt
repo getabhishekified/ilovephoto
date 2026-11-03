@@ -1,0 +1,57 @@
+# ilovephoto.in
+
+> Free photo and signature resizer for Indian application forms (PAN, Voter ID, Sarathi driving licence, NEET UG, UPSC, IBPS/SBI, CAT, OCI, India e-Visa, US visa, Schengen, UK passport). It outputs a JPEG with the exact pixel size, DPI and file-size window each portal accepts. All processing happens in the user's browser; photos are never uploaded. Specs last reviewed November 2026.
+
+Key facts:
+- Indian passport-size photo: 3.5 × 4.5 cm = 413 × 531 px at 300 DPI.
+- Aadhaar and Indian passport photos are taken at the enrolment centre / Passport Seva Kendra — no upload.
+- JEE Main (2026 cycle) and SSC use live webcam photo capture inside the form — no photo file to upload.
+- Where official sources disagree, the site's presets use values that satisfy every published limit.
+
+## Size chart
+- PAN card photo — Protean (NSDL): 197×276 px, up to 50 KB, 200 DPI — https://ilovephoto.in/blog/pan-card-photo-size.html
+- PAN card photo — UTIITSL: 213×213 px, up to 30 KB, 300 DPI — https://ilovephoto.in/blog/pan-card-photo-size.html#utiitsl
+- Voter ID (Form 6 / Form 8) photo: 413×531 px, up to 100 KB, 300 DPI — https://ilovephoto.in/blog/voter-id-photo-size.html
+- Learner's / Driving licence (Sarathi) photo: 420×525 px, 10–20 KB, 300 DPI — https://ilovephoto.in/blog/driving-licence-photo-size.html
+- NEET UG passport-size photo: 413×531 px, 10–200 KB, 300 DPI — https://ilovephoto.in/blog/neet-photo-size.html
+- NEET UG postcard photo (4×6 in): 1200×1800 px, 10–200 KB, 300 DPI — https://ilovephoto.in/blog/neet-photo-size.html#postcard
+- UPSC (CSE, ESE, CDS, NDA…) photo: 600×750 px, 20–200 KB, 300 DPI — https://ilovephoto.in/blog/upsc-photo-size.html
+- IBPS / SBI / RBI bank exam photo: 200×230 px, 20–50 KB, 200 DPI — https://ilovephoto.in/blog/ibps-bank-exam-photo-size.html
+- CAT (IIM) photo: 1200×1200 px, up to 80 KB, 300 DPI — https://ilovephoto.in/blog/cat-exam-photo-size.html
+- OCI card photo: 600×600 px, up to 200 KB, 300 DPI — https://ilovephoto.in/blog/oci-card-photo-requirements.html
+- India e-Visa photo: 600×600 px, 10–300 KB, 300 DPI — https://ilovephoto.in/blog/india-evisa-photo.html
+- US visa (DS-160) / US passport photo: 600×600 px, up to 240 KB, 300 DPI — https://ilovephoto.in/blog/us-visa-photo-requirements.html
+- Schengen visa photo (35×45 mm print): 827×1063 px, up to 500 KB, 600 DPI — https://ilovephoto.in/blog/schengen-visa-photo-size.html
+- UK passport photo (online application): 900×1125 px, 50–2048 KB, 300 DPI — https://ilovephoto.in/blog/uk-passport-photo-size.html
+- PAN signature — Protean (NSDL): 354×157 px, up to 50 KB, 200 DPI — https://ilovephoto.in/blog/signature-size-guide.html#pan
+- NEET UG signature: 350×150 px, 10–30 KB, 200 DPI — https://ilovephoto.in/blog/signature-size-guide.html#neet
+- UPSC signature: 700×350 px, 20–200 KB, 300 DPI — https://ilovephoto.in/blog/signature-size-guide.html#upsc
+- IBPS / SBI bank exam signature: 140×60 px, 10–20 KB, 200 DPI — https://ilovephoto.in/blog/signature-size-guide.html#ibps
+- OCI signature (3:1): 600×200 px, up to 200 KB, 300 DPI — https://ilovephoto.in/blog/signature-size-guide.html#oci
+- LinkedIn / résumé profile photo: 800×800 px, up to 1 MB, 72 DPI — https://ilovephoto.in/blog/linkedin-profile-photo-size.html
+
+## Guides
+- [PAN card photo & signature](https://ilovephoto.in/blog/pan-card-photo-size.html): For a Protean (NSDL) PAN application, the photo is 2.5 × 3.5 cm at 200 DPI — 197 × 276 pixels, JPEG, under 50 KB. For UTIITSL it is a square 213 × 213 pixels, under about 30 KB. The Protean signature is 4.5 × 2 cm at 200 DPI (354 × 157 px), under 50 KB. No upload is needed if you apply with Aadhaar e-KYC.
+- [Voter ID (EPIC) photo](https://ilovephoto.in/blog/voter-id-photo-size.html): The Voter ID (EPIC) photo for Form 6 or Form 8 is a recent passport-size colour photo, 3.5 × 4.5 cm, on a plain white background, uploaded as JPEG. At 300 DPI that is 413 × 531 pixels; keeping it under 100 KB works with every published limit.
+- [Driving licence photo](https://ilovephoto.in/blog/driving-licence-photo-size.html): For a learner's licence on Sarathi Parivahan, upload a JPEG between 10 KB and 20 KB; 420 × 525 pixels is a safe size. For the permanent driving licence, many RTOs take your photo at the driving test, so no upload is needed.
+- [NEET UG photo](https://ilovephoto.in/blog/neet-photo-size.html): NEET UG needs a passport-size photo and a 4 × 6 inch postcard photo, each a JPEG between 10 KB and 200 KB, on a white background with the face covering about 80% of the frame. Since 2026 a live photo is also captured by webcam in the form. Use the same recent photo for both uploads.
+- [UPSC photo](https://ilovephoto.in/blog/upsc-photo-size.html): The UPSC photo is a JPEG between 20 KB and 200–300 KB (depending on the notice) with each side between 350 and 1000 pixels. It must be very recent and, when the notice asks, show your name and the date the photo was taken below the face. The signature follows the same limits.
+- [IBPS & SBI bank exam photo](https://ilovephoto.in/blog/ibps-bank-exam-photo-size.html): For IBPS (PO, Clerk, RRB, SO) and SBI forms, the photo is 200 × 230 pixels, JPEG, 20–50 KB and the signature is 140 × 60 pixels, JPEG, 10–20 KB. You also upload a left thumb impression and a handwritten declaration, and capture a live photo.
+- [CAT (IIM) photo](https://ilovephoto.in/blog/cat-exam-photo-size.html): The CAT registration photo is commonly specified as 1200 × 1200 pixels, JPEG. Published file limits differ (80 KB or 1 MB), so a file under 80 KB passes either. The signature is usually given as 80 × 35 mm.
+- [OCI card photo](https://ilovephoto.in/blog/oci-card-photo-requirements.html): The OCI photo is a square JPEG, at least 200 × 200 pixels — 600 × 600 pixels under 200 KB fits every published limit. The OCI signature must have a 3:1 width-to-height ratio, for example 600 × 200 pixels.
+- [India e-Visa photo](https://ilovephoto.in/blog/india-evisa-photo.html): The Indian e-Visa photo must be a square JPEG (height equal to width) between 10 KB and 300 KB, showing the full face on a plain white background, centred, with no border.
+- [US visa (DS-160) photo](https://ilovephoto.in/blog/us-visa-photo-requirements.html): The DS-160 photo must be a square colour JPEG, 600 × 600 to 1200 × 1200 pixels, 240 KB or smaller, with the head taking 50–69% of the image height. No glasses, white or off-white background, taken in the last 6 months.
+- [Schengen visa photo](https://ilovephoto.in/blog/schengen-visa-photo-size.html): A Schengen visa photo is a 35 × 45 mm print with the face (chin to crown) taking 70–80% of the height — about 32–36 mm — on a plain light background. Most countries ask you to bring one or two printed photos to the VFS or embassy appointment.
+- [UK passport photo](https://ilovephoto.in/blog/uk-passport-photo-size.html): For an online UK passport application, the photo must be at least 600 pixels wide and 750 pixels tall, between 50 KB and 10 MB, in colour, against a plain light background, and taken in the last month.
+- [LinkedIn / résumé photo](https://ilovephoto.in/blog/linkedin-profile-photo-size.html): LinkedIn profile photos should be at least 400 × 400 pixels; 800 × 800 pixels stays sharp everywhere. Files up to 8 MB are accepted. Keep your face centred because the photo is shown as a circle.
+- [Signature size guide](https://ilovephoto.in/blog/signature-size-guide.html): Common signature sizes: PAN (Protean) 354 × 157 px under 50 KB; IBPS/SBI 140 × 60 px, 10–20 KB; NEET 10–30 KB; UPSC 20–200 KB, 350–1000 px; OCI 3:1 ratio. Sign in black ink on white paper and crop tight before resizing.
+
+## Explainers
+- [When you don't upload a photo](https://ilovephoto.in/blog/photo-not-required.html): Aadhaar, passport, JEE, SSC
+- [Pixels, DPI & KB explained](https://ilovephoto.in/blog/photo-size-dpi-kb-explained.html): Why “3.5 × 4.5 cm” isn't enough
+- [Take a photo at home](https://ilovephoto.in/blog/take-passport-photo-at-home.html): Phone, light, background, framing
+- [Photo size chart](https://ilovephoto.in/blog/photo-size-chart.html): all sizes in one table
+- [FAQ](https://ilovephoto.in/blog/faq.html): using the converter, KB limits, privacy
+
+## Tool
+- [Converter](https://ilovephoto.in/): open with ?preset=<id> to preselect a form, e.g. https://ilovephoto.in/?preset=pan_protean
