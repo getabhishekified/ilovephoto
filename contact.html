@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | ilovephoto.in</title>
+<meta name="description" content="Contact ilovephoto.in — request a preset, report a changed size or a bug.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ilovephoto.in/contact.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ilovephoto.in/contact.html">
+<meta property="og:title" content="Contact | ilovephoto.in">
+<meta property="og:description" content="Contact ilovephoto.in — request a preset, report a changed size or a bug.">
+<meta property="og:site_name" content="ilovephoto.in">
+<meta property="og:locale" content="en_IN">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JEEC2LBZBG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JEEC2LBZBG');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4415395756457608" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="/" aria-label="ilovephoto.in home">I <span class="heart">♥</span> Photo <small>ilovephoto.in</small></a>
+  <nav class="nav" aria-label="Main"><a href="/">Converter</a><a href="/blog/">Guides</a><a href="/blog/faq.html">FAQ</a><a href="/about.html">About</a></nav>
+</div></header>
+<main>
+<div class="wrap narrow page"><article class="prose">
+<h1>Contact</h1>
+<p class="lede">Questions, a preset request, or a size that's changed? Write to us at <a href="mailto:ilovephoto.in@gmail.com">ilovephoto.in@gmail.com</a> or use the form below — it opens your email app with the message filled in.</p>
+<p>When reporting a rejected upload, include the form name and the exact error message. Please don't send your photo.</p>
+<form class="form" id="contactForm" novalidate>
+  <div class="form-row">
+    <label>Your name<input type="text" id="cfName" autocomplete="name" required></label>
+    <label>Email<input type="email" id="cfEmail" autocomplete="email" required></label>
+  </div>
+  <label>Topic<select id="cfSubject">
+    <option>Preset request</option><option>Size has changed</option><option>Bug report</option><option>Other</option>
+  </select></label>
+  <label>Message<textarea id="cfMessage" required></textarea></label>
+  <div><button class="btn btn-primary" type="submit">Open in email app</button></div>
+  <div class="form-status" id="cfStatus" role="status"></div>
+</form>
+</article></div>
+<script>
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var name = document.getElementById('cfName').value.trim();
+  var email = document.getElementById('cfEmail').value.trim();
+  var msg = document.getElementById('cfMessage').value.trim();
+  var status = document.getElementById('cfStatus');
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !msg) {
+    status.textContent = 'Please fill in your name, a valid email and a message.';
+    return;
+  }
+  var subj = encodeURIComponent(document.getElementById('cfSubject').value + ' — ilovephoto.in');
+  var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + msg);
+  window.location.href = 'mailto:ilovephoto.in@gmail.com?subject=' + subj + '&body=' + body;
+  status.textContent = 'Your email app should open with the message ready. Press send there to deliver it.';
+});
+</script>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="/">I <span class="heart">♥</span> Photo</a>
+      <p>Free, private photo and signature resizer for Indian application forms. Your files are processed in your browser and never uploaded.</p>
+    </div>
+    <div><h3>Popular guides</h3><ul>
+      <li><a href="/blog/pan-card-photo-size.html">PAN card photo</a></li>
+      <li><a href="/blog/neet-photo-size.html">NEET UG photo</a></li>
+      <li><a href="/blog/upsc-photo-size.html">UPSC photo</a></li>
+      <li><a href="/blog/signature-size-guide.html">Signature sizes</a></li>
+      <li><a href="/blog/us-visa-photo-requirements.html">US visa photo</a></li>
+    </ul></div>
+    <div><h3>Learn</h3><ul>
+      <li><a href="/blog/faq.html">FAQ</a></li>
+      <li><a href="/blog/photo-size-dpi-kb-explained.html">Pixels, DPI &amp; KB explained</a></li>
+      <li><a href="/blog/take-passport-photo-at-home.html">Take a photo at home</a></li>
+      <li><a href="/blog/photo-not-required.html">When you don't upload a photo</a></li>
+    </ul></div>
+    <div><h3>Site</h3><ul>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/privacy-policy.html">Privacy policy</a></li>
+      <li><a href="/terms-of-service.html">Terms of service</a></li>
+    </ul></div>
+  </div>
+  <p class="footer-note">© 2026 ilovephoto.in · Not affiliated with any government body. Requirements change — always check the instructions on the official portal before you submit.</p>
+</div></footer>
+</body>
+</html>

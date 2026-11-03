@@ -1,276 +1,68 @@
 <!DOCTYPE html>
 <html lang="en-IN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo Size Guides for Indian Government Forms | ilovephoto.in Blog</title>
-  <meta name="description" content="Complete guides on photo size, DPI, and format requirements for PAN Card, Passport, Voter ID, Aadhar, Driving Licence, exams, visas and more Indian documents.">
-  <link rel="canonical" href="https://ilovephoto.in/blog/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --rose: #FF2D5B;
-      --rose-light: #FF6080;
-      --rose-glow: rgba(255,45,91,0.13);
-      --rose-deep: #C4003B;
-      --ink: #0D0A14;
-      --ink-mid: #160F22;
-      --ink-card: #1C1328;
-      --ink-border: rgba(255,255,255,0.07);
-      --white: #FFFFFF;
-      --muted: rgba(255,255,255,0.42);
-      --success: #00C97A;
-      --violet: #7B4FFF;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); color: var(--white); min-height: 100vh; line-height: 1.6; }
-    body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-      background:
-        radial-gradient(ellipse 70% 55% at 15% -10%, rgba(255,45,91,0.13) 0%, transparent 65%),
-        radial-gradient(ellipse 55% 45% at 85% 105%, rgba(123,79,255,0.12) 0%, transparent 65%);
-    }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; }
-    header { padding: 20px 0; border-bottom: 1px solid var(--ink-border); margin-bottom: 40px; }
-    .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-    .logo-mark {
-      width: 40px; height: 40px; background: linear-gradient(140deg, var(--rose), var(--rose-deep));
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; box-shadow: 0 4px 20px rgba(255,45,91,0.3);
-    }
-    .logo-text { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.3rem; color: var(--white); }
-    .logo-text .h { color: var(--rose); }
-    .page-head { text-align: center; padding-bottom: 40px; }
-    .page-head h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
-    .page-head p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
-    .back-link { color: var(--rose-light); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-block; margin-bottom: 20px; }
-    .back-link:hover { text-decoration: underline; }
-    .intro-content { max-width: 780px; margin: 0 auto 40px; }
-    .intro-content p { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 16px; font-weight: 300; }
-    .intro-content p strong { color: var(--white); font-weight: 600; }
-    .cat-heading { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; margin: 48px 0 20px; color: var(--rose-light); }
-    .cat-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; max-width: 700px; }
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-bottom: 40px; }
-    .blog-card {
-      background: var(--ink-card); border: 1px solid var(--ink-border);
-      border-radius: 20px; padding: 24px; transition: border-color 0.2s, transform 0.2s;
-      display: flex; flex-direction: column;
-    }
-    .blog-card:hover { border-color: rgba(255,45,91,0.35); transform: translateY(-3px); }
-    .blog-card-icon { font-size: 2rem; margin-bottom: 12px; }
-    .blog-card h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
-    .blog-card h2 a { color: var(--white); text-decoration: none; }
-    .blog-card h2 a:hover { color: var(--rose-light); }
-    .blog-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; flex: 1; margin-bottom: 14px; }
-    .blog-card-meta { font-size: 0.72rem; color: var(--muted); display: flex; gap: 12px; align-items: center; }
-    .blog-card-tag {
-      display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.4px;
-      padding: 3px 9px; border-radius: 5px; text-transform: uppercase;
-    }
-    .tag-gov { background: rgba(255,45,91,0.1); color: var(--rose-light); }
-    .tag-visa { background: rgba(123,79,255,0.12); color: var(--violet); }
-    .tag-exam { background: rgba(0,201,122,0.1); color: var(--success); }
-    .tag-pro { background: rgba(255,165,0,0.1); color: #ffa500; }
-    footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--ink-border); color: var(--muted); font-size: 0.8rem; }
-    footer a { color: var(--rose-light); text-decoration: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo &amp; Signature Size Guides for Indian Forms (2026) | ilovephoto.in</title>
+<meta name="description" content="Photo and signature size guides for PAN, Voter ID, driving licence, NEET, UPSC, IBPS, CAT, OCI and visa applications.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ilovephoto.in/blog/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ilovephoto.in/blog/">
+<meta property="og:title" content="Photo &amp; Signature Size Guides for Indian Forms (2026) | ilovephoto.in">
+<meta property="og:description" content="Photo and signature size guides for PAN, Voter ID, driving licence, NEET, UPSC, IBPS, CAT, OCI and visa applications.">
+<meta property="og:site_name" content="ilovephoto.in">
+<meta property="og:locale" content="en_IN">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JEEC2LBZBG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JEEC2LBZBG');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4415395756457608" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <a href="/" class="logo">
-        <div class="logo-mark">❤️</div>
-        <span class="logo-text">I <span class="h">❤️</span> Photo</span>
-      </a>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="/" aria-label="ilovephoto.in home">I <span class="heart">♥</span> Photo <small>ilovephoto.in</small></a>
+  <nav class="nav" aria-label="Main"><a href="/">Converter</a><a href="/blog/" class="active">Guides</a><a href="/blog/faq.html">FAQ</a><a href="/about.html">About</a></nav>
+</div></header>
+<main>
+<div class="wrap page">
+<div class="crumbs"><a href="/">Home</a> › Guides</div>
+<h1>Photo and signature guides</h1>
+<p class="lede">Exact sizes, rules and common rejection reasons for each form — reviewed November 2026.</p>
+<p class="section-label">ID & tax</p><div class="cards"><a class="card-link" href="/blog/pan-card-photo-size.html"><strong>PAN card photo & signature</strong><span>Protean (NSDL) and UTIITSL sizes</span></a><a class="card-link" href="/blog/voter-id-photo-size.html"><strong>Voter ID (EPIC) photo</strong><span>Form 6 & Form 8 on the ECI portal</span></a><a class="card-link" href="/blog/driving-licence-photo-size.html"><strong>Driving licence photo</strong><span>Learner's licence on Sarathi Parivahan</span></a></div><p class="section-label">Exams & jobs</p><div class="cards"><a class="card-link" href="/blog/neet-photo-size.html"><strong>NEET UG photo</strong><span>Passport, postcard & live photo</span></a><a class="card-link" href="/blog/upsc-photo-size.html"><strong>UPSC photo</strong><span>20–200 KB, name & date strip</span></a><a class="card-link" href="/blog/ibps-bank-exam-photo-size.html"><strong>IBPS & SBI bank exam photo</strong><span>200 × 230 px, 20–50 KB</span></a><a class="card-link" href="/blog/cat-exam-photo-size.html"><strong>CAT (IIM) photo</strong><span>Photo & signature for CAT registration</span></a></div><p class="section-label">Travel & visas</p><div class="cards"><a class="card-link" href="/blog/oci-card-photo-requirements.html"><strong>OCI card photo</strong><span>Square photo & 3:1 signature</span></a><a class="card-link" href="/blog/india-evisa-photo.html"><strong>India e-Visa photo</strong><span>Square JPEG, 10–300 KB</span></a><a class="card-link" href="/blog/us-visa-photo-requirements.html"><strong>US visa (DS-160) photo</strong><span>600 × 600 px, under 240 KB</span></a><a class="card-link" href="/blog/schengen-visa-photo-size.html"><strong>Schengen visa photo</strong><span>35 × 45 mm prints</span></a><a class="card-link" href="/blog/uk-passport-photo-size.html"><strong>UK passport photo</strong><span>Online application, min 600 × 750 px</span></a></div><p class="section-label">Profile</p><div class="cards"><a class="card-link" href="/blog/linkedin-profile-photo-size.html"><strong>LinkedIn / résumé photo</strong><span>Square, 400–800 px</span></a></div><p class="section-label">Signatures</p><div class="cards"><a class="card-link" href="/blog/signature-size-guide.html"><strong>Signature size guide</strong><span>PAN, NEET, UPSC, IBPS, OCI</span></a></div>
+<p class="section-label">Learn</p><div class="cards"><a class="card-link" href="/blog/photo-not-required.html"><strong>When you don't upload a photo</strong><span>Aadhaar, passport, JEE, SSC</span></a><a class="card-link" href="/blog/photo-size-dpi-kb-explained.html"><strong>Pixels, DPI & KB explained</strong><span>Why “3.5 × 4.5 cm” isn't enough</span></a><a class="card-link" href="/blog/take-passport-photo-at-home.html"><strong>Take a photo at home</strong><span>Phone, light, background, framing</span></a><a class="card-link" href="/blog/faq.html"><strong>FAQ</strong><span>Using the converter, KB limits, privacy</span></a></div>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="/">I <span class="heart">♥</span> Photo</a>
+      <p>Free, private photo and signature resizer for Indian application forms. Your files are processed in your browser and never uploaded.</p>
     </div>
-  </header>
-  <main class="wrap">
-    <a href="/" class="back-link">← Back to Photo Converter</a>
-    <div class="page-head">
-      <h1>Government Form Photo Guides</h1>
-      <p>Find the exact photo size, DPI, format, and background requirements for every Indian government document, exam, and visa application.</p>
-    </div>
-
-    <div class="intro-content">
-      <p>Applying for a government document in India often requires submitting a photograph that meets very specific technical specifications — precise pixel dimensions, exact DPI, strict file size limits, and particular background colours. Each agency sets its own rules: the Income Tax Department for PAN cards, the Election Commission for Voter ID, the Ministry of External Affairs for passports, and the Union Public Service Commission for civil services exams.</p>
-      <p>An incorrectly sized photo is one of the most common reasons for application rejection in India. A rejected application means losing your processing fee, waiting another 15–30 days, and potentially missing critical deadlines for exams or travel. These guides explain exactly what each form requires so you can get it right the first time.</p>
-    </div>
-
-    <h2 class="cat-heading">Government ID Cards</h2>
-    <p class="cat-desc">PAN Card, Passport, Voter ID, Aadhar, Driving Licence, OCI Card, Ration Card, and other identity documents issued by Indian government agencies. These forms typically require passport-style photos with white backgrounds and specific pixel dimensions.</p>
-    <div class="blog-grid">
-
-      <div class="blog-card">
-        <div class="blog-card-icon">💳</div>
-        <h2><a href="pan-card-photo-size.html">PAN Card Photo Size &amp; Requirements Guide</a></h2>
-        <p>Complete specs for PAN card photo — 200×276 px, 200 DPI, JPEG under 50 KB. Step-by-step guide with common rejection reasons.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">📗</div>
-        <h2><a href="passport-photo-size.html">Indian Passport Photo Size &amp; Requirements</a></h2>
-        <p>MEA guidelines for Indian passport photos — 35×45 mm, 300 DPI, white background. Learn the rules for glasses, accessories, and face coverage.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🗳️</div>
-        <h2><a href="voter-id-photo-size.html">Voter ID Photo Size &amp; Requirements</a></h2>
-        <p>Election Commission of India photo specs for EPIC/Voter ID cards — 35×45 mm, 300 DPI, colour photo. Step-by-step conversion guide.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🏠</div>
-        <h2><a href="aadhar-photo-specifications.html">Aadhar Card Photo Requirements &amp; Size Guide</a></h2>
-        <p>UIDAI photo specifications for Aadhar enrollment and update. Learn the correct photo size, format, and background rules.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🚗</div>
-        <h2><a href="driving-licence-photo-size.html">Driving Licence Photo Size in India</a></h2>
-        <p>Sarathi/Parivahan photo requirements for Indian driving licence — 35×45 mm, 300 DPI, white background, max 50 KB. Step-by-step guide.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🌏</div>
-        <h2><a href="oci-card-photo-requirements.html">OCI Card Photo Size Requirements</a></h2>
-        <p>Overseas Citizen of India photo specs — 600×600 px square, 200 DPI, white background, JPEG max 200 KB. Complete guide.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🏠</div>
-        <h2><a href="ration-card-photo-size.html">Ration Card Photo Size &amp; Requirements</a></h2>
-        <p>State-wise ration card photo specifications — 400×400 px, 200 DPI, white background. Covers NREGA and food security schemes.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-gov">Government ID</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-    </div>
-
-    <h2 class="cat-heading">Competitive Exams</h2>
-    <p class="cat-desc">Photo requirements for National Testing Agency (NTA) and Union Public Service Commission (UPSC) examinations. These applications have strict deadlines — a rejected photo can mean a missed exam cycle.</p>
-    <div class="blog-grid">
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🎓</div>
-        <h2><a href="neet-photo-size.html">NEET/JEE/GATE NTA Exam Photo Size Requirements</a></h2>
-        <p>NTA exam photo specifications for NEET, JEE, GATE applications — 413×531 px, 300 DPI, white background, max 200 KB.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-exam">Exam</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">⚖️</div>
-        <h2><a href="upsc-photo-size.html">UPSC Civil Services Exam Photo Requirements</a></h2>
-        <p>UPSC photo size guidelines for IAS, IPS, IFS applications — 800×800 px, 200 DPI, JPEG max 300 KB. Complete step-by-step guide.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-exam">Exam</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-    </div>
-
-    <h2 class="cat-heading">Visa &amp; International Travel</h2>
-    <p class="cat-desc">Photo specifications for Schengen (Europe), US, UK, and India e-Visa applications. Visa photo requirements vary significantly by country and often have stricter DPI and background colour rules than domestic documents.</p>
-    <div class="blog-grid">
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🇪🇺</div>
-        <h2><a href="schengen-visa-photo-size.html">Schengen Visa Photo Size &amp; Requirements</a></h2>
-        <p>VFS/ICAO photo rules for Schengen visa — 35×45 mm at 600 DPI, white background, max 500 KB. Detailed specifications for EU travel.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-visa">Visa</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🦅</div>
-        <h2><a href="us-visa-photo-requirements.html">US Visa / Passport Photo Requirements</a></h2>
-        <p>US State Department photo rules — 600×600 px, 300 DPI, white background, max 240 KB. Square photo format explained.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-visa">Visa</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">✈️</div>
-        <h2><a href="india-evisa-photo.html">India e-Visa Photo Size Requirements</a></h2>
-        <p>Indian e-Visa photo specs for foreign nationals — 400×400 px, 200 DPI, JPEG max 300 KB. Complete guide for visa-on-arrival applications.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-visa">Visa</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-icon">🇬🇧</div>
-        <h2><a href="uk-passport-photo-size.html">UK Passport Photo Size &amp; Requirements</a></h2>
-        <p>HMPO photo rules for UK passports — 600×750 px, cream/light-grey background, 300 DPI. Covers the specific cream background requirement.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-visa">Visa</span>
-          <span>6 min read</span>
-        </div>
-      </div>
-
-    </div>
-
-    <h2 class="cat-heading">Professional Profiles</h2>
-    <p class="cat-desc">Photo specifications for professional networking platforms. While not a government document, getting your LinkedIn profile photo right can significantly impact your job search and professional networking.</p>
-    <div class="blog-grid">
-
-      <div class="blog-card">
-        <div class="blog-card-icon">💼</div>
-        <h2><a href="linkedin-profile-photo-size.html">LinkedIn Profile Photo Size &amp; Tips</a></h2>
-        <p>LinkedIn profile photo specs — 800×800 px, 300 DPI, any background. Professional tips for the best LinkedIn photo.</p>
-        <div class="blog-card-meta">
-          <span class="blog-card-tag tag-pro">Professional</span>
-          <span>5 min read</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="intro-content" style="margin-top:48px;padding-top:40px;border-top:1px solid var(--ink-border)">
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;margin-bottom:16px;color:var(--rose-light)">Need a Different Photo Size?</h2>
-      <p>If your document is not listed above, use the <strong>Custom Preset</strong> feature on the <a href="/" style="color:var(--rose-light);text-decoration:none">main converter tool</a>. You can set any width, height, DPI, file format, and maximum file size. Custom presets are saved in your browser for future use. The converter is 100% free, works entirely in your browser, and requires no signup or installation.</p>
-    </div>
-  </main>
-  <footer>
-    <div class="wrap">
-      &copy; 2026 ilovephoto.in — Free government form photo converter for Indian citizens.
-      <br><a href="/">Back to Converter</a>
-    </div>
-  </footer>
+    <div><h3>Popular guides</h3><ul>
+      <li><a href="/blog/pan-card-photo-size.html">PAN card photo</a></li>
+      <li><a href="/blog/neet-photo-size.html">NEET UG photo</a></li>
+      <li><a href="/blog/upsc-photo-size.html">UPSC photo</a></li>
+      <li><a href="/blog/signature-size-guide.html">Signature sizes</a></li>
+      <li><a href="/blog/us-visa-photo-requirements.html">US visa photo</a></li>
+    </ul></div>
+    <div><h3>Learn</h3><ul>
+      <li><a href="/blog/faq.html">FAQ</a></li>
+      <li><a href="/blog/photo-size-dpi-kb-explained.html">Pixels, DPI &amp; KB explained</a></li>
+      <li><a href="/blog/take-passport-photo-at-home.html">Take a photo at home</a></li>
+      <li><a href="/blog/photo-not-required.html">When you don't upload a photo</a></li>
+    </ul></div>
+    <div><h3>Site</h3><ul>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/privacy-policy.html">Privacy policy</a></li>
+      <li><a href="/terms-of-service.html">Terms of service</a></li>
+    </ul></div>
+  </div>
+  <p class="footer-note">© 2026 ilovephoto.in · Not affiliated with any government body. Requirements change — always check the instructions on the official portal before you submit.</p>
+</div></footer>
 </body>
 </html>

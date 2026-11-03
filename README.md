@@ -1,45 +1,42 @@
-# I ❤️ Photo
+# I ♥ Photo — ilovephoto.in
 
-**Free, private photo converter for Indian government forms & documents — runs entirely in your browser.**
+Free, private photo and signature resizer for Indian application forms. Runs entirely in the browser — photos are never uploaded.
 
 🌐 **Live at [ilovephoto.in](https://ilovephoto.in)**
 
----
-
 ## What it does
 
-Upload any portrait photo and convert it instantly to the exact pixel dimensions, DPI, file format, and size limit required by Indian government portals and international visa applications — no uploads to any server, no sign-up, no watermarks.
+Pick a form, add a photo, and download a JPEG with the exact pixel size, DPI and file-size window the portal accepts. It finds the highest JPEG quality under the maximum, and if a form also has a minimum (IBPS, NEET, UPSC, Sarathi), it pads the file with a JPEG comment segment so it isn't rejected as too small.
 
-## Supported presets
+Other features: drag-to-reposition and zoom, face guide, crop, straighten, brightness/contrast, optional name & date strip (UPSC), A4 print sheet at actual size, and custom presets saved in the browser.
 
-| Category | Presets |
+## Which forms are included
+
+Only forms where **the applicant provides the photo**: PAN (Protean & UTIITSL), Voter ID, Sarathi learner's licence, NEET UG, UPSC, IBPS/SBI, CAT, OCI, India e-Visa, US visa, Schengen, UK passport, LinkedIn, plus signature presets.
+
+Deliberately excluded: Aadhaar and the Indian passport (photo taken at the centre), JEE Main and SSC (live webcam capture), NREGA (taken by officials). The guide `blog/photo-not-required.html` explains these.
+
+## Project layout
+
+| Path | What it is |
 |---|---|
-| **India — High Volume** | PAN Card, Passport (India) |
-| **India — Exams** | NTA (NEET / JEE / GATE), NEET Postcard, UPSC Civil Services, CAT (IIM) |
-| **India — Identity** | Voter ID (EPIC), Driver's Licence, OCI Card |
-| **Visas** | US Passport / Visa, Schengen Visa, India e-Visa, UK Passport |
-| **Professional & Welfare** | LinkedIn Profile, NREGA / Job Card, Ration Card |
+| `index.html` | The converter (hand-written, no framework) |
+| `assets/site.css` | Shared styles for every page |
+| `assets/presets.js` | Preset data used by the converter — **generated** |
+| `blog/*.html`, `about.html`, `contact.html`, legal pages, `sitemap.xml` | **Generated** content pages |
+| `scripts/build_site.py` | Generator — presets, guide content and page templates live here |
 
-You can also **create and save custom presets** locally for any other portal.
+To change a preset or guide, edit `scripts/build_site.py` and run:
 
-## Features
+```bash
+python scripts/build_site.py
+```
 
-- ✅ Converts JPEG, PNG, BMP, GIF, TIFF, HEIC/HEIF
-- ✅ Guarantees output file size is **strictly under** the preset limit (binary-search quality tuning)
-- ✅ Correct pixel dimensions & DPI for every preset
-- ✅ Custom presets saved in your browser (localStorage)
-- ✅ Searchable preset dropdown with keyboard navigation
-- ✅ 100% private — all processing happens in your browser, nothing is uploaded
-- ✅ No dependencies, no build step — single HTML file
+Commit the generated files; GitHub Pages serves the repo as-is (no build step on deploy).
 
 ## Privacy
 
-Your photos never leave your device. The app uses the HTML5 Canvas API to process images locally. No analytics, no tracking, no ads.
-
-## Tech
-
-Single-file HTML/CSS/JS app. No frameworks, no build tools.
-Hosted on GitHub Pages.
+Images are processed with the Canvas API in the browser and never sent anywhere. The site uses Google Analytics and Google AdSense — see `privacy-policy.html`.
 
 ## License
 
